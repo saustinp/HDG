@@ -1,0 +1,17 @@
+function hdg_volint(master,app,dgnodes)
+
+ne   = size(dgnodes,3);
+nd   = master.nd;
+npv  = master.npv;
+ngv  = master.ngv;
+
+% Shap functions and derivatives
+shapvt = master.shapvt;
+shapvg = reshape(master.shapvg,[npv ngv*(nd+1)]);
+shapvgdotshapvl = reshape(master.shapvgdotshapvl,[npv*npv ngv (nd+1)]);
+
+% , Jacobian, and its determinant at Gauss points  
+[pg, Xx, jac] = volgeom(master.shapmv,dgnodes);
+
+M = reshape(shapvgdotshapvl(:,:,1)*reshape(jac,[ngv ne]),[npv npv ne]);
+

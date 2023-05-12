@@ -1,0 +1,45 @@
+
+
+%        master    :    Master structure
+%        mesh      :    Mesh structure
+%        app       :    Application structure
+%
+%        UDG       :    Current solution
+%        UH        :    Current numerical trace
+%        SH        :    Source term
+%
+%        DUDG      :    Local solutions due to residual
+%        DUDH_duh  :    Local solutions due to the numerical trace
+%        DUDH_dp   :    Local solutions due to pressure (Augmented Lagrangian)
+%        AE        :    Elemental stiffness matrices
+%        FE        :    Elemental residual vectors
+%        FE_dp     :    Elemental residual vectors due to pressure (Augmented Lagrangian)
+%
+%        dim       :    Dimension 
+%        npl       :    Number of DG nodes per element
+%        ne        :    Number of elements
+%        nd        :    Dimension
+%        nps       :    Number of DG nodes per side/face 
+%        ng        :    Number of Gauss points per element
+%        ngs       :    Number of Gauss points per side/face
+%        nc        :    Number of conservative variables in the solution
+%        nch       :    Number of unknowns in the numerical trace       
+%        nb        :    Number of blocks/subdomains  
+%        ns        :    Number of elements per block
+%        nf        :    Number of faces
+%        npe       :    Number of vertex nodes per element
+%        nfe       :    Number of faces per element
+%        npf       :    Number of vertex nodes per face
+%
+%        time      :    Time (for time dependent mode only)
+%        tdep      :    Flag for time-dependent problems
+%        wave      :    Flag for wave propagation problems
+%        alag      :    Flag for augmented Lagrangian 
+%        elcon     :    Element connectivities
+%        perm      :    Index mapping to obtain DG nodes on sides/faces
+%
+%        flg_q     :    Flag for q + nabla u = 0 equation
+%        fc_q      :    Time factor for  dq/dt + nabla u = 0 equation 
+
+
+

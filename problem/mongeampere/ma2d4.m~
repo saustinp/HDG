@@ -1,0 +1,78 @@
+setapplicationpath('FM/poi');
+
+porder = 3;
+ngrid  = 101;
+elemtype = 1;
+nodetype = 1;
+hybrid = 'hdg';
+
+app.tau = 1;
+app.bcm = [1;1;1;1];
+app.fbou = 'ubouma5';
+app.source = 'sourcema5';
+
+mesh   = mkmesh_rect(ngrid,ngrid,porder,0,[-0.5 0.5 -0.5 0.5],elemtype,nodetype);
+master = mkmaster(mesh,2*porder);
+[master,mesh] = preprocess(master,mesh,hybrid);
+ 
+x = (mesh.dgnodes(:,1,:));
+y = (mesh.dgnodes(:,2,:));
+r = sqrt(x.^2+y.^2);
+a1 = 20;
+a2 = 200;
+a = 0.25;
+rho = 1 + a1*sech(a2*(r.^2-a^2));
+L = averagevector(master,mesh);
+theta = sum(L(:).*rho(:))/sum(L(:));
+%theta = 4;
+
+u = (x.^2+y.^2)/2;
+uavg = sum(L(:).*u(:));
+u = u - uavg;
+app.param = [theta a1 a2 a uavg];
+uhat = inituhat(master,mesh.elcon,u,1);
+uhat = uhat(:);
+
+figure(1); clf; scaplot(mesh,rho,[],0,1); axis equal; axis tight; colormap jet;
+%figure(2); clf; scaplot(mesh,u,[],0,1); axis equal; axis tight; colormap jet;
+
+app.neumman = 1;
+app.bcm = [1;1;1;1];
+[u,q,uhat,v,iter] = hdg_ma6(master, mesh, app, u, uhat);
+
+%figure(1); clf; scaplot(mesh,v(:,1,1,:),[],0,1); axis equal; axis tight; colormap jet;
+
+figure(1); clf;
+mesh2 = mesh; 
+mesh2.dgnodes = q;
+meshplot(mesh2,1);
+set(gca,'FontSize',16); 
+axis equal; axis tight; axis on; colorbar off;
+set(gca, 'XTick', [-0.5:0.2:0.5])
+set(gca, 'yTick', [-0.5:0.2:0.5])
+axis([-0.5 0.5 -0.5 0.5]);
+ax = gca;
+% fn = "ex4_tri60_case" + num2str(1) + ".png";
+% exportgraphics(ax,fn,'Resolution',300); 
+
+x = (mesh2.dgnodes(:,1,:));
+y = (mesh2.dgnodes(:,2,:));
+r = sqrt(x.^2+y.^2);
+a1 = 20;
+a2 = 200;
+a = 0.25;
+rho = 1 + a1*sech(a2*(r.^2-a^2));
+figure(2); clf; scaplot(mesh2,rho,[],1,2); axis equal; axis tight; colormap jet;
+
+figure(2); clf; scaplot(mesh,rho,[],1,2); axis equal; axis tight; colormap jet;
+
+
+% figure(2); clf; meshplot(mesh,1);    
+% mesh2 = mesh; 
+% mesh2.dgnodes = q;
+% figure(3); clf; meshplot(mesh2,1);
+
+
+
+return;
+

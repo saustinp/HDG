@@ -1,0 +1,55 @@
+function checkneumann(master, mesh, app, q)
+
+nd = mesh.nd;
+nt  = size(mesh.t,1);
+nfe = size(master.perm,2);
+npf = master.npf;
+ngf = master.ngf;
+perm = master.perm;
+
+dshapft  = master.shapmf(:,:,2:nd);
+
+for i = 1:nt % loop over each element    
+  for j = 1:nfe % loop over each face of the element i    
+    ibf = mesh.f(abs(mesh.t2f(i,j)),end);
+    if ibf<0
+      ibc = app.bcm(-ibf);
+      if (ibc==10) % Neumman
+        pn = reshape(mesh.dgnodes(perm(:,j),:,i),[npf nd]);
+        pg = reshape(master.shapmf(:,:,1)*pn,[ngf nd]);
+        qn = reshape(q(perm(:,j),:,i),[npf nd]);      
+        qg = reshape(master.shapmf(:,:,1)*qn,[ngf nd]);
+
+        dpg = dshapft*pn;      
+        jac = sqrt(dpg(:,1).^2+dpg(:,2).^2);
+        nlg   = [dpg(:,2)./jac,-dpg(:,1)./jac];      
+        err = qg(:,1).*nlg(:,1)+qg(:,2).*nlg(:,2)-(pg(:,1).*nlg(:,1)+pg(:,2).*nlg(:,2));        
+
+        if max(abs(pn(:,1).^2 + pn(:,2).^2 - 1.0)) < 0.01
+          max(abs(err(:)))
+          [max(abs(err(:))) max(abs(qn(:)-pn(:)))]
+          (pg(:,1).*nlg(:,1)+pg(:,2).*nlg(:,2))
+          [pn(:,1).*pn(:,1)+pn(:,2).*pn(:,2) qn(:,1).*qn(:,1)+qn(:,2).*qn(:,2)]
+        end
+      elseif (ibc==2) % Neumman
+        pn = reshape(mesh.dgnodes(perm(:,j),:,i),[npf nd]);
+        qn = reshape(q(perm(:,j),:,i),[npf nd]);  
+        t1 = pn(:,1).*pn(:,1) + pn(:,2).*pn(:,2);
+        t2 = qn(:,1).*qn(:,1) + qn(:,2).*qn(:,2);
+        [t1 t2]
+%         pn = reshape(mesh.dgnodes(perm(:,j),:,i),[npf nd]);
+%         pg = reshape(master.shapmf(:,:,1)*pn,[ngf nd]);
+%         qn = reshape(q(perm(:,j),:,i),[npf nd]);      
+%         qg = reshape(master.shapmf(:,:,1)*qn,[ngf nd]);
+% 
+%         err = qn(:,1).*pn(:,1)+qn(:,2).*pn(:,2)-(pn(:,1).*pn(:,1)+pn(:,2).*pn(:,2));                
+%         if max(abs(pn(:,1).^2 + pn(:,2).^2 - 1.0)) < 0.01
+%           [max(abs(err(:))) max(abs(qn(:)-pn(:)))]
+%           [pn qn pg qg]
+%         end
+      end                              
+    end
+  end
+  
+end
+
