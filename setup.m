@@ -11,6 +11,6 @@ addpath([d0,'/kernel']);
 addpath([d0,'/master']);
 addpath([d0,'/plot']);
 addpath([d0,'/shockcapturing']);
-% addpath([d0,'/distmesh']);
+addpath([d0,'/problem/ionicwind/mesh']);
 fprintf(' \n Done. \n\n');
 clear d0

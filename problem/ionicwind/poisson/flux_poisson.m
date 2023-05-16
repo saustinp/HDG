@@ -17,32 +17,16 @@ nq = nc-nch;
 nd = nq;
 
 kappa = param{1};
-if nd==2
-    r = p(:,1);
-    u = udg(:,1);
-    qx = udg(:,2);
-    qy = udg(:,3);
 
-    f = zeros(ng,nch,nd);
-    f(:,1,1) = kappa*(r.*qx);
-    f(:,1,2) = kappa*(r.*qy);
+r = p(:,1);
+% u = udg(:,1);
+qx = udg(:,2);
+qy = udg(:,3);
 
-    f_udg = zeros(ng,nch,nd,nc);
-    f_udg(:,1,1,2) = kappa*r;
-    f_udg(:,1,2,3) = kappa*r;
-else
-    u = udg(:,1);
-    qx = udg(:,2);
-    qy = udg(:,3);
-    qz = udg(:,4);
+f = zeros(ng,nch,nd);
+f(:,1,1) = kappa*r.*qx;
+f(:,1,2) = kappa*r.*qy;
 
-    f = zeros(ng,nch,nd);
-    f(:,1,1) = kappa*qx;
-    f(:,1,2) = kappa*qy;
-    f(:,1,3) = kappa*qz;
-
-    f_udg = zeros(ng,nch,nd,nc);
-    f_udg(:,1,1,2) = kappa;
-    f_udg(:,1,2,3) = kappa;    
-    f_udg(:,1,3,4) = kappa;    
-end
+f_udg = zeros(ng,nch,nd,nc);
+f_udg(:,1,1,2) = kappa*r;
+f_udg(:,1,2,3) = kappa*r;

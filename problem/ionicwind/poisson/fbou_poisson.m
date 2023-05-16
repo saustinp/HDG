@@ -30,7 +30,7 @@ switch ib
         fh_u = tau*ones(ng,nch,nch);
         fh_q = zeros(ng,nch,nq);
         fh_udg = cat(3,fh_u,fh_q);
-        fh_uh = -tau*ones(ng,nch,nch);      
+        fh_uh = -tau*ones(ng,nch,nch);
     case 3  % Prescribed flux
 %         x = p(:,1);
 %         y = p(:,2);

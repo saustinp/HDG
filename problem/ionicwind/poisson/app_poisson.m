@@ -28,7 +28,7 @@ app.fc_p = 0;
 
 app.nd = 2;
 app.nch  = 1;                       % Number of componets of UH
-app.nc   = app.nch*(app.nd+1);    % Number of componeents of UDG
+app.nc   = app.nch*(app.nd+1);    % Number of components of UDG: for each equation, one solution variable and ND number of gradient variables
 app.ncu = 1;
 
 app.time = [];
@@ -44,14 +44,9 @@ UH=inituhat(master,mesh.elcon,UDG,1);
 
 [UDG,UH] = hdg_solve(master,mesh,app,UDG,UH,0*UDG);
 
-figure(1); scaplot(mesh,UDG(:,1,:),[],0,1); axis equal; axis tight; colormap jet;
-figure(2); scaplot(mesh,UDG(:,2,:),[],0,1); axis equal; axis tight; colormap jet;
-figure(3); scaplot(mesh,UDG(:,3,:),[],0,1); axis equal; axis tight; colormap jet;
+save '../poissonsolution2.mat' UDG
 
-%figure(3); scaplot(mesh,UDG(:,3,:),[-10 100],0,1); axis equal; axis tight; colormap jet;
-
-
-
-
-
-
+clf;
+figure(1); scaplot(mesh,UDG(:,1,:),[],0,0); axis equal; axis tight; colormap turbo; title('Phi');
+figure(2); scaplot(mesh,UDG(:,2,:),[],0,0); axis equal; axis tight; colormap turbo; title('Er');
+figure(3); scaplot(mesh,UDG(:,3,:),[],0,0); axis equal; axis tight; colormap turbo; title('Ez');

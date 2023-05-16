@@ -18,9 +18,24 @@ function [fh,fh_udg,fh_uh] = fbou_electrondensity(ib,ui,nl,p,udg,uh,param,time)
 nch = 1;
 nq = nc-nch;
 
-kappa = param{1};
-tau   = param{end};
-u     = udg(:,nch);
+% Physics parameters
+% r0 = param{1};
+% z0 = param{2};
+% s0 = param{3};
+% Nmax = param{4};
+% e = param{5};
+% epsilon0 = param{6};
+% Ua = param{7};
+% gamma = param{8};
+% E_bd = param{9};
+% r_tip = param{10};
+% n_ref = param{11};
+% N = param{12};
+% mue_ref = param{13};
+D_star = param{14};
+tau = param{end};
+u = udg(:,nch);     % Why is u defined multiple times?
+
 switch ib
     case 1  % Dirichlet
         fh = tau.*(ui-uh);
@@ -33,29 +48,29 @@ switch ib
         fh_udg = cat(3,fh_u,fh_q);
         fh_uh = -tau*ones(ng,nch,nch);
     case 3  % Prescribed flux
-        [fh,fh_udg,fh_uh] = fhat_cd(nl,p,udg,uh,param,time);
+        [fh,fh_udg,fh_uh] = fhat_electrondensity(nl,p,udg,uh,param,time);
         fh = fh + ui;
-    case 4  % Prescribed diffusion flux
+    case 4  % Diffusion flux only
         r = p(:,1);
         u = udg(:,1);
-        qx = udg(:,2);
-        qy = udg(:,3);
-        fh = r.*(kappa*qx.*nl(:,1) + kappa*qy.*nl(:,2)) + tau.*(u-uh);
+        dne_dr = udg(:,2);
+        dne_dz = udg(:,3);
+        fh = r.*(D_star*dne_dr.*nl(:,1) + D_star*dne_dz.*nl(:,2)) + tau.*(u-uh);
 
         fh_udg = zeros(ng,nch,nc);
         fh_udg(:,1,1) = tau;
-        fh_udg(:,1,2) = kappa*r.*nl(:,1);
-        fh_udg(:,1,3) = kappa*r.*nl(:,2);
+        fh_udg(:,1,2) = D_star*r.*nl(:,1);
+        fh_udg(:,1,3) = D_star*r.*nl(:,2);
 
         fh_uh = zeros(ng,nch,nch);
         fh_uh(:,1,1) = -tau;         
-    case 5 % Dirichlet
-        x = p(:,1);
-        y = p(:,2);
-        ui = sin(0.5*pi*x).*sin(0.5*pi*y);       
-        fh = tau.*(ui-uh);
-        fh_udg = zeros(ng,nch,nc);
-        fh_uh = -tau;     
+    % case 5 % Dirichlet - custon function
+    %     x = p(:,1);
+    %     y = p(:,2);
+    %     ui = sin(0.5*pi*x).*sin(0.5*pi*y);       
+    %     fh = tau.*(ui-uh);
+    %     fh_udg = zeros(ng,nch,nc);
+    %     fh_uh = -tau;     
     otherwise
         error('unknown boundary type');
 end
