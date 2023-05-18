@@ -3,6 +3,7 @@ hybrid = 'hdg';
 nstage = 1;
 torder = 1;
 tau = 1;
+app.axisymmetry = 1;
 
 app.source = 'source_electrondensity';
 app.flux = 'flux_electrondensity';
@@ -10,7 +11,7 @@ app.fbou = 'fbou_electrondensity';
 app.fhat = 'fhat_electrondensity';
 app.localsolve=1;
 % app.bcm = [4;4;4;2;2;2;1];
-app.bcm = [3;3;3;1;4;4;3];
+app.bcm = [5;3;3;1;4;4;3];
 app.bcs = [0;0;0;0;0;0;0];
 app.bcd = [];
 app.bcv = [];
@@ -32,8 +33,8 @@ app.nch  = 1;                       % Number of componets of UH
 app.nc   = app.nch*(app.nd+1);    % Number of componeents of UDG
 app.ncu = 1;
 
-ntime  = 5;
-dt = linspace(.1, .5 ,ntime);
+ntime  = 10;
+dt = linspace(.05, .5 ,ntime);
 
 % Physical parameters
 Kep = 2e-13;             % mu[1] Recombination coeff - pos and neg ions [m^3/s]
@@ -46,7 +47,7 @@ Dn = 0.043e-4;           % mu[7] Neg diffusion coefficient [m^2/s]
 Nmax = 1e16;             % mu[8] Max number density for initial charge distribution [particles/m^3]
 r0 = 0.0;                % mu[9] r-pos of emitter tip in reference frame [m]
 z0 = 0.0;              % mu[10]z-pos of emitter tip in reference frame [m]
-s0 = 2e-3;               % mu[11]Std deviation of initial charge distribution [m]
+s0 = 2e-5;               % mu[11]Std deviation of initial charge distribution [m]
 e = 1.6022e-19;          % mu[12]Charge on electron [C]
 epsilon0 = 8.854e-12;     % mu[13]absolute permittivity of air [C^2/(N*m^2)]
 Ua = -10e3;              % mu[14]Emitter potential relative to ground [V]
@@ -78,10 +79,13 @@ master = mkmaster(mesh,2*porder);
 [master,mesh] = preprocess(master,mesh,hybrid);
 
 load '../poissonsolution2.mat';
+UDG = UDG*Ua/(E_bd*r_tip);      % Sign flip and scaling potential function for problem nondimensionalization
 mesh.dgnodes(:,3,:) = UDG(:,2,:);
 mesh.dgnodes(:,4,:) = UDG(:,3,:);
 
-UDG = initu(mesh,{0;0;0});      % CHANGE ME
+UDG = initu(mesh,{@initu_func;@initq_func_r;@initq_func_z},app.arg);
+UDG_history = zeros([size(UDG),ntime+1]);
+UDG_history(:,:,:,1) = UDG;
 UH=inituhat(master,mesh.elcon,UDG,1);
 
 time = 0;
@@ -90,18 +94,19 @@ figure(1);
 for itime = 1:ntime
     fprintf('Timestep :  %d\n', itime);
     
-    [UDG,UH] = hdg_solve_dirk(master,mesh,app,UDG,UH,[],time,dt(itime),nstage,torder);    
-    time = time + dt(itime); 
+    [UDG,UH] = hdg_solve_dirk(master,mesh,app,UDG,UH,[],time,dt(itime),nstage,torder);
+    time = time + dt(itime);
+    UDG_history(:,:,:,itime+1) = UDG;
     
-    figure(1); scaplot(mesh,UDG(:,1,:),[],0,0); axis equal; axis tight; colormap jet; title('ne');
+    % figure(1); scaplot(mesh,UDG(:,1,:),[],0,0); axis equal; axis tight; colormap jet; title('ne');
 end
 
 % [UDG,UH] = hdg_solve(master,mesh,app,UDG,UH,0*UDG);      % CHANGE ME - IMPLEMENT TIMESTEPPING SCHEME
 
-clf;
-figure(1); scaplot(mesh,UDG(:,1,:),[],0,0); axis equal; axis tight; colormap jet; title('ne');
-figure(2); scaplot(mesh,UDG(:,2,:),[],0,0); axis equal; axis tight; colormap jet; title('dne/dr');
-figure(3); scaplot(mesh,UDG(:,3,:),[],0,0); axis equal; axis tight; colormap jet; title('dne/dz');
+% clf;
+% figure(1); scaplot(mesh,UDG(:,1,:),[],0,0); axis equal; axis tight; colormap jet; title('ne');
+% figure(2); scaplot(mesh,UDG(:,2,:),[],0,0); axis equal; axis tight; colormap jet; title('dne/dr');
+% figure(3); scaplot(mesh,UDG(:,3,:),[],0,0); axis equal; axis tight; colormap jet; title('dne/dz');
 
 % figure(4); scaplot(mesh,mue*mesh.dgnodes(:,3,:),[],0,0); axis equal; axis tight; colormap jet; title('Er');
 % figure(5); scaplot(mesh,mue*mesh.dgnodes(:,4,:),[],0,0); axis equal; axis tight; colormap jet; title('Ez');

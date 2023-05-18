@@ -10,9 +10,9 @@ ne = UDG_history(:,1,:,i);
 clf;
 txt = sprintf('ne, timestep %d', i);
 t = figure(1);
-scaplot(mesh,ne,[0,1.2],0,shwmsh); axis equal; axis tight; colormap jet;
-xlim([-2,17]);
-ylim([-15,7]);
+scaplot(mesh,ne,[0,1.2e-2],0,shwmsh); axis equal; axis tight; colormap jet;
+xlim([-2,40]);
+ylim([-40,15]);
 title(txt, 'FontWeight', 'bold');
 
 

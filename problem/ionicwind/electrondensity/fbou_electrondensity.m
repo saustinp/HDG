@@ -63,8 +63,35 @@ switch ib
         fh_udg(:,1,3) = D_star*r.*nl(:,2);
 
         fh_uh = zeros(ng,nch,nch);
-        fh_uh(:,1,1) = -tau;         
-    % case 5 % Dirichlet - custon function
+        fh_uh(:,1,1) = -tau; 
+    case 5 % Symmetry boundary condition
+        r = 1.0;
+        D_star = 1.0;
+        u = udg(:,1);
+        dne_dr = udg(:,2);
+        dne_dz = udg(:,3);
+        fh = r.*(D_star*dne_dr.*nl(:,1) + D_star*dne_dz.*nl(:,2)) + tau.*(u-uh);
+        fh_udg = zeros(ng,nch,nc);
+        fh_udg(:,1,1) = tau;
+        fh_udg(:,1,2) = D_star*r.*nl(:,1);
+        fh_udg(:,1,3) = D_star*r.*nl(:,2);
+        fh_uh = zeros(ng,nch,nch);
+        fh_uh(:,1,1) = -tau;
+    % case 6  % Prescribed flux according to function or other properties
+    %     [fh,fh_udg,fh_uh] = fhat_electrondensity(nl,p,udg,uh,param,time);
+    %     r = p(:,1);
+    %     Ex = p(:,3);    % Ex is -grad(phi)
+    %     Ey = p(:,4);
+    %     np = udg(:,??);     % Need to figure out where in the vector the np goes
+    %     gamma = 0.001;      % Secondary emission coefficient from needle
+
+    %     normE = sqrt(Ex.^2 + Ey.^2);
+
+    %     needle_flux = gamma*np*normE;
+
+    %     fh = fh + needle_flux;
+    
+    % case 6 % Dirichlet - custon function
     %     x = p(:,1);
     %     y = p(:,2);
     %     ui = sin(0.5*pi*x).*sin(0.5*pi*y);       

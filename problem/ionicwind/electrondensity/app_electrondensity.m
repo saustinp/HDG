@@ -3,6 +3,7 @@ hybrid = 'hdg';
 nstage = 1;
 torder = 1;
 tau = 1;
+app.axisymmetry = 1;
 
 app.source = 'source_electrondensity';
 app.flux = 'flux_electrondensity';
@@ -10,7 +11,7 @@ app.fbou = 'fbou_electrondensity';
 app.fhat = 'fhat_electrondensity';
 app.localsolve=1;
 % app.bcm = [4;4;4;2;2;2;1];
-app.bcm = [3;3;3;1;4;4;3];
+app.bcm = [5;3;3;1;4;4;3];
 app.bcs = [0;0;0;0;0;0;0];
 app.bcd = [];
 app.bcv = [];
@@ -30,10 +31,10 @@ app.fc_p = 0;
 app.nd = 2;
 app.nch  = 1;                       % Number of componets of UH
 app.nc   = app.nch*(app.nd+1);    % Number of componeents of UDG
-app.ncu = 1;
+app.ncu = app.nch;
 
-ntime  = 40;
-dt = linspace(.05, 2 ,ntime);
+ntime  = 5;
+dt = linspace(.05, .5 ,ntime);
 
 % Physical parameters
 Kep = 2e-13;             % mu[1] Recombination coeff - pos and neg ions [m^3/s]
@@ -46,7 +47,7 @@ Dn = 0.043e-4;           % mu[7] Neg diffusion coefficient [m^2/s]
 Nmax = 1e16;             % mu[8] Max number density for initial charge distribution [particles/m^3]
 r0 = 0.0;                % mu[9] r-pos of emitter tip in reference frame [m]
 z0 = 0.0;              % mu[10]z-pos of emitter tip in reference frame [m]
-s0 = 2e-3;               % mu[11]Std deviation of initial charge distribution [m]
+s0 = 25e-5;               % mu[11]Std deviation of initial charge distribution [m]
 e = 1.6022e-19;          % mu[12]Charge on electron [C]
 epsilon0 = 8.854e-12;     % mu[13]absolute permittivity of air [C^2/(N*m^2)]
 Ua = -10e3;              % mu[14]Emitter potential relative to ground [V]
@@ -66,8 +67,8 @@ mue_ref = 0.04266918357567234;   % m^2/(V*s)
 D_star = D/(mue_ref*E_bd*r_tip);   % Nondimensionalized diffusion coefficient
 
 % Set discretization parameters, physical parameters, and solver parameters
-     %      1  2    3   4    5      6     7     8     9     10      11   12   13       14     15
-app.arg = {r0, z0, s0, Nmax, e, epsilon0, Ua, gamma, E_bd, r_tip, n_ref, N, mue_ref, D_star, tau};
+     %      1  2    3   4    5      6     7     8     9     10      11   12   13       14     15   16   17    18   end
+app.arg = {r0, z0, s0, Nmax, e, epsilon0, Ua, gamma, E_bd, r_tip, n_ref, N, mue_ref, D_star, Kep, Knp, mu_p, mu_n, tau};
 
 app.time = [];
 app.dtfc = [];

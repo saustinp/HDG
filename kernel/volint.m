@@ -106,7 +106,7 @@ if tdep
     % axis symmetry
     axisflag = isfield(app,'axisymmetry');
     if axisflag
-        xr = app.axisymmetry.*abs(pg(:,2));
+        xr = app.axisymmetry.*abs(pg(:,1));
         xr = reshape(xr,[ngv*ne 1]);
     else
         xr = ones(ngv*ne,1);
