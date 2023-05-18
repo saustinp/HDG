@@ -1,0 +1,18 @@
+dse_dne	(mue.*r_tip.*(alpha - eta).*(Er.^2 + Ez.^2).^(1./2))./mue_ref - (epsilon0.*k_ep.*np)./(e.*mue_ref)
+dse_dnp	-(epsilon0.*k_ep.*ne)./(e.*mue_ref)
+dse_dnn	0
+dse_dEr	(Er.*mue.*ne.*r_tip.*(alpha - eta))./(mue_ref.*(Er.^2 + Ez.^2).^(1./2))
+dse_dEz	(Ez.*mue.*ne.*r_tip.*(alpha - eta))./(mue_ref.*(Er.^2 + Ez.^2).^(1./2))
+dsp_dne	(alpha.*mue.*r_tip.*(Er.^2 + Ez.^2).^(1./2))./mue_ref - (epsilon0.*k_ep.*np)./(e.*mue_ref)
+dsp_dnp	-(epsilon0.*(k_ep.*ne + k_np.*nn))./(e.*mue_ref)
+dsp_dnn	-(epsilon0.*k_np.*np)./(e.*mue_ref)
+dsp_dEr	(Er.*alpha.*mue.*ne.*r_tip)./(mue_ref.*(Er.^2 + Ez.^2).^(1./2))
+dsp_dEz	(Ez.*alpha.*mue.*ne.*r_tip)./(mue_ref.*(Er.^2 + Ez.^2).^(1./2))
+dsn_dne	(eta.*mue.*r_tip.*(Er.^2 + Ez.^2).^(1./2))./mue_ref
+dsn_dnp	-(epsilon0.*k_np.*nn)./(e.*mue_ref)
+dsn_dnn	-(epsilon0.*k_np.*np)./(e.*mue_ref)
+dsn_dEr	(Er.*eta.*mue.*ne.*r_tip)./(mue_ref.*(Er.^2 + Ez.^2).^(1./2))
+dsn_dEz	(Ez.*eta.*mue.*ne.*r_tip)./(mue_ref.*(Er.^2 + Ez.^2).^(1./2))
+dsphi_dne	1
+dsphi_dnp	-1
+dsphi_dnn	1

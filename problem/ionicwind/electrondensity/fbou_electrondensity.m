@@ -79,16 +79,14 @@ switch ib
         fh_uh(:,1,1) = -tau;
     % case 6  % Prescribed flux according to function or other properties
     %     [fh,fh_udg,fh_uh] = fhat_electrondensity(nl,p,udg,uh,param,time);
-    %     r = p(:,1);
-    %     Ex = p(:,3);    % Ex is -grad(phi)
-    %     Ey = p(:,4);
-    %     np = udg(:,??);     % Need to figure out where in the vector the np goes
+    %     Er = udg(:,8);    % Ex is -grad(phi)
+    %     Ez = udg(:,12);
+    %     np = udg(:,2);
     %     gamma = 0.001;      % Secondary emission coefficient from needle
 
-    %     normE = sqrt(Ex.^2 + Ey.^2);
+    %     normE = sqrt(Er.^2 + Ez.^2);
 
     %     needle_flux = gamma*np*normE;
-
     %     fh = fh + needle_flux;
     
     % case 6 % Dirichlet - custon function
