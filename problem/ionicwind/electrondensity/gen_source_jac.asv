@@ -1,0 +1,33 @@
+syms ne np nn Er Ez
+syms alpha eta mue mue_ref r_tip k_ep k_np epsilon0 e
+
+normE = sqrt(Er^2+Ez^2);
+source_electrons = (alpha-eta)*(mue/mue_ref)*r_tip*ne.*normE - k_ep*epsilon0/(e*mue_ref)*ne*np;
+source_positives = alpha*(mue/mue_ref)*r_tip*ne.*normE - np*epsilon0/(e*mue_ref)*(k_np*nn + k_ep*ne);
+source_negatives = eta*(mue/mue_ref)*r_tip*ne.*normE - k_np*epsilon0/(e*mue_ref)*nn*np;
+source_poisson = ne + nn - np;
+
+% Note the u vector is: (u1, u2, u3, u4, q1x, q2x, q3x, q4x, q1y, q2y, q3y, q4y)
+% For the source terms, q[123][xy] are unused hence their derivatives are 0 and are not computed
+
+dse_dne = diff(source_electrons, 'ne')
+dse_dnp = diff(source_electrons, 'np')
+dse_dnn = diff(source_electrons, 'nn')
+dse_dEr = diff(source_electrons, 'Er')
+dse_dEz = diff(source_electrons, 'Ez')
+
+% dsp_dne = diff(source_positives, 'ne')
+% dsp_dnp = diff(source_positives, 'np')
+% dsp_dnn = diff(source_positives, 'nn')
+% dsp_dEr = diff(source_positives, 'Er')
+% dsp_dEz = diff(source_positives, 'Ez')
+
+% dsn_dne = diff(source_negatives, 'ne')
+% dsn_dnp = diff(source_negatives, 'np')
+% dsn_dnn = diff(source_negatives, 'nn')
+% dsn_dEr = diff(source_negatives, 'Er')
+% dsn_dEz = diff(source_negatives, 'Ez')
+
+dsphi_dne = diff(source_poisson, 'ne')
+dsphi_dnp = diff(source_poisson, 'np')
+dsphi_dnn = diff(source_poisson, 'nn')

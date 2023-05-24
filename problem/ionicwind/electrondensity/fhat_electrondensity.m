@@ -57,19 +57,20 @@ Dp_star = Dp/(mue_ref*E_bd*r_tip);
 % Note the u vector is: (ne, np, nn, dne_dr, dnn_dr, dnp_dr, dne_dz, dnn_dz, dnp_dz)
 
 r = p(:,1);
-Ex = p(:,3);    % Ex is -grad(phi)
-Ey = p(:,4);
 
 % Read in values from the u vector
 ne = udg(:,1);
 nn = udg(:,2);
 np = udg(:,3);
-dne_dr = udg(:,4); % q is -grad(ne)
-dnn_dr = udg(:,5); % q is -grad(ne)
-dnp_dr = udg(:,6);
-dne_dz = udg(:,7);
-dnn_dz = udg(:,8);
-dnp_dz = udg(:,9);
+phi = udg(:,4);
+dne_dr = udg(:,5); % q is -grad(ne)
+dnn_dr = udg(:,6); % q is -grad(ne)
+dnp_dr = udg(:,7);
+Ex = udg(:,8);    % Ex is -grad(phi)
+dne_dz = udg(:,9);
+dnn_dz = udg(:,10);
+dnp_dz = udg(:,11);
+Ey = udg(:,12);
 
 % Compute convective velocities for r and z components for each equation
 cr_e = -(mu_e/mue_ref)*Ex;
@@ -85,20 +86,31 @@ fh = zeros(ng,nch);
 fh(:,1) = r.*((cr_e.*uh(:,1)+De_star*dne_dr).*nl(:,1) + (cz_e.*uh(:,1)+De_star*dne_dz).*nl(:,2)) + tau.*(ne-uh(:,1));
 fh(:,2) = r.*((cr_n.*uh(:,2)+Dn_star*dnn_dr).*nl(:,1) + (cz_n.*uh(:,2)+Dn_star*dnn_dz).*nl(:,2)) + tau.*(nn-uh(:,2));
 fh(:,3) = r.*((cr_p.*uh(:,3)+Dp_star*dnp_dr).*nl(:,1) + (cz_p.*uh(:,3)+Dp_star*dnp_dz).*nl(:,2)) + tau.*(np-uh(:,3));
+fh(:,4) = r.*(Ex.*nl(:,1) + Ey.*nl(:,2)) + tau.*(phi-uh(:,4));
 
 % Jacobian of f_hat with respect to UDG.
 fh_udg = zeros(ng,nch,nc);
 fh_udg(:,1,1) = tau;                    % dfh(ne)_d(ne)
-fh_udg(:,1,4) = De_star*r.*nl(:,1);     % dfh(ne)_d(dne_dr)
-fh_udg(:,1,7) = De_star*r.*nl(:,2);     % dfh(ne)_d(dne_dz)
+fh_udg(:,1,5) = De_star*r.*nl(:,1);     % dfh(ne)_d(dne_dr)
+fh_udg(:,1,8) = -(mu_e/mue_ref)*r.*uh(:,1).*nl(:,1);
+fh_udg(:,1,9) = De_star*r.*nl(:,2);     % dfh(ne)_d(dne_dz)
+fh_udg(:,1,12) = -(mu_e/mue_ref)*r.*uh(:,1).*nl(:,2);
 
 fh_udg(:,2,2) = tau;                    % dfh(nn)_d(nn)
-fh_udg(:,2,5) = Dn_star*r.*nl(:,1);     % dfh(nn)_d(dnn_dr)
-fh_udg(:,2,8) = Dn_star*r.*nl(:,2);     % dfh(nn)_d(dnn_dz)
+fh_udg(:,2,6) = Dn_star*r.*nl(:,1);     % dfh(nn)_d(dnn_dr)
+fh_udg(:,2,8) = -(mu_n/mue_ref)*r.*uh(:,2).*nl(:,1);
+fh_udg(:,2,10) = Dn_star*r.*nl(:,2);     % dfh(nn)_d(dnn_dz)
+fh_udg(:,2,12) = -(mu_n/mue_ref)*r.*uh(:,2).*nl(:,2);
 
 fh_udg(:,3,3) = tau;                    % dfh(np)_d(np)
-fh_udg(:,3,6) = Dp_star*r.*nl(:,1);     % dfh(np)_d(dnp_dr)
-fh_udg(:,3,9) = Dp_star*r.*nl(:,2);     % dfh(np)_d(dnp_dz)
+fh_udg(:,3,7) = Dp_star*r.*nl(:,1);     % dfh(np)_d(dnp_dr)
+fh_udg(:,3,8) = (mu_p/mue_ref)*r.*uh(:,3).*nl(:,1);
+fh_udg(:,3,11) = Dp_star*r.*nl(:,2);     % dfh(np)_d(dnp_dz)
+fh_udg(:,3,12) = (mu_p/mue_ref)*r.*uh(:,3).*nl(:,2);
+
+fh_udg(:,4,1) = tau;
+fh_udg(:,4,8) = r.*nl(:,1);
+fh_udg(:,4,12) = r.*nl(:,2);
 
 % This is the jacobian of the normal flux f_hat w.r.t UHAT and does _not_ involve UDG.
 % For this problem the jacobian matrix is diagonal - each equation doesn't depend on uhat from the other equations
@@ -106,3 +118,4 @@ fh_uh = zeros(ng,nch,nch);
 fh_uh(:,1,1) = cr_e.*r.*nl(:,1) + cz_e.*r.*nl(:,2) - tau;
 fh_uh(:,2,2) = cr_n.*r.*nl(:,1) + cz_n.*r.*nl(:,2) - tau;
 fh_uh(:,3,3) = cr_p.*r.*nl(:,1) + cz_p.*r.*nl(:,2) - tau;
+fh_uh(:,4,4) = -tau;

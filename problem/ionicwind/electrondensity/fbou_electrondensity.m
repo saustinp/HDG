@@ -34,7 +34,9 @@ r_tip = param{10};
 mue_ref = param{13};
 
 % These swarm parameters will eventually be replaced with calls to the curve fit functions.
-% mu_e = .0378;
+mu_e = .0378;
+mu_p = 2.43e-4;          % mu[3] Pos ion mobility [m^2/(Vs)]
+mu_n = 2.7e-4;           % mu[4] Neg mobility [m^2/(Vs)]
 De = 0.18;               % Electron diffusion coefficient [m^2/s]
 Dn = 0.043e-4;           % Neg diffusion coefficient [m^2/s]
 Dp = 0.028e-4;           % Pos ion diffusion coefficient [m^2/s]
@@ -45,8 +47,8 @@ Dp_star = Dp/(mue_ref*E_bd*r_tip);
 tau = param{end};
 
 r = p(:,1);
-Er = p(:,3);    % Ex is -grad(phi)
-Ez = p(:,4);
+Ex = udg(:,8);
+Ey = udg(:,12);
 
 switch ib
     case 1  % Axisymmetry boundary
@@ -63,37 +65,52 @@ switch ib
         ne = udg(:,1);
         nn = udg(:,2);
         np = udg(:,3);
-        dne_dr = udg(:,4); % q is -grad(ne)
-        dnn_dr = udg(:,5); % q is -grad(ne)
-        dnp_dr = udg(:,6);
-        dne_dz = udg(:,7);
-        dnn_dz = udg(:,8);
-        dnp_dz = udg(:,9);
+        phi = udg(:,4);
+        dne_dr = udg(:,5); % q is -grad(ne)
+        dnn_dr = udg(:,6); % q is -grad(ne)
+        dnp_dr = udg(:,7);
+        Ex = udg(:,8);    % Ex is -grad(phi)
+        dne_dz = udg(:,9);
+        dnn_dz = udg(:,10);
+        dnp_dz = udg(:,11);
+        Ey = udg(:,12);
 
         % ng x nch, same size as uh
         % This is the jacobian of the normal flux f_hat w.r.t UDG. UDG is [u, uq1x, q2x], and does _not_ involve uh.
         fh(:,1) = r.*(D_star*dne_dr.*nl(:,1) + D_star*dne_dz.*nl(:,2)) + tau.*(ne-uh(:,1));
         fh(:,2) = r.*(D_star*dnn_dr.*nl(:,1) + D_star*dnn_dz.*nl(:,2)) + tau.*(nn-uh(:,2));
         fh(:,3) = r.*(D_star*dnp_dr.*nl(:,1) + D_star*dnp_dz.*nl(:,2)) + tau.*(np-uh(:,3));
+        fh(:,4) = r.*(Ex.*nl(:,1) + Ey.*nl(:,2))                       + tau.*(phi-uh(:,4));
 
         % Jacobian of f_hat with respect to UDG.
         fh_udg(:,1,1) = tau;                    % dfh(ne)_d(ne)
-        fh_udg(:,1,4) = D_star*r.*nl(:,1);     % dfh(ne)_d(dne_dr)
-        fh_udg(:,1,7) = D_star*r.*nl(:,2);     % dfh(ne)_d(dne_dz)
-
+        fh_udg(:,1,5) = D_star*r.*nl(:,1);     % dfh(ne)_d(dne_dr)
+        fh_udg(:,1,8) = -(mu_e/mue_ref)*r.*uh(:,1).*nl(:,1);
+        fh_udg(:,1,9) = D_star*r.*nl(:,2);     % dfh(ne)_d(dne_dz)
+        fh_udg(:,1,12) = -(mu_e/mue_ref)*r.*uh(:,1).*nl(:,2);
+        
         fh_udg(:,2,2) = tau;                    % dfh(nn)_d(nn)
-        fh_udg(:,2,5) = D_star*r.*nl(:,1);     % dfh(nn)_d(dnn_dr)
-        fh_udg(:,2,8) = D_star*r.*nl(:,2);     % dfh(nn)_d(dnn_dz)
-
+        fh_udg(:,2,6) = D_star*r.*nl(:,1);     % dfh(nn)_d(dnn_dr)
+        fh_udg(:,2,8) = -(mu_n/mue_ref)*r.*uh(:,2).*nl(:,1);
+        fh_udg(:,2,10) = D_star*r.*nl(:,2);     % dfh(nn)_d(dnn_dz)
+        fh_udg(:,2,12) = -(mu_n/mue_ref)*r.*uh(:,2).*nl(:,2);
+        
         fh_udg(:,3,3) = tau;                    % dfh(np)_d(np)
-        fh_udg(:,3,6) = D_star*r.*nl(:,1);     % dfh(np)_d(dnp_dr)
-        fh_udg(:,3,9) = D_star*r.*nl(:,2);     % dfh(np)_d(dnp_dz)
+        fh_udg(:,3,7) = D_star*r.*nl(:,1);     % dfh(np)_d(dnp_dr)
+        fh_udg(:,3,8) = (mu_p/mue_ref)*r.*uh(:,3).*nl(:,1);
+        fh_udg(:,3,11) = D_star*r.*nl(:,2);     % dfh(np)_d(dnp_dz)
+        fh_udg(:,3,12) = (mu_p/mue_ref)*r.*uh(:,3).*nl(:,2);
+        
+        fh_udg(:,4,1) = tau;
+        fh_udg(:,4,8) = r.*nl(:,1);
+        fh_udg(:,4,12) = r.*nl(:,2);
 
         % This is the jacobian of the normal flux f_hat w.r.t UHAT and does _not_ involve UDG.
         % For this problem the jacobian matrix is diagonal - each equation doesn't depend on uhat from the other equations
         fh_uh(:,1,1) = -tau;
         fh_uh(:,2,2) = -tau;
         fh_uh(:,3,3) = -tau;
+        fh_uh(:,4,4) = -tau;
 
     case 2  % Farfield - 0 flux
         [fh,fh_udg,fh_uh] = fhat_electrondensity(nl,p,udg,uh,param,time);
@@ -108,10 +125,12 @@ switch ib
         fh(:,1) = tau.*(0-uh(:,1));
         fh(:,2) = tau.*(0-uh(:,2));
         fh(:,3) = tau.*(0-uh(:,3));
+        fh(:,4) = tau.*(0-uh(:,4));
 
         fh_uh(:,1,1) = -tau;
         fh_uh(:,2,2) = -tau;
-        fh_uh(:,3,3) = -tau;
+        fh_uh(:,3,3) = -tau;        
+        fh_uh(:,4,4) = -tau;        
 
     case 4  % Grounded surface
         fh = zeros(ng,nch);
@@ -132,12 +151,12 @@ switch ib
         fh(:,2) = r.*(Dn_star*dnn_dr.*nl(:,1) + Dn_star*dnn_dz.*nl(:,2)) + tau.*(nn-uh(:,2));
 
         fh_udg(:,1,1) = tau;                    % dfh(ne)_d(ne)
-        fh_udg(:,1,4) = De_star*r.*nl(:,1);     % dfh(ne)_d(dne_dr)
-        fh_udg(:,1,7) = De_star*r.*nl(:,2);     % dfh(ne)_d(dne_dz)
+        fh_udg(:,1,5) = De_star*r.*nl(:,1);     % dfh(ne)_d(dne_dr)
+        fh_udg(:,1,9) = De_star*r.*nl(:,2);     % dfh(ne)_d(dne_dz)
 
         fh_udg(:,2,2) = tau;                    % dfh(nn)_d(nn)
-        fh_udg(:,2,5) = Dn_star*r.*nl(:,1);     % dfh(nn)_d(dnn_dr)
-        fh_udg(:,2,8) = Dn_star*r.*nl(:,2);     % dfh(nn)_d(dnn_dz)
+        fh_udg(:,2,6) = Dn_star*r.*nl(:,1);     % dfh(nn)_d(dnn_dr)
+        fh_udg(:,2,10) = Dn_star*r.*nl(:,2);     % dfh(nn)_d(dnn_dz)
 
         fh_uh(:,1,1) = -tau;
         fh_uh(:,2,2) = -tau;
@@ -145,6 +164,10 @@ switch ib
         % Positives: homogeneous dirichlet
         fh(:,3) = tau.*(0-uh(:,3));
         fh_uh(:,3,3) = -tau;
+
+        % Poisson: dirichlet
+        fh(:,4) = tau.*(0-uh(:,4));
+        fh_uh(:,4,4) = -tau;        
 
     case 5  % Needle
         fh = zeros(ng,nch);
@@ -157,7 +180,7 @@ switch ib
         dnp_dr = udg(:,6);
         dnp_dz = udg(:,9);
 
-        normE = sqrt(Er.^2 + Ez.^2);
+        normE = sqrt(Ex.^2 + Ey.^2);
         gamma = 0.001;
 
         % Electrons: outflow flux -- should I make this more like a neumann condition: get fhat like usual and then add the flux to that?
@@ -183,6 +206,10 @@ switch ib
         fh_udg(:,3,6) = Dp_star*r.*nl(:,1);     % dfh(np)_d(dnp_dr)
         fh_udg(:,3,9) = Dp_star*r.*nl(:,2);     % dfh(np)_d(dnp_dz)
         fh_uh(:,3,3) = -tau;
+
+        % Emitter held at a positive voltage
+        fh(:,4) = tau.*(15.151515-uh(:,4));
+        fh_uh(:,4,4) = -tau;        
 
     otherwise
         error('unknown boundary type');
