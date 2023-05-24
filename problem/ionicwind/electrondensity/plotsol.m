@@ -5,7 +5,7 @@ function t = plotsol(i, shwmsh)
 mesh = evalin('base', 'mesh');
 UDG_history = evalin('base', 'UDG_history');
 
-ne = UDG_history(:,1,:,i);
+ne = UDG_history(:,4,:,i);
 
 clf;
 txt = sprintf('ne, timestep %d', i);

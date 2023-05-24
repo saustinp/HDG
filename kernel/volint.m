@@ -106,7 +106,7 @@ if tdep
     % axis symmetry
     axisflag = isfield(app,'axisymmetry');
     if axisflag
-        xr = app.axisymmetry.*abs(pg(:,1));
+        xr = app.axisymmetry.*abs(pg(:,1));     % pg=the first component of DGnodes (x or r coord)
         xr = reshape(xr,[ngv*ne 1]);
     else
         xr = ones(ngv*ne,1);

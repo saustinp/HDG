@@ -47,7 +47,7 @@ app.fc_u = 0;
 app.fc_p = 0;
 
 app.nd = 2;
-app.nch  = 3;                       % Number of componets of UH
+app.nch  = 4;                       % Number of componets of UH
 app.nc   = app.nch*(app.nd+1);    % Number of componeents of UDG
 app.ncu = app.nch;
 
@@ -105,8 +105,8 @@ mesh.dgnodes(:,4,:) = UDG(:,3,:);
 % Number density initialized to the same gaussian for both electrons and positives, and 0 for negatives.
 % These have to be initialized in the same order that UDG is in
 %                   ne_0        q_ne_r0        q_ne_z0       nn_0         np_0         q_np_r0       q_np_z0
-% initu_func_set = {@initu_func;0;@initu_func;    @initq_func_r;0;@initq_func_r;    @initq_func_z;0;@initq_func_z};
-initu_func_set = {0;0;@initu_func;    0;0;@initq_func_r;    0;0;@initq_func_z};
+initu_func_set = {@initu_func;0;@initu_func;0;    @initq_func_r;0;@initq_func_r;0;    @initq_func_z;0;@initq_func_z;0};
+% initu_func_set = {0;0;@initu_func;    0;0;@initq_func_r;    0;0;@initq_func_z};
 UDG = initu(mesh,initu_func_set,app.arg); 
 
 % Creating history vector to track the snapshots. Set the first snapshot equal to the initial condition as a test

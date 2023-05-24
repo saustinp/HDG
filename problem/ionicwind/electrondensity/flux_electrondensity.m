@@ -53,19 +53,28 @@ Dp_star = Dp/(mue_ref*E_bd*r_tip);
 % Note the u vector is: (ne, np, nn, dne_dr, dnn_dr, dnp_dr, dne_dz, dnn_dz, dnp_dz)
 
 r = p(:,1);
-Ex = p(:,3);    % Ex is -grad(phi)
-Ey = p(:,4);
+% Ex = p(:,3);    % Ex is -grad(phi)
+% Ey = p(:,4);
+
+% Read in values from the u vector
+Ex_0 = p(:,3);    % Ex is -grad(phi)
+Ey_0 = p(:,4);
 
 % Read in values from the u vector
 ne = udg(:,1);
 nn = udg(:,2);
 np = udg(:,3);
-dne_dr = udg(:,4); % q is -grad(ne)
-dnn_dr = udg(:,5); % q is -grad(ne)
-dnp_dr = udg(:,6);
-dne_dz = udg(:,7);
-dnn_dz = udg(:,8);
-dnp_dz = udg(:,9);
+phi = udg(:,4);
+dne_dr = udg(:,5); % q is -grad(ne)
+dnn_dr = udg(:,6); % q is -grad(ne)
+dnp_dr = udg(:,7);
+Ex = udg(:,8) + Ex_0;
+dne_dz = udg(:,9);
+dnn_dz = udg(:,10);
+dnp_dz = udg(:,11);
+Ey = udg(:,12) + Ey_0;
+Ex_prime = udg(:,8);
+Ey_prime = udg(:,12);
 
 % Compute convective velocities
 cr_e = -(mu_e/mue_ref)*Ex;
@@ -83,21 +92,33 @@ f(:,2,1) = cr_n.*(r.*nn) + Dn_star*(r.*dnn_dr);
 f(:,2,2) = cz_n.*(r.*nn) + Dn_star*(r.*dnn_dz);
 f(:,3,1) = cr_p.*(r.*np) + Dp_star*(r.*dnp_dr);
 f(:,3,2) = cz_p.*(r.*np) + Dp_star*(r.*dnp_dz);
+f(:,4,1) = r.*Ex_prime;
+f(:,4,2) = r.*Ey_prime;
 
 % Jacobian of flux with respect to UDG. Thesea are the only nonzero components, the rest (cross terms etc) are zero. For example dfne_r_d(dne_dz) - f_udg(:,1,1,3)
 % This will be more complicated when the electrostatic equation is added
+% Kind of tricky: the derivatives are w.r.t Ex_prime, but the convective velocities require the total field.
 f_udg = zeros(ng,nch,nd,nc);
 f_udg(:,1,1,1) = cr_e.*r;       % df(ne)_r_d(ne)
-f_udg(:,1,1,4) = De_star*r;     % df(ne)_r_d(dne_dr)
+f_udg(:,1,1,5) = De_star*r;     % df(ne)_r_d(dne_dr)
 f_udg(:,1,2,1) = cz_e.*r;       % df(ne)_z_d(ne)
-f_udg(:,1,2,7) = De_star*r;     % df(ne)_z_d(dne_dz)
+f_udg(:,1,2,9) = De_star*r;     % df(ne)_z_d(dne_dz)
+f_udg(:,1,1,8) = -(mu_e/mue_ref).*(r.*ne);
+f_udg(:,1,2,12) = -(mu_e/mue_ref).*(r.*ne);
 
 f_udg(:,2,1,2) = cr_n.*r;       % df(nn)_r_d(nn)
-f_udg(:,2,1,5) = Dn_star*r;     % df(nn)_r_d(dnn_dr)
+f_udg(:,2,1,6) = Dn_star*r;     % df(nn)_r_d(dnn_dr)
 f_udg(:,2,2,2) = cz_n.*r;       % df(nn)_z_d(nn)
-f_udg(:,2,2,8) = Dn_star*r;     % df(nn)_z_d(dnn_dz)
+f_udg(:,2,2,10) = Dn_star*r;     % df(nn)_z_d(dnn_dz)
+f_udg(:,2,1,8) = -(mu_n/mue_ref).*(r.*nn);
+f_udg(:,2,2,12) = -(mu_n/mue_ref).*(r.*nn);
 
 f_udg(:,3,1,3) = cr_p.*r;       % df(np)_r_d(np)
-f_udg(:,3,1,6) = Dp_star*r;     % df(np)_r_d(dnp_dr)
+f_udg(:,3,1,7) = Dp_star*r;     % df(np)_r_d(dnp_dr)
 f_udg(:,3,2,3) = cz_p.*r;       % df(np)_z_d(np)
-f_udg(:,3,2,9) = Dp_star*r;     % df(np)_z_d(dnp_dz)
+f_udg(:,3,2,11) = Dp_star*r;     % df(np)_z_d(dnp_dz)
+f_udg(:,3,1,8) = (mu_p/mue_ref).*(r.*np);
+f_udg(:,3,2,12) = (mu_p/mue_ref).*(r.*np);
+
+f_udg(:,4,1,8) = r;
+f_udg(:,4,2,12) = r;

@@ -31,16 +31,28 @@ mue = .0378;
 
 r = p(:,1);
 
+sr = zeros(ng,nch);
+sr_udg = zeros(ng,nch,nc);
+
+Er_0 = p(:,3);    % Er is -grad(phi)
+Ez_0 = p(:,4);
+
 % Read in values from the u vector
 ne = udg(:,1);
 nn = udg(:,2);
 np = udg(:,3);
-Er = p(:,3);    % Ex is -grad(phi)
-Ez = p(:,4);
+phi = udg(:,4);
+dne_dr = udg(:,5); % q is -grad(ne)
+dnn_dr = udg(:,6); % q is -grad(ne)
+dnp_dr = udg(:,7);
+Er = udg(:,8) + Er_0;
+dne_dz = udg(:,9);
+dnn_dz = udg(:,10);
+dnp_dz = udg(:,11);
+Ez = udg(:,12) + Ez_0;
+
 normE = sqrt(Er.^2+Ez.^2);
 
-sr = zeros(ng,nch);
-sr_udg = zeros(ng,nch,nc);
 
 % Phase 1: no source terms - this is the end of the function
 
@@ -58,27 +70,27 @@ sr_udg = zeros(ng,nch,nc);
 sr(:,1) = r.*((alpha-eta)*(mue/mue_ref)*r_tip*ne.*normE - k_ep*epsilon0/(e*mue_ref).*ne.*np);                                  % ne
 sr(:,2) = r.*(eta*(mue/mue_ref)*r_tip*ne.*normE - k_np*epsilon0/(e*mue_ref).*nn.*np);                                          % nn
 sr(:,3) = r.*(alpha.*(mue/mue_ref).*r_tip.*ne.*normE - np.*epsilon0./(e.*mue_ref).*(k_np.*nn + k_ep.*ne));                            % np
-% sr(:,4) = r.*(ne + nn - np);                                                                                                 % phi
+sr(:,4) = -r.*(ne + nn - np);                                                                                                 % phi
 
 % Jacobian of sr with respect to u -> (U and Q)
 sr_udg(:,1,1) = r.*((mue.*r_tip.*(alpha - eta).*(Er.^2 + Ez.^2).^(1./2))./mue_ref - (epsilon0.*k_ep.*np)./(e.*mue_ref));     % dse_dne
 sr_udg(:,1,2) = 0;                                                                                                          % dse_dnn
 sr_udg(:,1,3) = r.*(-(epsilon0.*k_ep.*ne)./(e.*mue_ref));                                                                    % dse_dnp
-% sr_udg(:,1,8) = r.*((Er.*mue.*ne.*r_tip.*(alpha - eta))./(mue_ref.*(Er.^2 + Ez.^2).^(1./2)));                                % dse_dEr
-% sr_udg(:,1,12) = r.*((Ez.*mue.*ne.*r_tip.*(alpha - eta))./(mue_ref.*(Er.^2 + Ez.^2).^(1./2)));                               % dse_dEz
+sr_udg(:,1,8) = r.*((Er.*mue.*ne.*r_tip.*(alpha - eta))./(mue_ref.*(Er.^2 + Ez.^2).^(1./2)));                                % dse_dEr
+sr_udg(:,1,12) = r.*((Ez.*mue.*ne.*r_tip.*(alpha - eta))./(mue_ref.*(Er.^2 + Ez.^2).^(1./2)));                               % dse_dEz
 
 sr_udg(:,2,1) = r.*((eta.*mue.*r_tip.*(Er.^2 + Ez.^2).^(1./2))./mue_ref);                                                    % dsn_dne
 sr_udg(:,2,2) = r.*(-(epsilon0.*k_np.*np)./(e.*mue_ref));                                                                    % dsn_dnn
 sr_udg(:,2,3) = r.*(-(epsilon0.*k_np.*nn)./(e.*mue_ref));                                                                    % dsn_dnp
-% sr_udg(:,2,8) =  r.*((Er.*eta.*mue.*ne.*r_tip)./(mue_ref.*(Er.^2 + Ez.^2).^(1./2)));                                          % dsn_dEr
-% sr_udg(:,2,12) = r.*((Ez.*eta.*mue.*ne.*r_tip)./(mue_ref.*(Er.^2 + Ez.^2).^(1./2)));                                         % dsn_dEz
+sr_udg(:,2,8) =  r.*((Er.*eta.*mue.*ne.*r_tip)./(mue_ref.*(Er.^2 + Ez.^2).^(1./2)));                                          % dsn_dEr
+sr_udg(:,2,12) = r.*((Ez.*eta.*mue.*ne.*r_tip)./(mue_ref.*(Er.^2 + Ez.^2).^(1./2)));                                         % dsn_dEz
 
 sr_udg(:,3,1) = r.*((alpha.*mue.*r_tip.*(Er.^2 + Ez.^2).^(1./2))./mue_ref - (epsilon0.*k_ep.*np)./(e.*mue_ref));             % dsp_dne
 sr_udg(:,3,2) = r.*(-(epsilon0.*k_np.*np)./(e.*mue_ref));                                                                    % dsp_dnn
 sr_udg(:,3,3) = r.*(-(epsilon0.*(k_ep.*ne + k_np.*nn))./(e.*mue_ref));                                                       % dsp_dnp
-% sr_udg(:,3,8) =  r.*((Er.*alpha.*mue.*ne.*r_tip)./(mue_ref.*(Er.^2 + Ez.^2).^(1./2)));                                        % dsp_dEr
-% sr_udg(:,3,12) = r.*((Ez.*alpha.*mue.*ne.*r_tip)./(mue_ref.*(Er.^2 + Ez.^2).^(1./2)));                                       % dsp_dEz
+sr_udg(:,3,8) =  r.*((Er.*alpha.*mue.*ne.*r_tip)./(mue_ref.*(Er.^2 + Ez.^2).^(1./2)));                                        % dsp_dEr
+sr_udg(:,3,12) = r.*((Ez.*alpha.*mue.*ne.*r_tip)./(mue_ref.*(Er.^2 + Ez.^2).^(1./2)));                                       % dsp_dEz
 
-% sr_udg(:,4,1) = r;                                                                                                      % dsphi_dne
-% sr_udg(:,4,2) = r;                                                                                                      % dsphi_dnn
-% sr_udg(:,4,3) = -r;                                                                                                     % dsphi_dnp
+sr_udg(:,4,1) = -r;                                                                                                      % dsphi_dne
+sr_udg(:,4,2) = -r;                                                                                                      % dsphi_dnn
+sr_udg(:,4,3) = r;                                                                                                     % dsphi_dnp
