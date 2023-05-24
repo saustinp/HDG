@@ -6,10 +6,10 @@ else
     perm = master(:,:,1);
 end
 
-ne   = size(UDG,3);
-npf  = size(perm,1);
-nfe  = size(perm,2);
-nsiz = max(elcon(:));
+ne   = size(UDG,3);     % Number of elements
+npf  = size(perm,1);    % Number of points per face
+nfe  = size(perm,2);    % Number of faces per element
+nsiz = max(elcon(:));   % Total number of nodes in the first order mesh - this seems like a more roundabout way of doing size(mesh.p), but mesh wasn't passed in to the function so we don't have access to that data structure.
 
 UH   = zeros(ncu*nsiz,1);
 ndiv = zeros(nsiz,1);

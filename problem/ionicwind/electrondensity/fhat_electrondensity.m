@@ -15,7 +15,7 @@ function [fh,fh_udg,fh_uh] = fhat_electrondensity(nl,p,udg,uh,param,time,signe)
 %      FHQ(N,NC,NC):         Jacobian of the flux flux vector w.r.t. Q
 
 [ng,nc] = size(udg);
-nch = 1;
+nch = nc/3;     % 3 components to UDG: (U,QX,QY) -> assuming 2D. For example, in 2D if U has 4 equations, nc will be 12
 % nq = nc-nch;
 % nd = nq;
 
@@ -28,31 +28,81 @@ nch = 1;
 % epsilon0 = param{6};
 % Ua = param{7};
 % gamma = param{8};
-% E_bd = param{9};
-% r_tip = param{10};
+E_bd = param{9};
+r_tip = param{10};
 % n_ref = param{11};
 % N = param{12};
 mue_ref = param{13};
-D_star = param{14};
-tau   = param{end};
+tau = param{end};
+
+% These swarm parameters will eventually be replaced with calls to the curve fit functions.
 mu_e = .0378;
+mu_p = 2.43e-4;          % mu[3] Pos ion mobility [m^2/(Vs)]
+mu_n = 2.7e-4;           % mu[4] Neg mobility [m^2/(Vs)]
+De = 0.18;               % Electron diffusion coefficient [m^2/s]
+Dn = 0.043e-4;           % Neg diffusion coefficient [m^2/s]
+Dp = 0.028e-4;           % Pos ion diffusion coefficient [m^2/s]
+
+De_star = De/(mue_ref*E_bd*r_tip);
+Dn_star = Dn/(mue_ref*E_bd*r_tip);
+Dp_star = Dp/(mue_ref*E_bd*r_tip);
+
+% Note the u vector is: (u1, u2, u3, u4, q1x, q2x, q3x, q4x, q1y, q2y, q3y, q4y)
+%                        1   2   3    4     5       6       7     8     9       10      11    12
+% Note the u vector is: (ne, np, nn, phi, dne_dr, dnn_dr, dnp_dr, Er, dne_dz, dnn_dz, dnp_dz, Ez)
+
+% Without the electrostatic equation:
+% Note the u vector is: (u1, u2, u3, q1x, q2x, q3x, q1y, q2y, q3y)
+%                        1   2   3     4       5       6       7       8       9
+% Note the u vector is: (ne, np, nn, dne_dr, dnn_dr, dnp_dr, dne_dz, dnn_dz, dnp_dz)
 
 r = p(:,1);
 Ex = p(:,3);    % Ex is -grad(phi)
 Ey = p(:,4);
+
+% Read in values from the u vector
 ne = udg(:,1);
-dne_dr = udg(:,2); % q is -grad(ne)
-dne_dz = udg(:,3); % q is -grad(ne)
-c1 = -(mu_e/mue_ref)*Ex;
-c2 = -(mu_e/mue_ref)*Ey;
+nn = udg(:,2);
+np = udg(:,3);
+dne_dr = udg(:,4); % q is -grad(ne)
+dnn_dr = udg(:,5); % q is -grad(ne)
+dnp_dr = udg(:,6);
+dne_dz = udg(:,7);
+dnn_dz = udg(:,8);
+dnp_dz = udg(:,9);
 
-% ng x nch
-fh = r.*((c1.*uh+D_star*dne_dr).*nl(:,1) + (c2.*uh+D_star*dne_dz).*nl(:,2)) + tau.*(ne-uh);        % CHANGE ME
+% Compute convective velocities for r and z components for each equation
+cr_e = -(mu_e/mue_ref)*Ex;
+cz_e = -(mu_e/mue_ref)*Ey;
+cr_n = -(mu_n/mue_ref)*Ex;
+cz_n = -(mu_n/mue_ref)*Ey;
+cr_p = (mu_p/mue_ref)*Ex;
+cz_p = (mu_p/mue_ref)*Ey;
 
+% ng x nch, same size as uh
+% This is the jacobian of the normal flux f_hat w.r.t UDG. UDG is [u, uq1x, q2x], and does _not_ involve uh.
+fh = zeros(ng,nch);
+fh(:,1) = r.*((cr_e.*uh(:,1)+De_star*dne_dr).*nl(:,1) + (cz_e.*uh(:,1)+De_star*dne_dz).*nl(:,2)) + tau.*(ne-uh(:,1));
+fh(:,2) = r.*((cr_n.*uh(:,2)+Dn_star*dnn_dr).*nl(:,1) + (cz_n.*uh(:,2)+Dn_star*dnn_dz).*nl(:,2)) + tau.*(nn-uh(:,2));
+fh(:,3) = r.*((cr_p.*uh(:,3)+Dp_star*dnp_dr).*nl(:,1) + (cz_p.*uh(:,3)+Dp_star*dnp_dz).*nl(:,2)) + tau.*(np-uh(:,3));
+
+% Jacobian of f_hat with respect to UDG.
 fh_udg = zeros(ng,nch,nc);
-fh_udg(:,1,1) = tau;
-fh_udg(:,1,2) = D_star*r.*nl(:,1);
-fh_udg(:,1,3) = D_star*r.*nl(:,2);
+fh_udg(:,1,1) = tau;                    % dfh(ne)_d(ne)
+fh_udg(:,1,4) = De_star*r.*nl(:,1);     % dfh(ne)_d(dne_dr)
+fh_udg(:,1,7) = De_star*r.*nl(:,2);     % dfh(ne)_d(dne_dz)
 
+fh_udg(:,2,2) = tau;                    % dfh(nn)_d(nn)
+fh_udg(:,2,5) = Dn_star*r.*nl(:,1);     % dfh(nn)_d(dnn_dr)
+fh_udg(:,2,8) = Dn_star*r.*nl(:,2);     % dfh(nn)_d(dnn_dz)
+
+fh_udg(:,3,3) = tau;                    % dfh(np)_d(np)
+fh_udg(:,3,6) = Dp_star*r.*nl(:,1);     % dfh(np)_d(dnp_dr)
+fh_udg(:,3,9) = Dp_star*r.*nl(:,2);     % dfh(np)_d(dnp_dz)
+
+% This is the jacobian of the normal flux f_hat w.r.t UHAT and does _not_ involve UDG.
+% For this problem the jacobian matrix is diagonal - each equation doesn't depend on uhat from the other equations
 fh_uh = zeros(ng,nch,nch);
-fh_uh(:,1,1) = c1.*r.*nl(:,1) + c2.*r.*nl(:,2) - tau;
+fh_uh(:,1,1) = cr_e.*r.*nl(:,1) + cz_e.*r.*nl(:,2) - tau;
+fh_uh(:,2,2) = cr_n.*r.*nl(:,1) + cz_n.*r.*nl(:,2) - tau;
+fh_uh(:,3,3) = cr_p.*r.*nl(:,1) + cz_p.*r.*nl(:,2) - tau;

@@ -10,9 +10,27 @@ app.flux = 'flux_electrondensity';
 app.fbou = 'fbou_electrondensity';
 app.fhat = 'fhat_electrondensity';
 app.localsolve=1;
-% app.bcm = [4;4;4;2;2;2;1];
-app.bcm = [5;3;3;1;4;4;3];
-app.bcs = [0;0;0;0;0;0;0];
+
+% Boundaries
+% 1 Axisymmetry
+% 2 Right farfield
+% 3 Top farfield
+% 4 Outflow
+% 5 Ground plane
+% 6 Cylinder
+% 7 Needle
+
+% BC types
+% 1 Dirichlet scalar
+% 3 Prescribed flux - scalar
+% 4 Diffusion flux only
+% 5 Symmetry
+% 6 Prescribed flux - function
+
+% Leaving out the electrostatic equation for now
+app.bcm = [1; 2; 2; 3; 4; 4; 5];
+app.bcs = [0; 0; 0; 0; 0; 0; 0];
+
 app.bcd = [];
 app.bcv = [];
 
@@ -29,12 +47,13 @@ app.fc_u = 0;
 app.fc_p = 0;
 
 app.nd = 2;
-app.nch  = 1;                       % Number of componets of UH
+app.nch  = 3;                       % Number of componets of UH
 app.nc   = app.nch*(app.nd+1);    % Number of componeents of UDG
 app.ncu = app.nch;
 
-ntime  = 5;
-dt = linspace(.05, .5 ,ntime);
+dt = 0.05;
+ntime  = 6;
+dt = linspace(dt, dt*ntime, ntime);
 
 % Physical parameters
 Kep = 2e-13;             % mu[1] Recombination coeff - pos and neg ions [m^3/s]
@@ -42,8 +61,8 @@ Knp = 2e-13;             % mu[2] Recombination coeff - pos ions and electrons [m
 mu_p = 2.43e-4;          % mu[3] Pos ion mobility [m^2/(Vs)]
 mu_n = 2.7e-4;           % mu[4] Neg mobility [m^2/(Vs)]
 De = 0.18;               % mu[5] Electron diffusion coefficient [m^2/s]
-Dp = 0.028e-4;           % mu[6] Pos ion diffusion coefficient [m^2/s]
 Dn = 0.043e-4;           % mu[7] Neg diffusion coefficient [m^2/s]
+Dp = 0.028e-4;           % mu[6] Pos ion diffusion coefficient [m^2/s]
 Nmax = 1e16;             % mu[8] Max number density for initial charge distribution [particles/m^3]
 r0 = 0.0;                % mu[9] r-pos of emitter tip in reference frame [m]
 z0 = 0.0;              % mu[10]z-pos of emitter tip in reference frame [m]
@@ -83,14 +102,26 @@ UDG = UDG*Ua/(E_bd*r_tip);      % Sign flip and scaling potential function for p
 mesh.dgnodes(:,3,:) = UDG(:,2,:);
 mesh.dgnodes(:,4,:) = UDG(:,3,:);
 
-UDG = initu(mesh,{@initu_func;@initq_func_r;@initq_func_z},app.arg);
+% Number density initialized to the same gaussian for both electrons and positives, and 0 for negatives.
+% These have to be initialized in the same order that UDG is in
+%                   ne_0        q_ne_r0        q_ne_z0       nn_0         np_0         q_np_r0       q_np_z0
+% initu_func_set = {@initu_func;0;@initu_func;    @initq_func_r;0;@initq_func_r;    @initq_func_z;0;@initq_func_z};
+initu_func_set = {0;0;@initu_func;    0;0;@initq_func_r;    0;0;@initq_func_z};
+UDG = initu(mesh,initu_func_set,app.arg); 
+
+% Creating history vector to track the snapshots. Set the first snapshot equal to the initial condition as a test
 UDG_history = zeros([size(UDG),ntime+1]);
-UDG_history(:,:,:,1) = UDG;
-UH=inituhat(master,mesh.elcon,UDG,1);
+UDG_history(:,:,:,1) = UDG;     
+
+UH=inituhat(master,mesh.elcon,UDG,app.ncu);
 
 time = 0;
 figure(1);
 % set(gcf,'color','black');
+% size(UDG)
+% size(UDG_history)
+% size(UH)
+
 for itime = 1:ntime
     fprintf('Timestep :  %d\n', itime);
     
