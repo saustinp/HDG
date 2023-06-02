@@ -52,7 +52,7 @@ app.nc   = app.nch*(app.nd+1);    % Number of componeents of UDG
 app.ncu = app.nch;
 
 dt = 0.05;
-ntime  = 6;
+ntime  = 1100;
 dt = linspace(dt, dt*ntime, ntime);
 
 % Physical parameters
@@ -99,9 +99,11 @@ master = mkmaster(mesh,2*porder);
 
 load '../poissonsolution2.mat';
 UDG = UDG*Ua/(E_bd*r_tip);      % Sign flip and scaling potential function for problem nondimensionalization
+electrostatic_sol = UDG;
 mesh.dgnodes(:,3,:) = UDG(:,2,:);
 mesh.dgnodes(:,4,:) = UDG(:,3,:);
 
+% scaplot(mesh,electrostatic_sol(:,1,:),[-15.15 0],0,0); title('Phi');
 % Number density initialized to the same gaussian for both electrons and positives, and 0 for negatives.
 % These have to be initialized in the same order that UDG is in
 %                   ne_0        q_ne_r0        q_ne_z0       nn_0         np_0         q_np_r0       q_np_z0
@@ -112,12 +114,15 @@ UDG = initu(mesh,initu_func_set,app.arg);
 % Creating history vector to track the snapshots. Set the first snapshot equal to the initial condition as a test
 UDG_history = zeros([size(UDG),ntime+1]);
 UDG_history(:,:,:,1) = UDG;     
+UDG_history(:,:,:,1) = UDG;
+UDG_history(:,4,:,1) = UDG_history(:,4,:,itime+1) + electrostatic_sol(:,1,:);
+UDG_history(:,8,:,1) = UDG_history(:,8,:,itime+1) + electrostatic_sol(:,2,:);
+UDG_history(:,12,:,1) = UDG_history(:,12,:,itime+1) + electrostatic_sol(:,3,:);
 
 UH=inituhat(master,mesh.elcon,UDG,app.ncu);
 
 time = 0;
 figure(1);
-% set(gcf,'color','black');
 % size(UDG)
 % size(UDG_history)
 % size(UH)
@@ -128,9 +133,14 @@ for itime = 1:ntime
     [UDG,UH] = hdg_solve_dirk(master,mesh,app,UDG,UH,[],time,dt(itime),nstage,torder);
     time = time + dt(itime);
     UDG_history(:,:,:,itime+1) = UDG;
+    UDG_history(:,4,:,itime+1) = UDG_history(:,4,:,itime+1) + electrostatic_sol(:,1,:);
+    UDG_history(:,8,:,itime+1) = UDG_history(:,8,:,itime+1) + electrostatic_sol(:,2,:);
+    UDG_history(:,12,:,itime+1) = UDG_history(:,12,:,itime+1) + electrostatic_sol(:,3,:);
     
-    % figure(1); scaplot(mesh,UDG(:,1,:),[],0,0); axis equal; axis tight; colormap jet; title('ne');
+    % scaplot(mesh,UDG_history(:,4,:,itime+1),[],0,0); axis equal; axis tight; colormap jet; title('phi');
 end
+
+animate_sol;
 
 % [UDG,UH] = hdg_solve(master,mesh,app,UDG,UH,0*UDG);      % CHANGE ME - IMPLEMENT TIMESTEPPING SCHEME
 
