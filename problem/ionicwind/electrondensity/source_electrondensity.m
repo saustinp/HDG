@@ -21,9 +21,18 @@ D_star = param{14};
 k_ep = param{15};
 k_np = param{16};
 
-alpha = 1.19e-21;
-eta = 2.28e-19;
-% D = 0.11736375131509072;    % Assuming it's supposed to be positive for now, will need to verify the swarm param plots later
+% Output from swarm param script:
+% N: 2.4614924955148245e+25 particles/m^3
+% At 130 Td:
+% alpha static: 1036.2883406117412
+% eta static: 975.9817744716279
+% diffusion static: 0.1185053379327856
+% mobility static: 0.04627273908311374
+
+
+alpha = 1036.28;
+eta = 975.98;
+
 % beta = 2e-13;
 mue = .0378;
 % mup = 2.34e-4;

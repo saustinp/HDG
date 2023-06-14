@@ -1,6 +1,6 @@
-function mesh = mkmesh_chen(porder)
+function mesh = mkmesh_chen(porder, fname)
 
-[p,t] = gmshcall("chen_5k.msh", 2, 0);
+[p,t] = gmshcall(fname, 2, 0);
 r_tip = 220e-6;
 p = p/r_tip;    % Nondimensionalization
 

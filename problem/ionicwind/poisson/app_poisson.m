@@ -35,7 +35,7 @@ app.time = [];
 app.dtfc = [];
 app.alpha = [];
 
-mesh   = mkmesh_chen(porder);
+mesh   = mkmesh_chen(porder, "chen_11k.msh");
 master = mkmaster(mesh,2*porder);
 [master,mesh] = preprocess(master,mesh,hybrid);
 
@@ -44,7 +44,7 @@ UH=inituhat(master,mesh.elcon,UDG,1);
 
 [UDG,UH] = hdg_solve(master,mesh,app,UDG,UH,0*UDG);
 
-save '../poissonsolution2.mat' UDG
+save '../poissonsolution_11k.mat' UDG
 
 clf;
 figure(1); scaplot(mesh,UDG(:,1,:),[],0,0); axis equal; axis tight; colormap turbo; title('Phi');

@@ -178,6 +178,6 @@ function [fh,fh_udg,fh_uh] = fhat_electrondensity(nl,p,udg,uh,param,time)
     fh_q = permute(fn_udgh(:,nch+1:(nd+1)*nch,:),[3 1 2]);
     fh_udg = cat(3,fh_u,fh_q);
     
-    fh_uh = permute(fn_udgh(:,1:nch,:)+mapContractK(Anm,u-uh,[2 4],3,1,2,[],1),[3 1 2])-An;    
+    fh_uh = permute(fn_udgh(:,1:nch,:)+mapContractK(Anm,u-uh,[2 4],3,1,2,[],1),[3 1 2])-An;
     
     

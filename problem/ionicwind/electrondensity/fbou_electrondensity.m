@@ -162,7 +162,7 @@ switch ib
         fh_uh = zeros(ng,nch,nch);
 
         normE = sqrt(Ex.^2 + Ey.^2);
-        gamma = 0.001;
+        gamma = 0.1;
 
         % Electrons: outflow flux -- should I make this more like a neumann condition: get fhat like usual and then add the flux to that?
         % fh(:,1) = r.*(gamma.*np.*normE) + tau.*(ne-uh(:,1));
