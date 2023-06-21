@@ -30,16 +30,16 @@ nch = nc/3;     % 3 components to UDG: (U,QX,QY) -> assuming 2D. For example, in
 E_bd = param{9};
 r_tip = param{10};
 % n_ref = param{11};
-% N = param{12};
+N = param{12};
 mue_ref = param{13};
 
 % These swarm parameters will eventually be replaced with calls to the curve fit functions.
 % mu_e = .0378;
-De = 0.18;               % Electron diffusion coefficient [m^2/s]
+% De = 0.18;               % Electron diffusion coefficient [m^2/s]
 Dn = 0.043e-4;           % Neg diffusion coefficient [m^2/s]
 Dp = 0.028e-4;           % Pos ion diffusion coefficient [m^2/s]
 
-De_star = De/(mue_ref*E_bd*r_tip);
+% De_star = De/(mue_ref*E_bd*r_tip);
 Dn_star = Dn/(mue_ref*E_bd*r_tip);
 Dp_star = Dp/(mue_ref*E_bd*r_tip);
 tau = param{end};
@@ -63,6 +63,24 @@ dnp_dz = udg(:,11);
 Ey = udg(:,12) + Ey_0;
 Ex_prime = udg(:,8);
 Ey_prime = udg(:,12);
+
+
+normE = sqrt(Ex.^2 + Ey.^2);
+if numel(normE) == 0
+    De=0.11;
+else
+    swarm = get_swarm_params(normE, N);
+    alpha = swarm(:,1);
+    eta = swarm(:,2);
+    beta = swarm(:,3);
+    De = swarm(:,4);
+    mue = swarm(:,5);
+    mup = swarm(:,6);
+    mun = swarm(:,7);
+end
+
+De_star = De/(mue_ref*E_bd*r_tip);
+
 
 switch ib
     case 1  % Axisymmetry boundary
@@ -134,16 +152,16 @@ switch ib
 
         % Electrons and negative ions: no diffusive flux (absorbing boundary)
 
-        fh(:,1) = r.*(De_star*dne_dr.*nl(:,1) + De_star*dne_dz.*nl(:,2)) + tau.*(ne-uh(:,1));
-        fh(:,2) = r.*(Dn_star*dnn_dr.*nl(:,1) + Dn_star*dnn_dz.*nl(:,2)) + tau.*(nn-uh(:,2));
+        fh(:,1) = r.*(De_star.*dne_dr.*nl(:,1) + De_star.*dne_dz.*nl(:,2)) + tau.*(ne-uh(:,1));
+        fh(:,2) = r.*(Dn_star.*dnn_dr.*nl(:,1) + Dn_star.*dnn_dz.*nl(:,2)) + tau.*(nn-uh(:,2));
 
         fh_udg(:,1,1) = tau;                    % dfh(ne)_d(ne)
-        fh_udg(:,1,5) = De_star*r.*nl(:,1);     % dfh(ne)_d(dne_dr)
-        fh_udg(:,1,9) = De_star*r.*nl(:,2);     % dfh(ne)_d(dne_dz)
+        fh_udg(:,1,5) = De_star.*r.*nl(:,1);     % dfh(ne)_d(dne_dr)
+        fh_udg(:,1,9) = De_star.*r.*nl(:,2);     % dfh(ne)_d(dne_dz)
 
         fh_udg(:,2,2) = tau;                    % dfh(nn)_d(nn)
-        fh_udg(:,2,6) = Dn_star*r.*nl(:,1);     % dfh(nn)_d(dnn_dr)
-        fh_udg(:,2,10) = Dn_star*r.*nl(:,2);     % dfh(nn)_d(dnn_dz)
+        fh_udg(:,2,6) = Dn_star.*r.*nl(:,1);     % dfh(nn)_d(dnn_dr)
+        fh_udg(:,2,10) = Dn_star.*r.*nl(:,2);     % dfh(nn)_d(dnn_dz)
 
         fh_uh(:,1,1) = -tau;
         fh_uh(:,2,2) = -tau;
@@ -162,7 +180,7 @@ switch ib
         fh_uh = zeros(ng,nch,nch);
 
         normE = sqrt(Ex.^2 + Ey.^2);
-        gamma = 0.1;
+        gamma = 0.01;
 
         % Electrons: outflow flux -- should I make this more like a neumann condition: get fhat like usual and then add the flux to that?
         % fh(:,1) = r.*(gamma.*np.*normE) + tau.*(ne-uh(:,1));
@@ -184,10 +202,10 @@ switch ib
         fh_uh(:,2,2) = -tau;
 
         % Positives: no diffusive flux (absorbing boundary)
-        fh(:,3) = r.*((Dp_star*dnp_dr).*nl(:,1) + (Dp_star*dnp_dz).*nl(:,2)) + tau.*(np-uh(:,3));
+        fh(:,3) = r.*((Dp_star.*dnp_dr).*nl(:,1) + (Dp_star.*dnp_dz).*nl(:,2)) + tau.*(np-uh(:,3));
         fh_udg(:,3,3) = tau;                    % dfh(np)_d(np)
-        fh_udg(:,3,6) = Dp_star*r.*nl(:,1);     % dfh(np)_d(dnp_dr)
-        fh_udg(:,3,9) = Dp_star*r.*nl(:,2);     % dfh(np)_d(dnp_dz)
+        fh_udg(:,3,6) = Dp_star.*r.*nl(:,1);     % dfh(np)_d(dnp_dr)
+        fh_udg(:,3,9) = Dp_star.*r.*nl(:,2);     % dfh(np)_d(dnp_dz)
         fh_uh(:,3,3) = -tau;
 
         % Homogeneous dirichlet for electrostatic BY SUPERPOSITION

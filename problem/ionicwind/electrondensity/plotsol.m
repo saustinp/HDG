@@ -18,32 +18,34 @@ function t = plotsol(i, shwmsh)
     title(t,txt, 'FontWeight', 'bold')
     nexttile
     % scaplot(mesh,ne,[min(min(ne)) max(max(ne))],0,shwmsh); title('ne');
-    scaplot(mesh,ne,[0 0.01327],0,shwmsh); title('ne');
-    xlim([-2,15]);
-    ylim([-15,5]);
+    scaplot(mesh,ne,[min(min(ne)) max(max(ne))],0,shwmsh); title('ne');
+    xlim([-2,8]);
+    ylim([-10,2]);
     nexttile
     scaplot(mesh,nn,[min(min(nn)) max(max(nn))],0,shwmsh); title('nn');
-    xlim([-2,15]);
-    ylim([-15,5]);
+    xlim([-2,8]);
+    ylim([-10,2]);
     nexttile
-    scaplot(mesh,np,[0 0.01327],0,shwmsh); title('np');
-    xlim([-2,15]);
-    ylim([-15,5]);
+    scaplot(mesh,np,[min(min(np)) max(max(np))],0,shwmsh); title('np');
+    xlim([-2,8]);
+    ylim([-10,2]);
     nexttile
     scaplot(mesh,phi,[-15.15 0],0,shwmsh); title('Phi');
-    xlim([-2,15]);
-    ylim([-15,5]);
+    xlim([-2,8]);
+    ylim([-10,2]);
     nexttile
     % scaplot(mesh,Er,[min(min(Er)) max(max(Er))],0,shwmsh); title('Er');
     scaplot(mesh,Er,[min(min(Er)) max(max(Er))],0,shwmsh); title('Er');
-    xlim([-2,15]);
-    ylim([-15,5]);
+    xlim([-2,8]);
+    ylim([-10,2]);
     nexttile
     % scaplot(mesh,Ez,[min(min(Ez)) max(max(Ez))],0,shwmsh); title('Ez');
     scaplot(mesh,Ez,[min(min(Ez)) max(max(Ez))],0,shwmsh); title('Ez');
-    xlim([-2,15]);
-    ylim([-15,5]);
-
+    xlim([-2,8]);
+    ylim([-10,2]);
+    
     fname = sprintf('./out_frames/barchart%d.png', i);
-    exportgraphics(t,fname,'Resolution',300)
+    exportgraphics(t,fname,'Resolution',300);
+
+    
     end

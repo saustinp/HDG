@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.io import savemat
 
 def get_swarm_params(E, N):
     # Using the values in the appendix of this paper: https://iopscience.iop.org/article/10.1088/0022-3727/30/4/017/pdf
@@ -85,6 +86,12 @@ PV=Nk_bT    https://en.wikipedia.org/wiki/Ideal_gas_law
 """
 
 BOLSIG_data = np.loadtxt('swarm.txt', skiprows=41, max_rows=100)
+
+# Saving to a .mat file
+bolsig_output_arry = BOLSIG_data[:,[1,3,4,11,12]]
+mdic = {'BOLSIG_data': bolsig_output_arry, 'label': 'data'}
+savemat("bolsig_data.mat", mdic)
+
 # Need to pull
 # A2, A6, A18, A19
 BOLSIG_EN = BOLSIG_data[:,1]
@@ -173,7 +180,4 @@ print(f'mobility static: {mobility_static}')
 # ax.legend()
 # plt.show()
 
-
-
-# Validate against BOLSIG
 # Ask Lee for the attachment/recombination coeffs

@@ -1,7 +1,7 @@
 porder = 2;
 hybrid = 'hdg';
-nstage = 3;
-torder = 3;
+nstage = 2;
+torder = 2;
 tau = 1;
 app.axisymmetry = 1;
 
@@ -10,6 +10,8 @@ app.flux = 'flux_electrondensity';
 app.fbou = 'fbou_electrondensity';
 app.fhat = 'fhat_electrondensity';
 app.localsolve=1;
+
+load bolsig_data.mat BOLSIG_data        % Load swarm parameters from BOLSIG results                             
 
 % Boundaries
 % 1 Axisymmetry
@@ -53,7 +55,7 @@ app.ncu = app.nch;
 
 dt = 0.05;
 % ntime  = 1100;
-ntime  = 8;
+ntime  = 500;
 dt = linspace(dt, dt*ntime, ntime);
 
 % Physical parameters
@@ -61,20 +63,20 @@ Kep = 2e-13;             % mu[1] Recombination coeff - pos and neg ions [m^3/s]
 Knp = 2e-13;             % mu[2] Recombination coeff - pos ions and electrons [m^3/s]
 mu_p = 2.43e-4;          % mu[3] Pos ion mobility [m^2/(Vs)]
 mu_n = 2.7e-4;           % mu[4] Neg mobility [m^2/(Vs)]
-De = 0.11;               % mu[5] Electron diffusion coefficient [m^2/s]
+% De = 0.11;               % mu[5] Electron diffusion coefficient [m^2/s]
 Dn = 0.043e-4;           % mu[7] Neg diffusion coefficient [m^2/s]
 Dp = 0.028e-4;           % mu[6] Pos ion diffusion coefficient [m^2/s]
 Nmax = 1e16;             % mu[8] Max number density for initial charge distribution [particles/m^3]
 r0 = 0.0;                % mu[9] r-pos of emitter tip in reference frame [m]
 z0 = 0.0;              % mu[10]z-pos of emitter tip in reference frame [m]
-s0 = 100e-6;               % mu[11]Std deviation of initial charge distribution [m]
+s0 = 80e-6;               % mu[11]Std deviation of initial charge distribution [m]
 e = 1.6022e-19;          % mu[12]Charge on electron [C]
 epsilon0 = 8.854e-12;     % mu[13]absolute permittivity of air [C^2/(N*m^2)]
 Ua = -10e3;              % mu[14]Emitter potential relative to ground [V]
 gamma = 0.001;           % mu[15]Secondary electron emission coefficient [1/m]
 E_bd = 3e6;              % mu[16]Breakdown E field in air [V/m]
 r_tip = 220e-6;          % mu[17] Tip radius of curvature [m]
-D = 0.11736375131509072;     % Taken from swarm_params.py evaluated at E=3e6 V/m
+De = 0.11736375131509072;     % Taken from swarm_params.py evaluated at E=3e6 V/m
 n_ref = epsilon0*E_bd/(e*r_tip);  % Yes, this is redundant and could be recomputed from the above variables. But it saves having to recompute it each time in the functions.
 % ^=7.5357e+17
 
@@ -84,7 +86,10 @@ T = 273.15; % K
 k_b = 1.380649e-23; % m2 kg s-2 K-1
 N = P*V/(k_b*T);
 mue_ref = 0.04266918357567234;   % m^2/(V*s)
-D_star = D/(mue_ref*E_bd*r_tip);   % Nondimensionalized diffusion coefficient
+De_star = De/(mue_ref*E_bd*r_tip);   % Nondimensionalized diffusion coefficient
+Dn_star = Dn/(mue_ref*E_bd*r_tip);   % Nondimensionalized diffusion coefficient
+Dp_star = Dp/(mue_ref*E_bd*r_tip);   % Nondimensionalized diffusion coefficient
+
 
 % Output from swarm params script:
 % N: 2.4614924955148245e+25 particles/m^3
@@ -96,7 +101,7 @@ D_star = D/(mue_ref*E_bd*r_tip);   % Nondimensionalized diffusion coefficient
 
 % Set discretization parameters, physical parameters, and solver parameters
      %      1  2    3   4    5      6     7     8     9     10      11   12   13       14     15   16   17    18   end
-app.arg = {r0, z0, s0, Nmax, e, epsilon0, Ua, gamma, E_bd, r_tip, n_ref, N, mue_ref, D_star, Kep, Knp, mu_p, mu_n, tau};
+app.arg = {r0, z0, s0, Nmax, e, epsilon0, Ua, gamma, E_bd, r_tip, n_ref, N, mue_ref, De_star, Kep, Knp, mu_p, mu_n, tau};
 
 app.time = [];
 app.dtfc = [];
@@ -141,6 +146,9 @@ for itime = 1:ntime
     
     [UDG,UH] = hdg_solve_dirk(master,mesh,app,UDG,UH,[],time,dt(itime),nstage,torder);
     time = time + dt(itime);
+
+    % UDG(:,1:3,:) = max(UDG(:,1:3,:), 0);     % Clip to 0 to prevent wiggles
+
     UDG_history(:,:,:,itime+1) = UDG;
     UDG_history(:,4,:,itime+1) = UDG_history(:,4,:,itime+1) + electrostatic_sol(:,1,:);
     UDG_history(:,8,:,itime+1) = UDG_history(:,8,:,itime+1) + electrostatic_sol(:,2,:);

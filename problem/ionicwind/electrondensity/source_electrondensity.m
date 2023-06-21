@@ -30,11 +30,11 @@ k_np = param{16};
 % mobility static: 0.04627273908311374
 
 
-alpha = 1036.28;
-eta = 975.98;
+% alpha = 1036.28;
+% eta = 975.98;
 
 % beta = 2e-13;
-mue = .0378;
+% mue = .0378;
 % mup = 2.34e-4;
 % mun = -2.7e-4;
 
@@ -50,6 +50,21 @@ Ez_0 = p(:,4);
 ne = udg(:,1);
 nn = udg(:,2);
 np = udg(:,3);
+
+% step_ne = 0.5*(tanh(1000*(ne))+1);
+% step_np = 0.5*(tanh(1000*(np))+1);
+% step_nn = 0.5*(tanh(1000*(nn))+1);
+% ne = (1-step_ne)*1e-5 + step*ne
+% np = (1-step_np)*1e-5 + step*np
+% nn = (1-step_nn)*1e-5 + step*nn
+
+f = @(x, alpha) x.*(atan(alpha*x)/pi + 1/2) + 1/2 - atan(alpha)/pi;
+% f_prime = @(x) atan(1000.*x)/pi + (1000.*x)/(pi*(1e6.*x.^2 + 1)) + 1/2;
+
+ne = f(ne, 1000);
+np = f(np, 1000);
+nn = f(nn, 1000);
+
 phi = udg(:,4);
 dne_dr = udg(:,5); % q is -grad(ne)
 dnn_dr = udg(:,6); % q is -grad(ne)
@@ -61,6 +76,18 @@ dnp_dz = udg(:,11);
 Ez = udg(:,12) + Ez_0;
 
 normE = sqrt(Er.^2+Ez.^2);
+
+swarm = get_swarm_params(normE, N);
+alpha = swarm(:,1);
+eta = swarm(:,2);
+beta = swarm(:,3);
+De = swarm(:,4);
+mue = swarm(:,5);
+mup = swarm(:,6);
+mun = swarm(:,7);
+
+k_ep = beta;
+k_np = beta;
 
 
 % Phase 1: no source terms - this is the end of the function
@@ -76,8 +103,8 @@ normE = sqrt(Er.^2+Ez.^2);
 
 % Note that a factor of 'r' was added for axisymmetric
 % Phase 3: Source terms for all the equations
-sr(:,1) = r.*((alpha-eta)*(mue/mue_ref)*r_tip*ne.*normE - k_ep*epsilon0/(e*mue_ref).*ne.*np);                                  % ne
-sr(:,2) = r.*(eta*(mue/mue_ref)*r_tip*ne.*normE - k_np*epsilon0/(e*mue_ref).*nn.*np);                                          % nn
+sr(:,1) = r.*((alpha-eta).*(mue/mue_ref).*r_tip.*ne.*normE - k_ep.*epsilon0/(e.*mue_ref).*ne.*np);                                  % ne
+sr(:,2) = r.*(eta.*(mue/mue_ref).*r_tip.*ne.*normE - k_np.*epsilon0/(e.*mue_ref).*nn.*np);                                          % nn
 sr(:,3) = r.*(alpha.*(mue/mue_ref).*r_tip.*ne.*normE - np.*epsilon0./(e.*mue_ref).*(k_np.*nn + k_ep.*ne));                            % np
 sr(:,4) = -r.*(ne + nn - np);                                                                                                 % phi
 
