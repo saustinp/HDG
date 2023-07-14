@@ -211,7 +211,13 @@ The following nondimensional groups were chosen:
     \item $l_{ref} = r_{tip}$
 \end{itemize}
 
-Where $\mu_{e,ref}$ is taken at the reduced electric field value of $\frac{E_{bd}}{N}$, where $N$, the neutral number density, is computed using the ideal gas equation of state at standard temperature and pressure:
+Where
+\begin{itemize}
+    \item 
+\end{itemize}
+
+
+$\mu_{e,ref}$ is taken at the reduced electric field value of $\frac{E_{bd}}{N}$, where $N$, the neutral number density, is computed using the ideal gas equation of state at standard temperature and pressure:
 
 \begin{itemize}
     \item $pV = Nk_BT$
@@ -276,7 +282,6 @@ Simplifying:
     \nabla^2\Phi^* = n_e^*+n_n^*-n_p^*
 \end{align*}
 
-Then don't forget to multiply by r on both the source terms and the fluxes -> the r coordinate is nondimensional so it doesn't matter.
 
 \section{\bf \large Boundary Conditions}
 Note: Boundary numbering follows the boundary numbering in the paper
@@ -351,22 +356,6 @@ Note: Boundary numbering follows the boundary numbering in the paper
     \caption{Boundary conditions for  (Boundary surfaces 5 and 6)}
 \end{table}
 
-\section{\bf \large Code Review}
-
-
-
-\begin{figure}[!h]
-    \centering
-    \includegraphics*[width=.8\linewidth]{indicator_fcn.png}
-    \caption{Indicator function for $E \cdot n$ used in this problem}
-\end{figure}
-
-\begin{figure}[!h]
-    \centering
-    \includegraphics*[width=.99\linewidth]{exasim_bc_index.png}
-    \caption{Computational domain of Chen 2017 with Exasim BC indices overlaid}
-    \label{<label>}
-\end{figure}
 
 
 

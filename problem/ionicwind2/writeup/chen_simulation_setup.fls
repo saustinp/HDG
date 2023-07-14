@@ -743,16 +743,6 @@ INPUT /opt/homebrew/Cellar/texlive/20230313_2/share/texmf-dist/fonts/vf/adobe/pa
 INPUT /opt/homebrew/Cellar/texlive/20230313_2/share/texmf-dist/fonts/tfm/public/mathpazo/fplmr.tfm
 INPUT /opt/homebrew/Cellar/texlive/20230313_2/share/texmf-dist/fonts/vf/adobe/palatino/pplb7t.vf
 INPUT /opt/homebrew/Cellar/texlive/20230313_2/share/texmf-dist/fonts/tfm/adobe/palatino/pplb8r.tfm
-INPUT ./indicator_fcn.png
-INPUT ./indicator_fcn.png
-INPUT indicator_fcn.png
-INPUT ./indicator_fcn.png
-INPUT ./indicator_fcn.png
-INPUT ./exasim_bc_index.png
-INPUT ./exasim_bc_index.png
-INPUT exasim_bc_index.png
-INPUT ./exasim_bc_index.png
-INPUT ./exasim_bc_index.png
 INPUT chen_simulation_setup.aux
 INPUT ./chen_simulation_setup.out
 INPUT ./chen_simulation_setup.out

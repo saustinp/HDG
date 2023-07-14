@@ -43,8 +43,8 @@ E_bd = param(15);
 r_tip = param(16);
 N = param(18);
 mue_ref = param(19);
-mue = get_mue(normE, N);           % Multiplying by E_bd required to convert back to dimensional units
-De = get_diffusion_e(normE, N);
+mue = get_mue(normE*E_bd, N);           % Multiplying by E_bd required to convert back to dimensional units
+De = get_diffusion_e(normE*E_bd, N);
 
 De_s = De/(mue_ref*E_bd*r_tip);     % _s is "starred" or nondimensionalized quantity
 Dn_s = Dn/(mue_ref*E_bd*r_tip);

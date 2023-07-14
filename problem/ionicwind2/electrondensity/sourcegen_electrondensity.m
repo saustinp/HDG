@@ -47,9 +47,9 @@ r_tip = param(16);
 n_ref = param(17);
 N = param(18);
 mue_ref = param(19);
-mue = get_mue(normE, N);           % Multiplying by E_bd required to convert back to dimensional units
-alpha = get_alpha(normE, N);
-eta = get_eta(normE, N);
+mue = get_mue(normE*E_bd, N);           % Multiplying by E_bd required to convert back to dimensional units
+alpha = get_alpha(normE*E_bd, N);
+eta = get_eta(normE*E_bd, N);
 
 se = (alpha-eta)*(mue/mue_ref)*r_tip*ne*normE - Kep*epsilon0/(e*mue_ref)*ne*np;
 sn =         eta*(mue/mue_ref)*r_tip*ne*normE - Knp*epsilon0/(e*mue_ref)*nn*np;

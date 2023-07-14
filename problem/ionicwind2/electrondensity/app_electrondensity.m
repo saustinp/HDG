@@ -111,17 +111,17 @@ for itime = 1:ntime
     UDG_history(:,12,:,itime+1) = UDG_history(:,12,:,itime+1) + electrostatic_sol(:,3,:);
     
 
-    % Plotting the E field
-    Er0 = mesh.dgnodes(:,3,:);
-    Ez0 = mesh.dgnodes(:,4,:);
-    Er_prime = UDG_history(:,8,:,itime+1);
-    Ez_prime = UDG_history(:,12,:,itime+1);
-    Er = Er_prime + Er0;
-    Ez = Ez_prime + Ez0;
-    normE = sqrt(Er.^2 + Ez.^2);
-    N = 2.4614924955148245e25;
+    % % Plotting the E field
+    % Er0 = mesh.dgnodes(:,3,:);
+    % Ez0 = mesh.dgnodes(:,4,:);
+    % Er_prime = UDG_history(:,8,:,itime+1);
+    % Ez_prime = UDG_history(:,12,:,itime+1);
+    % Er = Er_prime + Er0;
+    % Ez = Ez_prime + Ez0;
+    % normE = sqrt(Er.^2 + Ez.^2);
+    % N = 2.4614924955148245e25;
 
-    scaplot(mesh,normE/N/1e-21,[],0,0); axis equal; axis tight; colormap jet; title('');
+    % scaplot(mesh,normE/N/1e-21,[],0,0); axis equal; axis tight; colormap jet; title('');
     return;
 end
 
