@@ -51,9 +51,8 @@ app.nch  = 4;                       % Number of componets of UH
 app.nc   = app.nch*(app.nd+1);    % Number of componeents of UDG
 app.ncu = app.nch;
 
-dt = 0.05;
-% ntime  = 1100;
-ntime  = 500;
+dt = 1e-3;
+ntime  = 20;
 dt = linspace(dt, dt*ntime, ntime);
 
 app.time = [];
@@ -122,7 +121,7 @@ for itime = 1:ntime
     % N = 2.4614924955148245e25;
 
     % scaplot(mesh,normE/N/1e-21,[],0,0); axis equal; axis tight; colormap jet; title('');
-    return;
+    % return;
 end
 
 % animate_sol;

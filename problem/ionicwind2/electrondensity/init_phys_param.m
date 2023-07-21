@@ -13,7 +13,7 @@ function param = init_phys_param()
     Nmax = 1e16;             % Max number density for initial charge distribution [particles/m^3]
     r0 = 0.0;                % r-pos of emitter tip in reference frame [m]
     z0 = 0.0;                % z-pos of emitter tip in reference frame [m]
-    s0 = 80e-6;              % Std deviation of initial charge distribution [m] -> 25e-6 in paper
+    s0 = 50e-6;              % Std deviation of initial charge distribution [m] -> 25e-6 in paper
     e = 1.6022e-19;          % Charge on electron [C]
 
     % Physical constants and miscellaneous

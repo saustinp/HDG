@@ -63,11 +63,11 @@ app.alpha = [];
 app.arg = init_phys_param();     % Physics param loaded in a separate script
 app.arg{end+1} = tau;
 
-mesh = mkmesh_chen(porder, "chen_11k.msh");
+mesh = mkmesh_chen(porder, "chen_18k.msh");
 master = mkmaster(mesh,2*porder);
 [master,mesh] = preprocess(master,mesh,hybrid);
 
-load '../poissonsolution_11k.mat';
+load '../poissonsolution_18k.mat';
 Ua = app.arg{13};
 UDG = UDG*Ua;
 electrostatic_sol = UDG;
