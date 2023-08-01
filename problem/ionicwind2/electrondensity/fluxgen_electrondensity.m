@@ -35,34 +35,39 @@ normE = sqrt(Er.^2 + Ez.^2);
 
 % Loading physics parameters
 % The electron diffusion and mobility coefficients are functions of the reduced E field
-mup = param(1);
-mun = param(2);
-Dn = param(3);
-Dp = param(4);
+% mup = param(1);
+% mun = param(2);
+% Dn = param(3);
+% Dp = param(4);
+
+mu_ions = param(1);
+D_ions = param(3);
+
 E_bd = param(15);
 r_tip = param(16);
 N = param(18);
 mue_ref = param(19);
 mue = get_mue(normE*E_bd, N);           % Multiplying by E_bd required to convert back to dimensional units
-De = get_diffusion_e(normE*E_bd, N);
 
 De_s = De/(mue_ref*E_bd*r_tip);     % _s is "starred" or nondimensionalized quantity
-Dn_s = Dn/(mue_ref*E_bd*r_tip);
-Dp_s = Dp/(mue_ref*E_bd*r_tip);
+Dions_s = D_ions/(mue_ref*E_bd*r_tip);
+mu_ions_s = mu_ions/mue_ref;
+% Dn_s = Dn/(mue_ref*E_bd*r_tip);
+% Dp_s = Dp/(mue_ref*E_bd*r_tip);
 
 % Compute convective velocities
 cr_e = -(mue/mue_ref).*Er;
 cz_e = -(mue/mue_ref).*Ez;
-cr_n = -(mun/mue_ref).*Er;
-cz_n = -(mun/mue_ref).*Ez;
-cr_p = (mup/mue_ref).*Er;
-cz_p = (mup/mue_ref).*Ez;
+cr_n = -mu_ions_s.*Er;
+cz_n = -mu_ions_s.*Ez;
+cr_p = mu_ions_s.*Er;
+cz_p = mu_ions_s.*Ez;
 
-fv = [De_s.*dne_dr, Dn_s.*dnn_dr, Dp_s.*dnp_dr, 0,...
-      De_s.*dne_dz, Dn_s.*dnn_dz, Dp_s.*dnp_dz, 0];
+fv = [De_s.*dne_dr, Dn_s.*dnn_dr, Dp_s.*dnp_dr, Er_prime,...
+      De_s.*dne_dz, Dn_s.*dnn_dz, Dp_s.*dnp_dz, Ez_prime];
 
-fi = [cr_e.*ne, cr_n.*nn, cr_p.*np, Er_prime,...
-      cz_e.*ne, cz_n.*nn, cz_p.*np, Ez_prime];
+fi = [cr_e.*ne, cr_n.*nn, cr_p.*np, 0,...
+      cz_e.*ne, cz_n.*nn, cz_p.*np, 0];
 
 % Multiply flux by r for axisymmetry
 f1 = r*(fi + fv);

@@ -165,14 +165,13 @@ switch ib
         % fh_udg(:,1,3) = r.*gamma.*normE;      % The only cross-term in the boundary conditions
         % fh_uh(:,1,1) = -tau;
 
-        % 0 flux on electrons from tip for now
         [fh_tmp,fh_udg_tmp,fh_uh_tmp] = fhat_electrondensity(nl,p,udg,uh,param,time);
-        fh(:,1) = fh_tmp(:,1)+r.*(gamma.*np.*normE);
+        fh(:,1) = fh_tmp(:,1)+r.*gamma.*np.*normE;
+        fh_uh(:,1,:) = fh_uh_tmp(:,1,:);
         fh_udg(:,1,:) = fh_udg_tmp(:,1,:);
-        fh_uh(:,1,1) = fh_uh_tmp(:,1,1);
-        fh_udg(:,1,3) = r.*gamma.*normE;      % The only cross-term in the boundary conditions
-        fh_udg(:,1,8) = r.*(gamma.*np.*Er./normE);
-        fh_udg(:,1,12) = r.*(gamma.*np.*Ez./normE);
+        fh_udg(:,1,3) = r.*gamma.*normE;
+        fh_udg(:,1,8) = r.*gamma.*np.*Er./normE;
+        fh_udg(:,1,12) = r.*gamma.*np.*Ez./normE;
 
         % Negatives: homogeneous dirichlet
         fh(:,2) = tau.*(0-uh(:,2));
@@ -181,8 +180,8 @@ switch ib
         % Positives: no diffusive flux (absorbing boundary)
         fh(:,3) = r.*((Dp_s.*dnp_dr).*nl(:,1) + (Dp_s.*dnp_dz).*nl(:,2)) + tau.*(np-uh(:,3));
         fh_udg(:,3,3) = tau;                    % dfh(np)_d(np)
-        fh_udg(:,3,6) = Dp_s.*r.*nl(:,1);     % dfh(np)_d(dnp_dr)
-        fh_udg(:,3,9) = Dp_s.*r.*nl(:,2);     % dfh(np)_d(dnp_dz)
+        fh_udg(:,3,7) = Dp_s.*r.*nl(:,1);     % dfh(np)_d(dnp_dr)
+        fh_udg(:,3,11) = Dp_s.*r.*nl(:,2);     % dfh(np)_d(dnp_dz)
         fh_uh(:,3,3) = -tau;
 
         % Homogeneous dirichlet for electrostatic BY SUPERPOSITION

@@ -51,6 +51,9 @@ mue = get_mue(normE*E_bd, N);           % Multiplying by E_bd required to conver
 alpha = get_alpha(normE*E_bd, N);
 eta = get_eta(normE*E_bd, N);
 
+alpha = alpha/10;
+eta = eta/10;
+
 se = (alpha-eta)*(mue/mue_ref)*r_tip*ne*normE - Kep*epsilon0/(e*mue_ref)*ne*np;
 sn =         eta*(mue/mue_ref)*r_tip*ne*normE - Knp*epsilon0/(e*mue_ref)*nn*np;
 sp =       alpha*(mue/mue_ref)*r_tip*ne*normE -  np*epsilon0/(e*mue_ref)*(Knp*nn + Kep*ne);

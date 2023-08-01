@@ -2,10 +2,10 @@ function param = init_phys_param()
     % Returns all of the simulation physical parameters that don't depend on the electric field
 
     % Static swarm parameters
-    mu_p = 2.34e-4;          % Pos ion mobility [m^2/(Vs)]
-    mu_n = 2.34-4;           % Neg mobility [m^2/(Vs)]
-    Dn = 0.043e-4;           % Neg diffusion coefficient [m^2/s]
-    Dp = 0.028e-4;           % Pos ion diffusion coefficient [m^2/s]
+    mu_p = 2e-4;          % Pos ion mobility [m^2/(Vs)]
+    mu_n = 2e-4;           % Neg mobility [m^2/(Vs)]
+    Dn = 5.1704e-6;           % Neg diffusion coefficient [m^2/s]
+    Dp = 5.1704e-6;           % Pos ion diffusion coefficient [m^2/s]
     Kep = 2e-13;             % Recombination coeff - pos and neg ions [m^3/s]
     Knp = 2e-13;             % Recombination coeff - pos ions and electrons [m^3/s]
 
@@ -13,7 +13,7 @@ function param = init_phys_param()
     Nmax = 1e16;             % Max number density for initial charge distribution [particles/m^3]
     r0 = 0.0;                % r-pos of emitter tip in reference frame [m]
     z0 = 0.0;                % z-pos of emitter tip in reference frame [m]
-    s0 = 50e-6;              % Std deviation of initial charge distribution [m] -> 25e-6 in paper
+    s0 = 25e-6;              % Std deviation of initial charge distribution [m] -> 25e-6 in paper
     e = 1.6022e-19;          % Charge on electron [C]
 
     % Physical constants and miscellaneous

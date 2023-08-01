@@ -37,13 +37,13 @@ ref_len = max(xlength, ylength, zlength)
 
 # Needle tip chen_geom_accurate_tip
 gm.mesh.field.add("Distance", 4)
-gm.mesh.field.setNumbers(4, "CurvesList", [2])
+# gm.mesh.field.setNumbers(4, "CurvesList", [2])
 gm.mesh.field.setNumbers(4, "PointsList", [3])
 gm.mesh.field.setNumber(4, "Sampling", 96)      # Tweaked this value just to hit 90k elements
 
 # Distance field - region 1
 gmsh.model.mesh.field.add("MathEval", 14)
-gmsh.model.mesh.field.setString(14, "F", "0.08*F4 + 1e-5")
+gmsh.model.mesh.field.setString(14, "F", "0.055*F4 + 1e-7")
 
 # Needle body
 gm.mesh.field.add("Distance", 3)
@@ -70,7 +70,7 @@ gmsh.option.setNumber("Mesh.MeshSizeMax", .003)
 gm.mesh.setSmoothing(2, 1, 10)
 
 gm.mesh.generate(2)
-gmsh.write('chen_11k.msh3')
+gmsh.write('chen_tmp.msh3')
 gmsh.fltk.run()
 gmsh.finalize()
 exit()

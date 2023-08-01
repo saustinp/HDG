@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1689358105 "/Users/saustin/Documents/HDG/problem/ionicwind2/writeup/chen_simulation_setup.tex" "chen_simulation_setup.pdf" "chen_simulation_setup" 1689358105 0
-  "/Users/saustin/Documents/HDG/problem/ionicwind2/writeup/chen_simulation_setup.tex" 1689358104 15617 bdf135b60fe8d34e186fd25930c03af5 ""
+["pdflatex"] 1690001875 "/Users/saustin/Documents/HDG/problem/ionicwind2/writeup/chen_simulation_setup.tex" "chen_simulation_setup.pdf" "chen_simulation_setup" 1690001876 0
+  "/Users/saustin/Documents/HDG/problem/ionicwind2/writeup/chen_simulation_setup.tex" 1690001875 22131 264902c25f51264db34fa4609043cf1d ""
   "/opt/homebrew/Cellar/texlive/20230313_2/share/texmf-dist/fonts/enc/dvips/base/8r.enc" 1678549815 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/opt/homebrew/Cellar/texlive/20230313_2/share/texmf-dist/fonts/map/fontname/texfonts.map" 1678549815 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/opt/homebrew/Cellar/texlive/20230313_2/share/texmf-dist/fonts/map/pdftex/updmap/pdftex.map" 1678549815 4609045 74543da1ab9350ba886fce0af49a2cfd ""
@@ -132,9 +132,9 @@
   "/opt/homebrew/Cellar/texlive/20230313_2/share/texmf-dist/tex/latex/xcolor/xcolor.sty" 1678549815 56148 51a9a8571c07b9921892ae11063ae853 ""
   "/opt/homebrew/Cellar/texlive/20230313_2/share/texmf-dist/web2c/texmf.cnf" 1678549815 40748 4081c8bc921e56c865f975bd762e388c ""
   "/opt/homebrew/Cellar/texlive/20230313_2/share/texmf-var/web2c/pdftex/pdflatex.fmt" 1678549815 7884066 8197b5e86c7bf6d7352283907f10d5c2 ""
-  "chen_simulation_setup.aux" 1689358105 3006 5d5ad8e157f6c848d449690e1f6235dc "pdflatex"
-  "chen_simulation_setup.out" 1689358105 1887 216d0a65690f9f9f81217879a22e5ca1 "pdflatex"
-  "chen_simulation_setup.tex" 1689358104 15617 bdf135b60fe8d34e186fd25930c03af5 ""
+  "chen_simulation_setup.aux" 1690001876 2846 ed4fa2c617760168d0bf5ec3386fd20a "pdflatex"
+  "chen_simulation_setup.out" 1690001876 2797 414724cf5fedb893966c8b49644bc4c5 "pdflatex"
+  "chen_simulation_setup.tex" 1690001875 22131 264902c25f51264db34fa4609043cf1d ""
   (generated)
   "chen_simulation_setup.aux"
   "chen_simulation_setup.log"

@@ -51,8 +51,8 @@ app.nch  = 4;                       % Number of componets of UH
 app.nc   = app.nch*(app.nd+1);    % Number of componeents of UDG
 app.ncu = app.nch;
 
-dt = 1e-3;
-ntime  = 20;
+dt = 1e-4;
+ntime  = 1000;
 dt = linspace(dt, dt*ntime, ntime);
 
 app.time = [];
@@ -63,20 +63,18 @@ app.alpha = [];
 app.arg = init_phys_param();     % Physics param loaded in a separate script
 app.arg{end+1} = tau;
 
-mesh = mkmesh_chen(porder, "chen_11k.msh");
+mesh = mkmesh_chen(porder, "chen_19k.msh");
 master = mkmaster(mesh,2*porder);
 [master,mesh] = preprocess(master,mesh,hybrid);
 
-load '../poissonsolution_11k.mat';
+load '../poissonsolution_19k.mat';
 Ua = app.arg{13};
 E_bd = app.arg{15};
 r_tip = app.arg{16};
-UDG = UDG*Ua/(E_bd*r_tip);      % Sign flip and scaling potential function for problem nondimensionalization
-electrostatic_sol = UDG;
+UDG = UDG*Ua/(E_bd*r_tip);      % Sign flip and scaling potential function for problem nondimensionalization. Because the mesh is already nondimensionalized, this scaling factor works for both the potential and the E field
 mesh.dgnodes(:,3,:) = UDG(:,2,:);
 mesh.dgnodes(:,4,:) = UDG(:,3,:);
 
-% scaplot(mesh,electrostatic_sol(:,1,:),[-15.15 0],0,0); title('Phi');
 % Number density initialized to the same gaussian for both electrons and positives, and 0 for negatives.
 % These have to be initialized in the same order that UDG is in
 %                 ne_0, nn_0, np_0, phi_0,      q_ne_r0, q_nn_r0, q_np_r0, q_phi_r0,   q_ne_z0, q_nn_z0, q_np_z0, q_phi_z0
@@ -85,11 +83,7 @@ UDG = initu(mesh,initu_func_set,app.arg);
 
 % Creating history vector to track the snapshots. Set the first snapshot equal to the initial condition as a test
 UDG_history = zeros([size(UDG),ntime+1]);
-UDG_history(:,:,:,1) = UDG;     
-UDG_history(:,:,:,1) = UDG;
-UDG_history(:,4,:,1) = UDG_history(:,4,:,1) + electrostatic_sol(:,1,:);
-UDG_history(:,8,:,1) = UDG_history(:,8,:,1) + electrostatic_sol(:,2,:);
-UDG_history(:,12,:,1) = UDG_history(:,12,:,1) + electrostatic_sol(:,3,:);
+UDG_history(:,:,:,1) = UDG;     % Adding in IC to the first snapshot
 
 UH=inituhat(master,mesh.elcon,UDG,app.ncu);
 
@@ -98,40 +92,63 @@ disp('Starting sim...')
 
 for itime = 1:ntime
     fprintf('Timestep :  %d\n', itime);
-    
+
+    % [stot, se, sn, sp, sphi] = source_eval(mesh.dgnodes,UDG,app.arg,0);
+    % [f, cr_e, cz_e, cr_n, cz_n, cr_p, cz_p, De_s, Dn_s, Dp_s] = flux_eval(mesh.dgnodes,UDG,app.arg,0);
+    % 
+    % r1 = mesh.dgnodes(:,1,:);
+
+    % Plot the electron convective velocities
+    % figure();
+    % scaplot(mesh, cr_e,[],0,0); axis equal; axis tight; colormap jet; title('cr_e');    
+    % figure();
+    % scaplot(mesh, cz_e,[],0,0); axis equal; axis tight; colormap jet; title('cz_e');
+    % figure();
+    % scaplot(mesh, cr_n,[],0,0); axis equal; axis tight; colormap jet; title('cr_n');    
+    % figure();
+    % scaplot(mesh, cz_n,[],0,0); axis equal; axis tight; colormap jet; title('cz_n');
+    % figure();
+    % scaplot(mesh, cr_p,[],0,0); axis equal; axis tight; colormap jet; title('cr_p');    
+    % figure();
+    % scaplot(mesh, cz_p,[],0,0); axis equal; axis tight; colormap jet; title('cz_p');
+
+    % Plot the diffusion fields
+    % figure();
+    % scaplot(mesh, De_s,[],0,0); axis equal; axis tight; colormap jet; title('De_s');
+
+    % Source term
+    % figure();
+    % scaplot(mesh, se,[],0,0); axis equal; axis tight; colormap jet; title('se');
+    % figure();
+    % scaplot(mesh, sn,[],0,0); axis equal; axis tight; colormap jet; title('sn');
+    % figure();
+    % scaplot(mesh, sp,[],0,0); axis equal; axis tight; colormap jet; title('sp');
+    % figure();
+    % scaplot(mesh, sphi,[],0,0); axis equal; axis tight; colormap jet; title('sphi');
+
+
+    % Er = UDG_history(:,8,:,itime+1) + mesh.dgnodes(:,3,:);
+    % Ez = UDG_history(:,12,:,itime+1) + mesh.dgnodes(:,4,:);
+    % 
+    % normE = sqrt(Er.^2+Ez.^2);
+    % alpha = get_alpha(normE*E_bd, N);
+    % eta = get_eta(normE*E_bd, N);
+    % mue = get_mue(normE*E_bd, N);
+    % diff = get_diffusion_e(normE*E_bd, N);
+
+    % Plotting swarm params
+    % figure();
+    % scaplot(mesh, alpha,[],0,0); axis equal; axis tight; colormap jet; title('alpha');
+    % figure();
+    % scaplot(mesh, eta,[],0,0); axis equal; axis tight; colormap jet; title('eta');
+    % figure();
+    % scaplot(mesh, mue,[],0,0); axis equal; axis tight; colormap jet; title('mue');
+    % figure();
+    % scaplot(mesh, diff,[],0,0); axis equal; axis tight; colormap jet; title('diff');
+
     [UDG,UH] = hdg_solve_dirk(master,mesh,app,UDG,UH,[],time,dt(itime),nstage,torder);
     time = time + dt(itime);
 
-    % UDG(:,1:3,:) = max(UDG(:,1:3,:), 0);     % Clip to 0 to prevent wiggles
-
     UDG_history(:,:,:,itime+1) = UDG;
-    UDG_history(:,4,:,itime+1) = UDG_history(:,4,:,itime+1) + electrostatic_sol(:,1,:);
-    UDG_history(:,8,:,itime+1) = UDG_history(:,8,:,itime+1) + electrostatic_sol(:,2,:);
-    UDG_history(:,12,:,itime+1) = UDG_history(:,12,:,itime+1) + electrostatic_sol(:,3,:);
     
-
-    % % Plotting the E field
-    % Er0 = mesh.dgnodes(:,3,:);
-    % Ez0 = mesh.dgnodes(:,4,:);
-    % Er_prime = UDG_history(:,8,:,itime+1);
-    % Ez_prime = UDG_history(:,12,:,itime+1);
-    % Er = Er_prime + Er0;
-    % Ez = Ez_prime + Ez0;
-    % normE = sqrt(Er.^2 + Ez.^2);
-    % N = 2.4614924955148245e25;
-
-    % scaplot(mesh,normE/N/1e-21,[],0,0); axis equal; axis tight; colormap jet; title('');
-    % return;
 end
-
-% animate_sol;
-
-% [UDG,UH] = hdg_solve(master,mesh,app,UDG,UH,0*UDG);      % CHANGE ME - IMPLEMENT TIMESTEPPING SCHEME
-
-% clf;
-% figure(1); scaplot(mesh,UDG(:,1,:),[],0,0); axis equal; axis tight; colormap jet; title('ne');
-% figure(2); scaplot(mesh,UDG(:,2,:),[],0,0); axis equal; axis tight; colormap jet; title('dne/dr');
-% figure(3); scaplot(mesh,UDG(:,3,:),[],0,0); axis equal; axis tight; colormap jet; title('dne/dz');
-
-% figure(4); scaplot(mesh,mue*mesh.dgnodes(:,3,:),[],0,0); axis equal; axis tight; colormap jet; title('Er');
-% figure(5); scaplot(mesh,mue*mesh.dgnodes(:,4,:),[],0,0); axis equal; axis tight; colormap jet; title('Ez');

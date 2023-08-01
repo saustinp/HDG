@@ -10,6 +10,7 @@ function mu_e = get_mue(E, N)
     % end
 
     % Electron mobility
-    mu_e = 10.^24.76713228 * 10.^(-0.34808749.*log_EN);
+    step = 0.5*(tanh(1000*(log_EN+2.45))+1);
+    mu_e = (1-step).*1.5260*N + step.*(10.^24.76713228 * 10.^(-0.34808749.*log_EN));
     mu_e = mu_e/N;
 end
