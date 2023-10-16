@@ -114,6 +114,7 @@ s     = reshape(s(:,1:ncu),[ngv*ne ncu]);
 
 % Update source term for time-dependent problems
 if tdep    
+    fc_u
     Stn = reshape(SH(:,:,1:ncu),[npv ne*ncu]);
     Stg = shapvt(:,:,1)*Stn;
     Stg = reshape(Stg,[ngv*ne ncu]);

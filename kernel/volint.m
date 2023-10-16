@@ -22,6 +22,8 @@ adjoint = app.adjoint;
 source = str2func(app.source);
 flux   = str2func(app.flux);
 
+disp(fc_u)
+
 % Shap functions and derivatives
 shapvt = master.shapvt;
 shapvg = reshape(master.shapvg,[npv ngv*(nd+1)]);
@@ -120,13 +122,25 @@ if tdep
         dtcoef = ones(ncu,1);
     end
     
-%    s = s + bsxfun(@times,xr,Stg-udgg(:,1:ncu)*fc_u);    
+%    s = s + bsxfun(@times,xr,Stg-udgg(:,1:ncu)*fc_u);
 %     s = s + Stg - udgg(:,1:ncu)*fc_u;    
-    for i=1:ncu
-        s(:,i) = s(:,i) + dtcoef(i)*xr.*(Stg(:,i)-udgg(:,i)*fc_u);
-        s_udg(:,i,i) = s_udg(:,i,i) - dtcoef(i)*fc_u*xr;
-%         s_udg(:,i,i) = s_udg(:,i,i) - fc_u;
-    end    
+    % axis symmetry
+    %fc_u
+    
+    fcu_vector = isfield(app,'fcu_vector');
+    if fcu_vector
+        dtcoef = dtcoef.*app.fcu_vector;
+        for i=1:ncu
+            s(:,i) = s(:,i) + dtcoef(i)*xr.*(Stg(:,i)-udgg(:,i)*fc_u);
+            s_udg(:,i,i) = s_udg(:,i,i) - dtcoef(i)*fc_u*xr;
+        end    
+    else
+        for i=1:ncu
+            s(:,i) = s(:,i) + dtcoef(i)*xr.*(Stg(:,i)-udgg(:,i)*fc_u);
+            s_udg(:,i,i) = s_udg(:,i,i) - dtcoef(i)*fc_u*xr;
+    %         s_udg(:,i,i) = s_udg(:,i,i) - fc_u;
+        end    
+    end
 end
 
 % compute wrk and wrl to time with shape functions

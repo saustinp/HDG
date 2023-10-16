@@ -23,9 +23,9 @@ function poly2gmsh(fname, pv, h)
     commapos = find(str(2:end)==' ' & str(1:end-1)~=' ') + 1;
     str(commapos) = ',';
 
-    fprintf(fid, 'Line Loop(%d) = {%s};\n', npv, str);
+    fprintf(fid, 'Curve Loop(%d) = {%s};\n', npv, str);
     fprintf(fid, 'Plane Surface(1) = {%d};\n', npv);
-    fprintf(fid, 'Recombine Surface {1};\n');    
+    % fprintf(fid, 'Recombine Surface {1};\n');    
 
     fclose(fid);
 

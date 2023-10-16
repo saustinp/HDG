@@ -102,9 +102,10 @@ if app.adjoint == 1
 end
 
 it   = 0;
-duh  = 1e6;
-NewtonTol = 1e-8;
-while duh > NewtonTol && it < 16
+residualNorm0 = norm(F(:));
+relResidualNorm = 1;
+relNewtonTol = 1e-9;
+while relResidualNorm > relNewtonTol && it < 16
                 
     if app.denseblock==0
         DUH = full(reshape(K\F,ncu,nsiz));   
@@ -172,6 +173,8 @@ while duh > NewtonTol && it < 16
 %     mesh.dgnodes(:,mesh.nd+1,:) = mesh.av*a;
         
     fprintf('Old residual: %e,   New residual: %e    %e\n', [duh0 duh alfa]);       
+    relResidualNorm = duh/residualNorm0;
+
     %figure(2); clf; scaplot(mesh,eulereval(UDG(:,1:app.ncu,:),'M',1.4),[],1,1); axis off; %axis equal; axis tight;
     
 %     e0=8.8540e-12;E0=60000;Etstar=1;L0=1;

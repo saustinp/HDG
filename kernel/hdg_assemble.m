@@ -38,7 +38,7 @@ end
 clear UDG SH UH 
 
 % compute elemental matrices in parallel
-for i = 1:np 
+parfor i = 1:np 
     [ae{i},fe{i},dudg{i},dudg_duh{i}] = hdg_elemental(masterp{i},appp{i},dgnodes{i},bf{i},udg{i},uh{i},sh{i});
 end
 
