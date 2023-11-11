@@ -1,0 +1,369 @@
+Starting sim...
+Timestep :  1
+DIRK stage :  1
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('volint')" style="font-weight:bold">volint</a>
+Number of elements must not change. Use [] as one of the size inputs to automatically calculate the
+appropriate size for that dimension.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('hdg_elemental', '/Users/saustin/Documents/HDG/kernel/hdg_elemental.m', 50)" style="font-weight:bold">hdg_elemental</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/kernel/hdg_elemental.m',50,0)">line 50</a>)
+    [Ru, Rq, BD, M, C, L, Q, Ju, Jq, wrl] = volint(master,app,dgnodes(:,id,:),UDG(:,id,:),SH(:,id,:));
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('hdg_assemble', '/Users/saustin/Documents/HDG/kernel/hdg_assemble.m', 41)" style="font-weight:bold">hdg_assemble</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/kernel/hdg_assemble.m',41,0)">line 41</a>)
+parfor i = 1:np
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('hdg_solve', '/Users/saustin/Documents/HDG/kernel/hdg_solve.m', 84)" style="font-weight:bold">hdg_solve</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/kernel/hdg_solve.m',84,0)">line 84</a>)
+[K,F,DUDG,DUDG_DUH] = hdg_assemble(master,mesh,app,UDG,UH,SH);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('hdg_solve_dirk', '/Users/saustin/Documents/HDG/kernel/hdg_solve_dirk.m', 63)" style="font-weight:bold">hdg_solve_dirk</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/kernel/hdg_solve_dirk.m',63,0)">line 63</a>)
+    [UDGn,UHn] = hdg_solve(master,mesh,app,UDG,UH,SDG);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('app_electrondensity', '/Users/saustin/Documents/HDG/problem/2d_streamer/discharge_model/app_electrondensity.m', 129)" style="font-weight:bold">app_electrondensity</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/problem/2d_streamer/discharge_model/app_electrondensity.m',129,0)">line 129</a>)
+    [UDG,UH] = hdg_solve_dirk(master,mesh,app,UDG,UH,[],time,dt(itime+itime_restart),nstage,torder);
+} 
+app_electrondensity
+Starting sim...
+Timestep :  1
+DIRK stage :  1
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('volint')" style="font-weight:bold">volint</a>
+Number of elements must not change. Use [] as one of the size inputs to automatically calculate the
+appropriate size for that dimension.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('hdg_elemental', '/Users/saustin/Documents/HDG/kernel/hdg_elemental.m', 50)" style="font-weight:bold">hdg_elemental</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/kernel/hdg_elemental.m',50,0)">line 50</a>)
+    [Ru, Rq, BD, M, C, L, Q, Ju, Jq, wrl] = volint(master,app,dgnodes(:,id,:),UDG(:,id,:),SH(:,id,:));
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('hdg_assemble', '/Users/saustin/Documents/HDG/kernel/hdg_assemble.m', 41)" style="font-weight:bold">hdg_assemble</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/kernel/hdg_assemble.m',41,0)">line 41</a>)
+parfor i = 1:np
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('hdg_solve', '/Users/saustin/Documents/HDG/kernel/hdg_solve.m', 84)" style="font-weight:bold">hdg_solve</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/kernel/hdg_solve.m',84,0)">line 84</a>)
+[K,F,DUDG,DUDG_DUH] = hdg_assemble(master,mesh,app,UDG,UH,SH);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('hdg_solve_dirk', '/Users/saustin/Documents/HDG/kernel/hdg_solve_dirk.m', 63)" style="font-weight:bold">hdg_solve_dirk</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/kernel/hdg_solve_dirk.m',63,0)">line 63</a>)
+    [UDGn,UHn] = hdg_solve(master,mesh,app,UDG,UH,SDG);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('app_electrondensity', '/Users/saustin/Documents/HDG/problem/2d_streamer/discharge_model/app_electrondensity.m', 129)" style="font-weight:bold">app_electrondensity</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/problem/2d_streamer/discharge_model/app_electrondensity.m',129,0)">line 129</a>)
+    [UDG,UH] = hdg_solve_dirk(master,mesh,app,UDG,UH,[],time,dt(itime+itime_restart),nstage,torder);
+} 
+app_electrondensity
+Starting sim...
+Timestep :  1
+DIRK stage :  1
+Elapsed time is 10.378554 seconds.
+Newton iteration :  1
+Old residual: 1.330841e+04,   New residual: 9.420181e-04    1.000000e+00
+Newton iteration :  2
+Old residual: 9.420181e-04,   New residual: 4.717807e-09    1.000000e+00
+ne max
+   10.8771
+
+E max
+   8.2789e+06
+
+Timestep :  2
+DIRK stage :  1
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('faceint')" style="font-weight:bold">faceint</a>
+
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('hdg_elemental', '/Users/saustin/Documents/HDG/kernel/hdg_elemental.m', 70)" style="font-weight:bold">hdg_elemental</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/kernel/hdg_elemental.m',70,0)">line 70</a>)
+    [Ru, Rq, Rh, BD, F, E, GK, H, Ju, Jq, Jh] = faceint(master,app,bf(:,id),dgnodes(:,id,:),UDG(:,id,:),UH(:,id,:),Ru,Rq,BD,Ju,Jq);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('parallel_function', '/Applications/MATLAB_R2023a.app/toolbox/matlab/lang/parallel_function.m', 494)" style="font-weight:bold">parallel_function</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2023a.app/toolbox/matlab/lang/parallel_function.m',494,0)">line 494</a>)
+            consume(base, limit, F(base, limit, supply(base, limit)));
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('hdg_assemble', '/Users/saustin/Documents/HDG/kernel/hdg_assemble.m', 41)" style="font-weight:bold">hdg_assemble</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/kernel/hdg_assemble.m',41,0)">line 41</a>)
+parfor i = 1:np
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('hdg_solve', '/Users/saustin/Documents/HDG/kernel/hdg_solve.m', 84)" style="font-weight:bold">hdg_solve</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/kernel/hdg_solve.m',84,0)">line 84</a>)
+[K,F,DUDG,DUDG_DUH] = hdg_assemble(master,mesh,app,UDG,UH,SH);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('hdg_solve_dirk', '/Users/saustin/Documents/HDG/kernel/hdg_solve_dirk.m', 63)" style="font-weight:bold">hdg_solve_dirk</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/kernel/hdg_solve_dirk.m',63,0)">line 63</a>)
+    [UDGn,UHn] = hdg_solve(master,mesh,app,UDG,UH,SDG);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('app_electrondensity', '/Users/saustin/Documents/HDG/problem/2d_streamer/discharge_model/app_electrondensity.m', 129)" style="font-weight:bold">app_electrondensity</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/problem/2d_streamer/discharge_model/app_electrondensity.m',129,0)">line 129</a>)
+    [UDG,UH] = hdg_solve_dirk(master,mesh,app,UDG,UH,[],time,dt(itime+itime_restart),nstage,torder);
+} 
+open gmshcall
+clear
+app_electrondensity
+{Unrecognized function or variable 'porder'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('app_electrondensity', '/Users/saustin/Documents/HDG/problem/2d_streamer/discharge_model/app_electrondensity.m', 68)" style="font-weight:bold">app_electrondensity</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/problem/2d_streamer/discharge_model/app_electrondensity.m',68,0)">line 68</a>)
+mesh = mkmesh_streamer_gmsh(porder, "streamer_16k-2.msh");
+} 
+app_electrondensity
+Starting sim...
+Timestep :  1
+DIRK stage :  1
+Elapsed time is 9.066201 seconds.
+Newton iteration :  1
+Old residual: 1.330841e+04,   New residual: 9.420181e-04    1.000000e+00
+Newton iteration :  2
+Old residual: 9.420181e-04,   New residual: 4.717807e-09    1.000000e+00
+ne max
+   10.8771
+
+E max
+   8.2789e+06
+
+Timestep :  2
+DIRK stage :  1
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('schur_primal>schur_uq2')" style="font-weight:bold">schur_primal>schur_uq2</a>
+
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('schur_primal', '/Users/saustin/Documents/HDG/kernel/schur_primal.m', 8)" style="font-weight:bold">schur_primal</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/kernel/schur_primal.m',8,0)">line 8</a>)
+    [DUDG, DUDG_DUH, AE, FE] = schur_uq2(M, C, E, BD, F, GK, H, Rq, Ru, Rh);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('hdg_elemental', '/Users/saustin/Documents/HDG/kernel/hdg_elemental.m', 109)" style="font-weight:bold">hdg_elemental</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/kernel/hdg_elemental.m',109,0)">line 109</a>)
+        [dudg, dudg_duh, ae, fe] = schur_primal(M, C, E, L, Q, BD, F, GK, H, Rq, Ru, Rh);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('parallel_function', '/Applications/MATLAB_R2023a.app/toolbox/matlab/lang/parallel_function.m', 494)" style="font-weight:bold">parallel_function</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2023a.app/toolbox/matlab/lang/parallel_function.m',494,0)">line 494</a>)
+            consume(base, limit, F(base, limit, supply(base, limit)));
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('hdg_assemble', '/Users/saustin/Documents/HDG/kernel/hdg_assemble.m', 41)" style="font-weight:bold">hdg_assemble</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/kernel/hdg_assemble.m',41,0)">line 41</a>)
+parfor i = 1:np
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('hdg_solve', '/Users/saustin/Documents/HDG/kernel/hdg_solve.m', 84)" style="font-weight:bold">hdg_solve</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/kernel/hdg_solve.m',84,0)">line 84</a>)
+[K,F,DUDG,DUDG_DUH] = hdg_assemble(master,mesh,app,UDG,UH,SH);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('hdg_solve_dirk', '/Users/saustin/Documents/HDG/kernel/hdg_solve_dirk.m', 63)" style="font-weight:bold">hdg_solve_dirk</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/kernel/hdg_solve_dirk.m',63,0)">line 63</a>)
+    [UDGn,UHn] = hdg_solve(master,mesh,app,UDG,UH,SDG);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('app_electrondensity', '/Users/saustin/Documents/HDG/problem/2d_streamer/discharge_model/app_electrondensity.m', 129)" style="font-weight:bold">app_electrondensity</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/problem/2d_streamer/discharge_model/app_electrondensity.m',129,0)">line 129</a>)
+    [UDG,UH] = hdg_solve_dirk(master,mesh,app,UDG,UH,[],time,dt(itime+itime_restart),nstage,torder);
+} 
+app_electrondensity
+Starting sim...
+Timestep :  1
+DIRK stage :  1
+Elapsed time is 8.917845 seconds.
+Newton iteration :  1
+Old residual: 1.330841e+04,   New residual: 9.420181e-04    1.000000e+00
+Newton iteration :  2
+Old residual: 9.420181e-04,   New residual: 4.717807e-09    1.000000e+00
+ne max
+   10.8771
+
+E max
+   8.2789e+06
+
+Timestep :  2
+DIRK stage :  1
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('mapContractK')" style="font-weight:bold">mapContractK</a>
+
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('schur_primal>schur_uq2', '/Users/saustin/Documents/HDG/kernel/schur_primal.m', 96)" style="font-weight:bold">schur_primal>schur_uq2</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/kernel/schur_primal.m',96,0)">line 96</a>)
+    BMiC = mapContractK(B,MiC,[1 2 4],[3 5],[],[1 3],2,[]);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('schur_primal', '/Users/saustin/Documents/HDG/kernel/schur_primal.m', 8)" style="font-weight:bold">schur_primal</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/kernel/schur_primal.m',8,0)">line 8</a>)
+    [DUDG, DUDG_DUH, AE, FE] = schur_uq2(M, C, E, BD, F, GK, H, Rq, Ru, Rh);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('hdg_elemental', '/Users/saustin/Documents/HDG/kernel/hdg_elemental.m', 109)" style="font-weight:bold">hdg_elemental</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/kernel/hdg_elemental.m',109,0)">line 109</a>)
+        [dudg, dudg_duh, ae, fe] = schur_primal(M, C, E, L, Q, BD, F, GK, H, Rq, Ru, Rh);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('parallel_function', '/Applications/MATLAB_R2023a.app/toolbox/matlab/lang/parallel_function.m', 494)" style="font-weight:bold">parallel_function</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2023a.app/toolbox/matlab/lang/parallel_function.m',494,0)">line 494</a>)
+            consume(base, limit, F(base, limit, supply(base, limit)));
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('hdg_assemble', '/Users/saustin/Documents/HDG/kernel/hdg_assemble.m', 41)" style="font-weight:bold">hdg_assemble</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/kernel/hdg_assemble.m',41,0)">line 41</a>)
+parfor i = 1:np
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('hdg_solve', '/Users/saustin/Documents/HDG/kernel/hdg_solve.m', 84)" style="font-weight:bold">hdg_solve</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/kernel/hdg_solve.m',84,0)">line 84</a>)
+[K,F,DUDG,DUDG_DUH] = hdg_assemble(master,mesh,app,UDG,UH,SH);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('hdg_solve_dirk', '/Users/saustin/Documents/HDG/kernel/hdg_solve_dirk.m', 63)" style="font-weight:bold">hdg_solve_dirk</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/kernel/hdg_solve_dirk.m',63,0)">line 63</a>)
+    [UDGn,UHn] = hdg_solve(master,mesh,app,UDG,UH,SDG);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('app_electrondensity', '/Users/saustin/Documents/HDG/problem/2d_streamer/discharge_model/app_electrondensity.m', 129)" style="font-weight:bold">app_electrondensity</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/problem/2d_streamer/discharge_model/app_electrondensity.m',129,0)">line 129</a>)
+    [UDG,UH] = hdg_solve_dirk(master,mesh,app,UDG,UH,[],time,dt(itime+itime_restart),nstage,torder);
+} 
+Starting sim...
+Timestep :  1
+DIRK stage :  1
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('schur_primal>schur_uq2')" style="font-weight:bold">schur_primal>schur_uq2</a>
+
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('schur_primal', '/Users/saustin/Documents/HDG/kernel/schur_primal.m', 8)" style="font-weight:bold">schur_primal</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/kernel/schur_primal.m',8,0)">line 8</a>)
+    [DUDG, DUDG_DUH, AE, FE] = schur_uq2(M, C, E, BD, F, GK, H, Rq, Ru, Rh);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('hdg_elemental', '/Users/saustin/Documents/HDG/kernel/hdg_elemental.m', 109)" style="font-weight:bold">hdg_elemental</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/kernel/hdg_elemental.m',109,0)">line 109</a>)
+        [dudg, dudg_duh, ae, fe] = schur_primal(M, C, E, L, Q, BD, F, GK, H, Rq, Ru, Rh);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('parallel_function', '/Applications/MATLAB_R2023a.app/toolbox/matlab/lang/parallel_function.m', 494)" style="font-weight:bold">parallel_function</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2023a.app/toolbox/matlab/lang/parallel_function.m',494,0)">line 494</a>)
+            consume(base, limit, F(base, limit, supply(base, limit)));
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('hdg_assemble', '/Users/saustin/Documents/HDG/kernel/hdg_assemble.m', 41)" style="font-weight:bold">hdg_assemble</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/kernel/hdg_assemble.m',41,0)">line 41</a>)
+parfor i = 1:np
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('hdg_solve', '/Users/saustin/Documents/HDG/kernel/hdg_solve.m', 84)" style="font-weight:bold">hdg_solve</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/kernel/hdg_solve.m',84,0)">line 84</a>)
+[K,F,DUDG,DUDG_DUH] = hdg_assemble(master,mesh,app,UDG,UH,SH);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('hdg_solve_dirk', '/Users/saustin/Documents/HDG/kernel/hdg_solve_dirk.m', 63)" style="font-weight:bold">hdg_solve_dirk</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/kernel/hdg_solve_dirk.m',63,0)">line 63</a>)
+    [UDGn,UHn] = hdg_solve(master,mesh,app,UDG,UH,SDG);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('app_electrondensity', '/Users/saustin/Documents/HDG/problem/2d_streamer/discharge_model/app_electrondensity.m', 129)" style="font-weight:bold">app_electrondensity</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/problem/2d_streamer/discharge_model/app_electrondensity.m',129,0)">line 129</a>)
+    [UDG,UH] = hdg_solve_dirk(master,mesh,app,UDG,UH,[],time,dt(itime+itime_restart),nstage,torder);
+} 
+E=3e6
+
+E =
+
+     3000000
+
+app.arg
+
+ans =
+
+  1×10 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+  Columns 1 through 7
+
+    {[1.0000e-04]}    {[0.0500]}    {[3000000]}    {[1.8096e-08]}    {[18750]}    {[5.0000e+18]}    {[0.0100]}
+
+  Columns 8 through 10
+
+    {[4.0000e-04]}    {[1.0000e+13]}    {[1]}
+
+l_ref = app.arg{1}
+
+l_ref =
+
+   1.0000e-04
+
+mu_ref = app.arg{2}
+
+mu_ref =
+
+    0.0500
+
+E_ref = app.arg{3}
+
+E_ref =
+
+     3000000
+
+normE = 10e6
+
+normE =
+
+    10000000
+
+E_ref = 3e6
+
+E_ref =
+
+     3000000
+
+De_tilde = 4.3628e-3*normE^.22 / (l_ref*mu_ref*E_ref)
+
+De_tilde =
+
+    0.0101
+
+load('/Users/saustin/Documents/HDG/problem/2d_streamer/discharge_model/run_9-26-23/time1088.mat')
+figure(1); clf; scaplot(mesh,UDG(:,2,:)-UDG(:,1,:),[],2,0); axis equal; axis tight; axis on; colormap jet;
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('reshape')" style="font-weight:bold">reshape</a>
+Number of elements must not change. Use [] as one of the size inputs to automatically calculate the appropriate size for
+that dimension.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('scaplot', '/Users/saustin/Documents/HDG/plot/scaplot.m', 22)" style="font-weight:bold">scaplot</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/plot/scaplot.m',22,0)">line 22</a>)
+u=reshape(u,npl,nt);
+} 
+mesh = mkmesh_streamer_gmsh(porder, "streamer_16k-2.msh");
+figure(1); clf; scaplot(mesh,UDG(:,2,:)-UDG(:,1,:),[],2,0); axis equal; axis tight; axis on; colormap jet;
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('reshape')" style="font-weight:bold">reshape</a>
+Number of elements must not change. Use [] as one of the size inputs to automatically calculate the appropriate size for
+that dimension.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('scaplot', '/Users/saustin/Documents/HDG/plot/scaplot.m', 22)" style="font-weight:bold">scaplot</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/plot/scaplot.m',22,0)">line 22</a>)
+u=reshape(u,npl,nt);
+} 
+mesh = mkmesh_streamer_gmsh(porder, "streamer_16k-4.msh");
+figure(1); clf; scaplot(mesh,UDG(:,2,:)-UDG(:,1,:),[],2,0); axis equal; axis tight; axis on; colormap jet;
+figure(1); clf; scaplot(mesh,log(UDG(:,2,:)-UDG(:,1,:)),[],2,0); axis equal; axis tight; axis on; colormap jet;
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('patch')" style="font-weight:bold">patch</a>
+Complex values are not supported.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('scaplot', '/Users/saustin/Documents/HDG/plot/scaplot.m', 67)" style="font-weight:bold">scaplot</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/plot/scaplot.m',67,0)">line 67</a>)
+patch('vertices',nodesvis,'faces',tvis,'cdata',u, ...
+} 
+figure(1); clf; scaplot(mesh,log(abs(UDG(:,2,:)-UDG(:,1,:))),[],2,0); axis equal; axis tight; axis on; colormap jet;
+figure(1); clf; scaplot(mesh,log10(abs(UDG(:,2,:)-UDG(:,1,:))),[],2,0); axis equal; axis tight; axis on; colormap jet;
+clc
+open lmin
+open lmax
+open limiting
+x = logspace(1,9,50)
+
+x =
+
+   1.0e+09 *
+
+  Columns 1 through 11
+
+    0.0000    0.0000    0.0000    0.0000    0.0000    0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+
+  Columns 12 through 22
+
+    0.0000    0.0000    0.0000    0.0000    0.0000    0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+
+  Columns 23 through 33
+
+    0.0000    0.0001    0.0001    0.0001    0.0002    0.0003    0.0004    0.0005    0.0008    0.0012    0.0017
+
+  Columns 34 through 44
+
+    0.0024    0.0036    0.0052    0.0075    0.0110    0.0160    0.0233    0.0339    0.0494    0.0720    0.1048
+
+  Columns 45 through 50
+
+    0.1526    0.2223    0.3237    0.4715    0.6866    1.0000
+
+av = limiting(x, 0, .01, 100, 2e6)
+
+av =
+
+  Columns 1 through 11
+
+   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007
+
+  Columns 12 through 22
+
+   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007
+
+  Columns 23 through 33
+
+   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007
+
+  Columns 34 through 44
+
+    0.0100    0.0100    0.0100    0.0100    0.0100    0.0100    0.0100    0.0100    0.0100    0.0100    0.0100
+
+  Columns 45 through 50
+
+    0.0100    0.0100    0.0100    0.0100    0.0100    0.0100
+
+semilogx(x,f)
+{Unrecognized function or variable 'f'.
+} 
+f = limiting(x, 0, .01, 100, 2e6)
+
+f =
+
+  Columns 1 through 11
+
+   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007
+
+  Columns 12 through 22
+
+   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007
+
+  Columns 23 through 33
+
+   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007   -0.0007
+
+  Columns 34 through 44
+
+    0.0100    0.0100    0.0100    0.0100    0.0100    0.0100    0.0100    0.0100    0.0100    0.0100    0.0100
+
+  Columns 45 through 50
+
+    0.0100    0.0100    0.0100    0.0100    0.0100    0.0100
+

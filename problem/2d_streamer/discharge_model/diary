@@ -1,0 +1,13 @@
+Timestep :  502
+DIRK stage :  1
+   5.5570e+04
+
+if system_dependent('IsDebugMode')==1, dbquit all; end
+app_electrondensity
+Starting sim...
+Timestep :  502
+DIRK stage :  1
+Linf error of FH and fhat from digaso
+   5.5570e+04
+
+<a href="matlab: opentoline('/Users/saustin/Documents/HDG/kernel/faceint.m',202,1)">202 </a>tm     = find(bf<0);

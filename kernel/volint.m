@@ -22,8 +22,6 @@ adjoint = app.adjoint;
 source = str2func(app.source);
 flux   = str2func(app.flux);
 
-disp(fc_u)
-
 % Shap functions and derivatives
 shapvt = master.shapvt;
 shapvg = reshape(master.shapvg,[npv ngv*(nd+1)]);
@@ -82,6 +80,50 @@ end
 % Fluxes and source at Gauss points
 [f, f_udg] = flux( pg, udgg, arg, time);
 [s, s_udg] = source( pg, udgg, arg, time); 
+
+% Insert code here to test the C->Matlab flux and source functions
+
+% Source check
+% nch=ncu;
+% ncd=3;
+% [ng,nc] = size(udgg);
+% arg2 = cell2mat(arg);
+% pg_digaso = reshape(pg,1,[]);   % flatten
+% udg_digaso = reshape(udgg,1,[]);    % flatten
+% s_digaso = zeros(ng,nch);
+% s_digaso = reshape(s_digaso,1,[]);
+% s_udg_digaso = zeros(ng,nch,nc);
+% s_udg_digaso = reshape(s_udg_digaso,1,[]);
+% 
+% [s_digaso, s_udg_digaso] = source_digaso_matlab_mex(s_digaso, s_udg_digaso, pg_digaso, udg_digaso, arg2, time, ng, nc, ncu, nd, ncd);
+% s_digaso = reshape(s_digaso, [ng,nch]);
+% s_udg_digaso = reshape(s_udg_digaso, [ng,nch,nc]);
+% 
+% disp('Max discrepancy in s and s_udg')
+% max(max(s-s_digaso))
+% max(max(max(s_udg-s_udg_digaso)))
+
+% Flux check
+% nch=ncu;
+% ncd=3;
+% [ng,nc] = size(udgg);
+% arg2 = cell2mat(arg);
+% pg_digaso = reshape(pg,1,[]);   % flatten
+% udg_digaso = reshape(udgg,1,[]);    % flatten
+% f_digaso = zeros(ng,nch,nd);
+% f_digaso = reshape(f_digaso,1,[]);
+% f_udg_digaso = zeros(ng,nch,nd,nc);
+% f_udg_digaso = reshape(f_udg_digaso,1,[]);
+% [f_digaso, f_udg_digaso] = flux_digaso_matlab_mex(f_digaso, f_udg_digaso, pg_digaso, udg_digaso, arg2, time, ng, nc, ncu, nd, ncd);
+% f_digaso = reshape(f_digaso, [ng,nch,nd]);
+% f_udg_digaso = reshape(f_udg_digaso, [ng,nch,nd,nc]);
+% 
+% disp('Max discrepancy in f and f_udg')
+% max(max(max(f-f_digaso)))
+% max(max(max(max(f_udg-f_udg_digaso))))
+% 
+
+
 f     = reshape(f,[ngv ne ncu nd]);
 f_udg = permute(reshape(f_udg,[ngv ne ncu nd nc]),[1 2 3 5 4]); 
 s     = reshape(s(:,1:ncu),[ngv*ne ncu]);

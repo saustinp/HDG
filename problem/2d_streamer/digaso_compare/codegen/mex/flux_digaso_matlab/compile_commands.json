@@ -1,0 +1,62 @@
+[
+  {
+    "directory": "/Users/saustin/Documents/HDG/problem/2d_streamer/digaso_compare/codegen/mex/flux_digaso_matlab",
+    "command": "/usr/bin/xcrun -sdk macosx13.3 clang -fno-common -arch x86_64 -mmacosx-version-min=10.15 -fexceptions -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \".\" -I \"/Users/saustin/Documents/HDG/problem/2d_streamer/digaso_compare\" -I \"./interface\" -I \"/Applications/MATLAB_R2023a.app/extern/include\" -I \".\" -DMODEL=flux_digaso_matlab_mex -c  /Users/saustin/Documents/HDG/problem/2d_streamer/digaso_compare/flux_streamer2d.c -o build/maci64/flux_streamer2d.o",
+    "file": "/Users/saustin/Documents/HDG/problem/2d_streamer/digaso_compare/flux_streamer2d.c",
+    "output": "build/maci64/flux_streamer2d.o"
+  },
+  {
+    "directory": "/Users/saustin/Documents/HDG/problem/2d_streamer/digaso_compare/codegen/mex/flux_digaso_matlab",
+    "command": "/usr/bin/xcrun -sdk macosx13.3 clang -fno-common -arch x86_64 -mmacosx-version-min=10.15 -fexceptions -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \".\" -I \"/Users/saustin/Documents/HDG/problem/2d_streamer/digaso_compare\" -I \"./interface\" -I \"/Applications/MATLAB_R2023a.app/extern/include\" -I \".\" -DMODEL=flux_digaso_matlab_mex -c  flux_digaso_matlab_data.c -o build/maci64/flux_digaso_matlab_data.o",
+    "file": "flux_digaso_matlab_data.c",
+    "output": "build/maci64/flux_digaso_matlab_data.o"
+  },
+  {
+    "directory": "/Users/saustin/Documents/HDG/problem/2d_streamer/digaso_compare/codegen/mex/flux_digaso_matlab",
+    "command": "/usr/bin/xcrun -sdk macosx13.3 clang -fno-common -arch x86_64 -mmacosx-version-min=10.15 -fexceptions -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \".\" -I \"/Users/saustin/Documents/HDG/problem/2d_streamer/digaso_compare\" -I \"./interface\" -I \"/Applications/MATLAB_R2023a.app/extern/include\" -I \".\" -DMODEL=flux_digaso_matlab_mex -c  rt_nonfinite.c -o build/maci64/rt_nonfinite.o",
+    "file": "rt_nonfinite.c",
+    "output": "build/maci64/rt_nonfinite.o"
+  },
+  {
+    "directory": "/Users/saustin/Documents/HDG/problem/2d_streamer/digaso_compare/codegen/mex/flux_digaso_matlab",
+    "command": "/usr/bin/xcrun -sdk macosx13.3 clang -fno-common -arch x86_64 -mmacosx-version-min=10.15 -fexceptions -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \".\" -I \"/Users/saustin/Documents/HDG/problem/2d_streamer/digaso_compare\" -I \"./interface\" -I \"/Applications/MATLAB_R2023a.app/extern/include\" -I \".\" -DMODEL=flux_digaso_matlab_mex -c  flux_digaso_matlab_initialize.c -o build/maci64/flux_digaso_matlab_initialize.o",
+    "file": "flux_digaso_matlab_initialize.c",
+    "output": "build/maci64/flux_digaso_matlab_initialize.o"
+  },
+  {
+    "directory": "/Users/saustin/Documents/HDG/problem/2d_streamer/digaso_compare/codegen/mex/flux_digaso_matlab",
+    "command": "/usr/bin/xcrun -sdk macosx13.3 clang -fno-common -arch x86_64 -mmacosx-version-min=10.15 -fexceptions -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \".\" -I \"/Users/saustin/Documents/HDG/problem/2d_streamer/digaso_compare\" -I \"./interface\" -I \"/Applications/MATLAB_R2023a.app/extern/include\" -I \".\" -DMODEL=flux_digaso_matlab_mex -c  flux_digaso_matlab_terminate.c -o build/maci64/flux_digaso_matlab_terminate.o",
+    "file": "flux_digaso_matlab_terminate.c",
+    "output": "build/maci64/flux_digaso_matlab_terminate.o"
+  },
+  {
+    "directory": "/Users/saustin/Documents/HDG/problem/2d_streamer/digaso_compare/codegen/mex/flux_digaso_matlab",
+    "command": "/usr/bin/xcrun -sdk macosx13.3 clang -fno-common -arch x86_64 -mmacosx-version-min=10.15 -fexceptions -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \".\" -I \"/Users/saustin/Documents/HDG/problem/2d_streamer/digaso_compare\" -I \"./interface\" -I \"/Applications/MATLAB_R2023a.app/extern/include\" -I \".\" -DMODEL=flux_digaso_matlab_mex -c  interface/_coder_flux_digaso_matlab_api.c -o build/maci64/_coder_flux_digaso_matlab_api.o",
+    "file": "interface/_coder_flux_digaso_matlab_api.c",
+    "output": "build/maci64/_coder_flux_digaso_matlab_api.o"
+  },
+  {
+    "directory": "/Users/saustin/Documents/HDG/problem/2d_streamer/digaso_compare/codegen/mex/flux_digaso_matlab",
+    "command": "/usr/bin/xcrun -sdk macosx13.3 clang -fno-common -arch x86_64 -mmacosx-version-min=10.15 -fexceptions -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \".\" -I \"/Users/saustin/Documents/HDG/problem/2d_streamer/digaso_compare\" -I \"./interface\" -I \"/Applications/MATLAB_R2023a.app/extern/include\" -I \".\" -DMODEL=flux_digaso_matlab_mex -c  interface/_coder_flux_digaso_matlab_mex.c -o build/maci64/_coder_flux_digaso_matlab_mex.o",
+    "file": "interface/_coder_flux_digaso_matlab_mex.c",
+    "output": "build/maci64/_coder_flux_digaso_matlab_mex.o"
+  },
+  {
+    "directory": "/Users/saustin/Documents/HDG/problem/2d_streamer/digaso_compare/codegen/mex/flux_digaso_matlab",
+    "command": "/usr/bin/xcrun -sdk macosx13.3 clang -fno-common -arch x86_64 -mmacosx-version-min=10.15 -fexceptions -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \".\" -I \"/Users/saustin/Documents/HDG/problem/2d_streamer/digaso_compare\" -I \"./interface\" -I \"/Applications/MATLAB_R2023a.app/extern/include\" -I \".\" -DMODEL=flux_digaso_matlab_mex -c  flux_digaso_matlab.c -o build/maci64/flux_digaso_matlab.o",
+    "file": "flux_digaso_matlab.c",
+    "output": "build/maci64/flux_digaso_matlab.o"
+  },
+  {
+    "directory": "/Users/saustin/Documents/HDG/problem/2d_streamer/digaso_compare/codegen/mex/flux_digaso_matlab",
+    "command": "/usr/bin/xcrun -sdk macosx13.3 clang -fno-common -arch x86_64 -mmacosx-version-min=10.15 -fexceptions -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \".\" -I \"/Users/saustin/Documents/HDG/problem/2d_streamer/digaso_compare\" -I \"./interface\" -I \"/Applications/MATLAB_R2023a.app/extern/include\" -I \".\" -DMODEL=flux_digaso_matlab_mex -c  interface/_coder_flux_digaso_matlab_info.c -o build/maci64/_coder_flux_digaso_matlab_info.o",
+    "file": "interface/_coder_flux_digaso_matlab_info.c",
+    "output": "build/maci64/_coder_flux_digaso_matlab_info.o"
+  },
+  {
+    "directory": "/Users/saustin/Documents/HDG/problem/2d_streamer/digaso_compare/codegen/mex/flux_digaso_matlab",
+    "command": "/usr/bin/xcrun -sdk macosx13.3 clang -fno-common -arch x86_64 -mmacosx-version-min=10.15 -fexceptions -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \".\" -I \"/Users/saustin/Documents/HDG/problem/2d_streamer/digaso_compare\" -I \"./interface\" -I \"/Applications/MATLAB_R2023a.app/extern/include\" -I \".\" -DMODEL=flux_digaso_matlab_mex -c  /Applications/MATLAB_R2023a.app/extern/version/c_mexapi_version.c -o build/maci64/c_mexapi_version.o",
+    "file": "/Applications/MATLAB_R2023a.app/extern/version/c_mexapi_version.c",
+    "output": "build/maci64/c_mexapi_version.o"
+  }
+]

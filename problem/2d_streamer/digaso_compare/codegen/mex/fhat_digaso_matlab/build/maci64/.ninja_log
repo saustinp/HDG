@@ -1,0 +1,12 @@
+# ninja log v5
+0	418	1699491647227632241	build/maci64/fhat_digaso_matlab_data.o	20d678336e91857e
+0	441	1699491647253152167	build/maci64/rt_nonfinite.o	580d6ef75e63275f
+8	441	1699491647253145917	build/maci64/c_mexapi_version.o	f0525ec8d443ad8a
+6	442	1699491647253549914	build/maci64/fhat_digaso_matlab.o	79b81dd9c03215c9
+7	442	1699491647253616413	build/maci64/_coder_fhat_digaso_matlab_info.o	a446c597105c0104
+1	443	1699491647253550039	build/maci64/fhat_digaso_matlab_terminate.o	71929faad876bd15
+1	443	1699491647253151376	build/maci64/fhat_digaso_matlab_initialize.o	1a22ed7e200c8c99
+1	445	1699491647258471117	build/maci64/_coder_fhat_digaso_matlab_api.o	afab0a1010f95ac7
+2	445	1699491647258520950	build/maci64/_coder_fhat_digaso_matlab_mex.o	2e0424f87c47803b
+0	508	1699491647322502598	build/maci64/fbou_streamer2d.o	94993b0fb1ac4e80
+508	592	1699491647407937085	fhat_digaso_matlab_mex.mexmaci64	776f98cc4e06cce3

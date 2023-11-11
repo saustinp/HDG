@@ -49,7 +49,7 @@ app.alpha = [];
 % Initializing data structures
 
 % mesh = mkmesh_rect(41,81,porder,0,[0 125 0 125],0,1);
-% mesh = mkmesh_streamer_gmsh(porder, "streamer_95k.msh");
+mesh = mkmesh_streamer_gmsh(porder, "streamer_16k_fixed.msh");
 % mesh = mkmesh_streamer(81,81,porder);
 % mesh = mesh2;
 master = mkmaster(mesh,2*porder);
@@ -63,7 +63,7 @@ UH=inituhat(master,mesh.elcon,UDG,1);
 
 [UDG,UH] = hdg_solve(master,mesh,app,UDG,UH,0*UDG);
 
-% save '../poissonIC.mat' UDG
+save '../poissonIC.mat' UDG
 
 normE = sqrt(UDG(:,2,:).^2 + UDG(:,3,:).^2);
 figure(); scaplot(mesh,normE,[],0,0); axis equal; axis tight; colormap jet;

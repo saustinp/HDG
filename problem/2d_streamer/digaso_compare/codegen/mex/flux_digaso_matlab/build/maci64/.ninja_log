@@ -1,0 +1,12 @@
+# ninja log v5
+1	457	1699457913434009546	build/maci64/flux_digaso_matlab_data.o	5a05c729312f0631
+5	484	1699457913467794122	build/maci64/c_mexapi_version.o	724b65426df98157
+2	485	1699457913467727540	build/maci64/flux_digaso_matlab_initialize.o	b6469bca778175ea
+2	485	1699457913468094786	build/maci64/_coder_flux_digaso_matlab_api.o	18284abd1c78d19
+1	485	1699457913467691873	build/maci64/rt_nonfinite.o	6eea24df769cba16
+3	485	1699457913469498815	build/maci64/_coder_flux_digaso_matlab_mex.o	9456e87dc032abcd
+4	486	1699457913468013495	build/maci64/_coder_flux_digaso_matlab_info.o	55a117592dc4624f
+2	486	1699457913468174161	build/maci64/flux_digaso_matlab_terminate.o	f14625d557a77f2c
+3	486	1699457913467745623	build/maci64/flux_digaso_matlab.o	699bf09ecad700fc
+1	523	1699457913511027406	build/maci64/flux_streamer2d.o	107e735acdd2903a
+523	619	1699457913608537418	flux_digaso_matlab_mex.mexmaci64	eb78313916f5c56e

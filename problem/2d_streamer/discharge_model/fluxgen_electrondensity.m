@@ -1,6 +1,7 @@
 % These inputs must match the dimensions of the input vectors in the final output function. For example:
 % function [f,f_udg] = flux_electrondensity(p,udg,param,time)
 
+% syms x1 x2 x3  % Variables stored in the p vector
 syms x1 x2  % Variables stored in the p vector
 syms u1 u2 u3 u4 u5 u6 u7 u8 u9     % Components of UDG
 syms time
@@ -9,10 +10,12 @@ syms zero one
 
 param = [param1 param2 param3 param4 param5 param6 param7 param8 param9 param10];
 udg = [u1 u2 u3 u4 u5 u6 u7 u8 u9];
+% p = [x1 x2 x3];
 p = [x1 x2];
 
 % Read in values from the p vector
 r_tilde = p(1);
+% av = p(3);
 
 % Read in values from the u vector
 ne_tilde = udg(1);
@@ -37,6 +40,7 @@ normE = normE_tilde*E_ref;
 
 mue_tilde = (2.3987*normE^(-.26))/mu_ref;
 De_tilde = 4.3628e-3*normE^.22 / (l_ref*mu_ref*E_ref);
+% De_tilde = 4.3628e-3*normE^.22 / (l_ref*mu_ref*E_ref)+av;     % Adding in the artificial viscosity field
 
 fv = [De_tilde.*dne_dr_tilde,0,Er_tilde,...
       De_tilde.*dne_dz_tilde,0,Ez_tilde];       % The negative sign is included in eqns 1 and 3 bc q=-grad(u)

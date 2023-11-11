@@ -1,0 +1,1441 @@
+Starting sim...
+Timestep :  502
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 11.498915 seconds.
+Newton iteration :  1
+Old residual: 1.644192e+07,   New residual: 2.651185e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 2.651185e+04,   New residual: 4.397523e-01    1.000000e+00
+Newton iteration :  3
+Old residual: 4.397523e-01,   New residual: 1.881887e-04    1.000000e+00
+ne max
+   6.6703e+07
+
+E max
+   1.3413e+07
+
+Timestep :  503
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 9.959013 seconds.
+Newton iteration :  1
+Old residual: 1.157113e+07,   New residual: 3.195765e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 3.195765e+04,   New residual: 6.666358e-01    1.000000e+00
+Newton iteration :  3
+Old residual: 6.666358e-01,   New residual: 1.876113e-04    1.000000e+00
+ne max
+   6.6894e+07
+
+E max
+   1.3434e+07
+
+Timestep :  504
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 9.712074 seconds.
+Newton iteration :  1
+Old residual: 1.208984e+07,   New residual: 3.807991e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 3.807991e+04,   New residual: 9.680926e-01    1.000000e+00
+Newton iteration :  3
+Old residual: 9.680926e-01,   New residual: 1.913732e-04    1.000000e+00
+ne max
+   6.7076e+07
+
+E max
+   1.3445e+07
+
+Timestep :  505
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 9.512370 seconds.
+Newton iteration :  1
+Old residual: 1.264553e+07,   New residual: 4.423418e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 4.423418e+04,   New residual: 1.307979e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 1.307979e+00,   New residual: 1.893865e-04    1.000000e+00
+ne max
+   6.7260e+07
+
+E max
+   1.3463e+07
+
+Timestep :  506
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 9.388134 seconds.
+Newton iteration :  1
+Old residual: 1.320581e+07,   New residual: 4.974802e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 4.974802e+04,   New residual: 1.628888e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 1.628888e+00,   New residual: 1.904282e-04    1.000000e+00
+ne max
+   6.7434e+07
+
+E max
+   1.3478e+07
+
+Timestep :  507
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 9.015203 seconds.
+Newton iteration :  1
+Old residual: 1.374743e+07,   New residual: 5.412236e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 5.412236e+04,   New residual: 1.874775e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 1.874775e+00,   New residual: 1.911231e-04    1.000000e+00
+ne max
+   6.7598e+07
+
+E max
+   1.3501e+07
+
+Timestep :  508
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 10.024131 seconds.
+Newton iteration :  1
+Old residual: 1.425196e+07,   New residual: 5.711902e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 5.711902e+04,   New residual: 2.014658e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 2.014658e+00,   New residual: 1.935929e-04    1.000000e+00
+ne max
+   6.7761e+07
+
+E max
+   1.3515e+07
+
+Timestep :  509
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 8.843459 seconds.
+Newton iteration :  1
+Old residual: 1.470632e+07,   New residual: 5.873629e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 5.873629e+04,   New residual: 2.050674e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 2.050674e+00,   New residual: 1.929341e-04    1.000000e+00
+ne max
+   6.7917e+07
+
+E max
+   1.3535e+07
+
+Timestep :  510
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 8.930171 seconds.
+Newton iteration :  1
+Old residual: 1.509930e+07,   New residual: 5.918027e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 5.918027e+04,   New residual: 2.016084e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 2.016084e+00,   New residual: 1.942611e-04    1.000000e+00
+ne max
+   6.8056e+07
+
+E max
+   1.3558e+07
+
+Timestep :  511
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 9.256473 seconds.
+Newton iteration :  1
+Old residual: 1.542944e+07,   New residual: 5.868174e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 5.868174e+04,   New residual: 1.946834e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 1.946834e+00,   New residual: 1.989564e-04    1.000000e+00
+ne max
+   6.8203e+07
+
+E max
+   1.3585e+07
+
+Timestep :  512
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 9.814024 seconds.
+Newton iteration :  1
+Old residual: 1.569794e+07,   New residual: 5.764874e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 5.764874e+04,   New residual: 1.878361e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 1.878361e+00,   New residual: 1.962454e-04    1.000000e+00
+ne max
+   6.8349e+07
+
+E max
+   1.3599e+07
+
+Timestep :  513
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 11.372418 seconds.
+Newton iteration :  1
+Old residual: 1.591373e+07,   New residual: 5.664301e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 5.664301e+04,   New residual: 1.842104e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 1.842104e+00,   New residual: 1.951569e-04    1.000000e+00
+ne max
+   6.8506e+07
+
+E max
+   1.3620e+07
+
+Timestep :  514
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 12.996713 seconds.
+Newton iteration :  1
+Old residual: 1.608537e+07,   New residual: 5.601090e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 5.601090e+04,   New residual: 1.840582e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 1.840582e+00,   New residual: 1.944981e-04    1.000000e+00
+ne max
+   6.8672e+07
+
+E max
+   1.3642e+07
+
+Timestep :  515
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 11.293118 seconds.
+Newton iteration :  1
+Old residual: 1.622006e+07,   New residual: 5.582753e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 5.582753e+04,   New residual: 1.866725e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 1.866725e+00,   New residual: 1.950428e-04    1.000000e+00
+ne max
+   6.8823e+07
+
+E max
+   1.3670e+07
+
+Timestep :  516
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 11.926984 seconds.
+Newton iteration :  1
+Old residual: 1.632721e+07,   New residual: 5.612723e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 5.612723e+04,   New residual: 1.909744e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 1.909744e+00,   New residual: 2.010730e-04    1.000000e+00
+ne max
+   6.8991e+07
+
+E max
+   1.3684e+07
+
+Timestep :  517
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 10.653212 seconds.
+Newton iteration :  1
+Old residual: 1.641541e+07,   New residual: 5.691403e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 5.691403e+04,   New residual: 1.964494e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 1.964494e+00,   New residual: 1.982127e-04    1.000000e+00
+ne max
+   6.9178e+07
+
+E max
+   1.3703e+07
+
+Timestep :  518
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 10.637816 seconds.
+Newton iteration :  1
+Old residual: 1.649119e+07,   New residual: 5.810348e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 5.810348e+04,   New residual: 2.032805e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 2.032805e+00,   New residual: 1.996438e-04    1.000000e+00
+ne max
+   6.9374e+07
+
+E max
+   1.3724e+07
+
+Timestep :  519
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 9.824849 seconds.
+Newton iteration :  1
+Old residual: 1.655723e+07,   New residual: 5.943362e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 5.943362e+04,   New residual: 2.106523e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 2.106523e+00,   New residual: 1.992066e-04    1.000000e+00
+ne max
+   6.9869e+07
+
+E max
+   1.3750e+07
+
+Timestep :  520
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 10.035201 seconds.
+Newton iteration :  1
+Old residual: 1.661700e+07,   New residual: 6.073309e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 6.073309e+04,   New residual: 2.188776e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 2.188776e+00,   New residual: 2.022645e-04    1.000000e+00
+ne max
+   7.1001e+07
+
+E max
+   1.3762e+07
+
+Timestep :  521
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 10.018881 seconds.
+Newton iteration :  1
+Old residual: 1.667443e+07,   New residual: 6.189920e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 6.189920e+04,   New residual: 2.274416e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 2.274416e+00,   New residual: 2.004347e-04    1.000000e+00
+ne max
+   7.2163e+07
+
+E max
+   1.3779e+07
+
+Timestep :  522
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 9.301489 seconds.
+Newton iteration :  1
+Old residual: 1.673650e+07,   New residual: 6.305802e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 6.305802e+04,   New residual: 2.372645e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 2.372645e+00,   New residual: 2.018024e-04    1.000000e+00
+ne max
+   7.3343e+07
+
+E max
+   1.3796e+07
+
+Timestep :  523
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 10.158152 seconds.
+Newton iteration :  1
+Old residual: 1.680379e+07,   New residual: 6.410079e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 6.410079e+04,   New residual: 2.466905e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 2.466905e+00,   New residual: 1.999418e-04    1.000000e+00
+ne max
+   7.4551e+07
+
+E max
+   1.3819e+07
+
+Timestep :  524
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 10.389635 seconds.
+Newton iteration :  1
+Old residual: 1.687705e+07,   New residual: 6.522384e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 6.522384e+04,   New residual: 2.572549e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 2.572549e+00,   New residual: 2.025616e-04    1.000000e+00
+ne max
+   7.5714e+07
+
+E max
+   1.3830e+07
+
+Timestep :  525
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 10.062511 seconds.
+Newton iteration :  1
+Old residual: 1.696000e+07,   New residual: 6.651346e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 6.651346e+04,   New residual: 2.686826e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 2.686826e+00,   New residual: 2.051416e-04    1.000000e+00
+ne max
+   7.6908e+07
+
+E max
+   1.3843e+07
+
+Timestep :  526
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 10.060233 seconds.
+Newton iteration :  1
+Old residual: 1.705529e+07,   New residual: 6.805826e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 6.805826e+04,   New residual: 2.810001e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 2.810001e+00,   New residual: 2.053106e-04    1.000000e+00
+ne max
+   7.8025e+07
+
+E max
+   1.3857e+07
+
+Timestep :  527
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 10.793068 seconds.
+Newton iteration :  1
+Old residual: 1.715709e+07,   New residual: 6.957656e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 6.957656e+04,   New residual: 2.939909e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 2.939909e+00,   New residual: 2.053332e-04    1.000000e+00
+ne max
+   7.9152e+07
+
+E max
+   1.3876e+07
+
+Timestep :  528
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 10.145397 seconds.
+Newton iteration :  1
+Old residual: 1.726583e+07,   New residual: 7.088261e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 7.088261e+04,   New residual: 3.078048e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 3.078048e+00,   New residual: 2.076817e-04    1.000000e+00
+ne max
+   8.0239e+07
+
+E max
+   1.3888e+07
+
+Timestep :  529
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 10.095242 seconds.
+Newton iteration :  1
+Old residual: 1.738063e+07,   New residual: 7.200943e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 7.200943e+04,   New residual: 3.226225e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 3.226225e+00,   New residual: 2.117184e-04    1.000000e+00
+ne max
+   8.1271e+07
+
+E max
+   1.3899e+07
+
+Timestep :  530
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 10.230850 seconds.
+Newton iteration :  1
+Old residual: 1.750153e+07,   New residual: 7.312475e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 7.312475e+04,   New residual: 3.375370e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 3.375370e+00,   New residual: 2.099876e-04    1.000000e+00
+ne max
+   8.2279e+07
+
+E max
+   1.3909e+07
+
+Timestep :  531
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 9.505472 seconds.
+Newton iteration :  1
+Old residual: 1.762653e+07,   New residual: 7.427177e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 7.427177e+04,   New residual: 3.514267e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 3.514267e+00,   New residual: 2.116207e-04    1.000000e+00
+ne max
+   8.3341e+07
+
+E max
+   1.3924e+07
+
+Timestep :  532
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 9.931143 seconds.
+Newton iteration :  1
+Old residual: 1.775778e+07,   New residual: 7.540944e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 7.540944e+04,   New residual: 3.644415e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 3.644415e+00,   New residual: 2.140210e-04    1.000000e+00
+ne max
+   8.4416e+07
+
+E max
+   1.3938e+07
+
+Timestep :  533
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 10.016682 seconds.
+Newton iteration :  1
+Old residual: 1.789738e+07,   New residual: 7.674029e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 7.674029e+04,   New residual: 3.789910e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 3.789910e+00,   New residual: 2.151075e-04    1.000000e+00
+ne max
+   8.5530e+07
+
+E max
+   1.3943e+07
+
+Timestep :  534
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 10.576798 seconds.
+Newton iteration :  1
+Old residual: 1.804525e+07,   New residual: 7.838941e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 7.838941e+04,   New residual: 3.958622e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 3.958622e+00,   New residual: 2.127163e-04    1.000000e+00
+ne max
+   8.6667e+07
+
+E max
+   1.3952e+07
+
+Timestep :  535
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 9.814858 seconds.
+Newton iteration :  1
+Old residual: 1.819893e+07,   New residual: 8.020205e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 8.020205e+04,   New residual: 4.139062e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 4.139062e+00,   New residual: 2.155358e-04    1.000000e+00
+ne max
+   8.7758e+07
+
+E max
+   1.3963e+07
+
+Timestep :  536
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 11.107981 seconds.
+Newton iteration :  1
+Old residual: 1.835198e+07,   New residual: 8.196326e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 8.196326e+04,   New residual: 4.311982e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 4.311982e+00,   New residual: 2.143986e-04    1.000000e+00
+ne max
+   8.8853e+07
+
+E max
+   1.3980e+07
+
+Timestep :  537
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 11.133339 seconds.
+Newton iteration :  1
+Old residual: 1.850884e+07,   New residual: 8.359364e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 8.359364e+04,   New residual: 4.476163e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 4.476163e+00,   New residual: 2.183444e-04    1.000000e+00
+ne max
+   8.9887e+07
+
+E max
+   1.3984e+07
+
+Timestep :  538
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 10.443020 seconds.
+Newton iteration :  1
+Old residual: 1.866121e+07,   New residual: 8.501570e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 8.501570e+04,   New residual: 4.648208e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 4.648208e+00,   New residual: 2.215520e-04    1.000000e+00
+ne max
+   9.0869e+07
+
+E max
+   1.3993e+07
+
+Timestep :  539
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 11.110156 seconds.
+Newton iteration :  1
+Old residual: 1.880919e+07,   New residual: 8.603751e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 8.603751e+04,   New residual: 4.807593e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 4.807593e+00,   New residual: 2.224772e-04    1.000000e+00
+ne max
+   9.1858e+07
+
+E max
+   1.4002e+07
+
+Timestep :  540
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 11.319358 seconds.
+Newton iteration :  1
+Old residual: 1.895298e+07,   New residual: 8.670902e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 8.670902e+04,   New residual: 4.941200e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 4.941200e+00,   New residual: 2.248731e-04    1.000000e+00
+ne max
+   9.2782e+07
+
+E max
+   1.4015e+07
+
+Timestep :  541
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 11.187240 seconds.
+Newton iteration :  1
+Old residual: 1.910645e+07,   New residual: 8.776650e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 8.776650e+04,   New residual: 5.077206e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 5.077206e+00,   New residual: 2.256245e-04    1.000000e+00
+ne max
+   9.3683e+07
+
+E max
+   1.4026e+07
+
+Timestep :  542
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 11.263814 seconds.
+Newton iteration :  1
+Old residual: 1.926711e+07,   New residual: 8.918408e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 8.918408e+04,   New residual: 5.201603e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 5.201603e+00,   New residual: 2.251700e-04    1.000000e+00
+ne max
+   9.4461e+07
+
+E max
+   1.4030e+07
+
+Timestep :  543
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 11.155796 seconds.
+Newton iteration :  1
+Old residual: 1.943455e+07,   New residual: 9.111837e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 9.111837e+04,   New residual: 5.358954e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 5.358954e+00,   New residual: 2.308369e-04    1.000000e+00
+ne max
+   9.5318e+07
+
+E max
+   1.4041e+07
+
+Timestep :  544
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 11.180234 seconds.
+Newton iteration :  1
+Old residual: 1.959968e+07,   New residual: 9.296478e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 9.296478e+04,   New residual: 5.525151e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 5.525151e+00,   New residual: 2.341630e-04    1.000000e+00
+ne max
+   9.6084e+07
+
+E max
+   1.4048e+07
+
+Timestep :  545
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 9.903351 seconds.
+Newton iteration :  1
+Old residual: 1.975647e+07,   New residual: 9.463503e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 9.463503e+04,   New residual: 5.699018e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 5.699018e+00,   New residual: 2.317273e-04    1.000000e+00
+ne max
+   9.6825e+07
+
+E max
+   1.4064e+07
+
+Timestep :  546
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 11.317570 seconds.
+Newton iteration :  1
+Old residual: 1.990556e+07,   New residual: 9.603009e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 9.603009e+04,   New residual: 5.881015e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 5.881015e+00,   New residual: 2.319249e-04    1.000000e+00
+ne max
+   9.7615e+07
+
+E max
+   1.4072e+07
+
+Timestep :  547
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 10.416039 seconds.
+Newton iteration :  1
+Old residual: 2.004745e+07,   New residual: 9.717139e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 9.717139e+04,   New residual: 6.069313e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 6.069313e+00,   New residual: 2.408210e-04    1.000000e+00
+ne max
+   9.8371e+07
+
+E max
+   1.4080e+07
+
+Timestep :  548
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 11.184632 seconds.
+Newton iteration :  1
+Old residual: 2.017755e+07,   New residual: 9.776483e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 9.776483e+04,   New residual: 6.255334e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 6.255334e+00,   New residual: 2.407954e-04    1.000000e+00
+ne max
+   9.9042e+07
+
+E max
+   1.4090e+07
+
+Timestep :  549
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 11.157225 seconds.
+Newton iteration :  1
+Old residual: 2.030406e+07,   New residual: 9.827344e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 9.827344e+04,   New residual: 6.421399e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 6.421399e+00,   New residual: 2.389641e-04    1.000000e+00
+ne max
+   9.9652e+07
+
+E max
+   1.4104e+07
+
+Timestep :  550
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 10.633524 seconds.
+Newton iteration :  1
+Old residual: 2.043423e+07,   New residual: 9.923746e+04    1.000000e+00
+Newton iteration :  2
+Old residual: 9.923746e+04,   New residual: 6.563179e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 6.563179e+00,   New residual: 2.402742e-04    1.000000e+00
+ne max
+   1.0025e+08
+
+E max
+   1.4116e+07
+
+Timestep :  551
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 10.335124 seconds.
+Newton iteration :  1
+Old residual: 2.058093e+07,   New residual: 1.012177e+05    1.000000e+00
+Newton iteration :  2
+Old residual: 1.012177e+05,   New residual: 6.719079e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 6.719079e+00,   New residual: 2.420962e-04    1.000000e+00
+ne max
+   1.0087e+08
+
+E max
+   1.4130e+07
+
+Timestep :  552
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 10.413004 seconds.
+Newton iteration :  1
+Old residual: 2.074129e+07,   New residual: 1.037850e+05    1.000000e+00
+Newton iteration :  2
+Old residual: 1.037850e+05,   New residual: 6.922252e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 6.922252e+00,   New residual: 2.482927e-04    1.000000e+00
+ne max
+   1.0154e+08
+
+E max
+   1.4139e+07
+
+Timestep :  553
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 11.773806 seconds.
+Newton iteration :  1
+Old residual: 2.090673e+07,   New residual: 1.062268e+05    1.000000e+00
+Newton iteration :  2
+Old residual: 1.062268e+05,   New residual: 7.163811e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 7.163811e+00,   New residual: 2.456012e-04    1.000000e+00
+ne max
+   1.0219e+08
+
+E max
+   1.4153e+07
+
+Timestep :  554
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 11.059326 seconds.
+Newton iteration :  1
+Old residual: 2.106502e+07,   New residual: 1.079418e+05    1.000000e+00
+Newton iteration :  2
+Old residual: 1.079418e+05,   New residual: 7.400200e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 7.400200e+00,   New residual: 2.467730e-04    1.000000e+00
+ne max
+   1.0281e+08
+
+E max
+   1.4167e+07
+
+Timestep :  555
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 11.446410 seconds.
+Newton iteration :  1
+Old residual: 2.122427e+07,   New residual: 1.091325e+05    1.000000e+00
+Newton iteration :  2
+Old residual: 1.091325e+05,   New residual: 7.617692e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 7.617692e+00,   New residual: 2.490685e-04    1.000000e+00
+ne max
+   1.0332e+08
+
+E max
+   1.4178e+07
+
+Timestep :  556
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 10.606429 seconds.
+Newton iteration :  1
+Old residual: 2.137911e+07,   New residual: 1.100124e+05    1.000000e+00
+Newton iteration :  2
+Old residual: 1.100124e+05,   New residual: 7.819063e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 7.819063e+00,   New residual: 2.495499e-04    1.000000e+00
+ne max
+   1.0388e+08
+
+E max
+   1.4190e+07
+
+Timestep :  557
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 10.006882 seconds.
+Newton iteration :  1
+Old residual: 2.152385e+07,   New residual: 1.107051e+05    1.000000e+00
+Newton iteration :  2
+Old residual: 1.107051e+05,   New residual: 8.004048e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 8.004048e+00,   New residual: 2.527893e-04    1.000000e+00
+ne max
+   1.0444e+08
+
+E max
+   1.4205e+07
+
+Timestep :  558
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 9.901692 seconds.
+Newton iteration :  1
+Old residual: 2.166398e+07,   New residual: 1.114644e+05    1.000000e+00
+Newton iteration :  2
+Old residual: 1.114644e+05,   New residual: 8.181264e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 8.181264e+00,   New residual: 2.520394e-04    1.000000e+00
+ne max
+   1.0489e+08
+
+E max
+   1.4217e+07
+
+Timestep :  559
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 10.528992 seconds.
+Newton iteration :  1
+Old residual: 2.181018e+07,   New residual: 1.129823e+05    1.000000e+00
+Newton iteration :  2
+Old residual: 1.129823e+05,   New residual: 8.356829e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 8.356829e+00,   New residual: 2.561309e-04    1.000000e+00
+ne max
+   1.0522e+08
+
+E max
+   1.4226e+07
+
+Timestep :  560
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 11.076987 seconds.
+Newton iteration :  1
+Old residual: 2.196605e+07,   New residual: 1.153289e+05    1.000000e+00
+Newton iteration :  2
+Old residual: 1.153289e+05,   New residual: 8.579843e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 8.579843e+00,   New residual: 2.600643e-04    1.000000e+00
+ne max
+   1.0552e+08
+
+E max
+   1.4242e+07
+
+Timestep :  561
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 9.496533 seconds.
+Newton iteration :  1
+Old residual: 2.212367e+07,   New residual: 1.177583e+05    1.000000e+00
+Newton iteration :  2
+Old residual: 1.177583e+05,   New residual: 8.852184e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 8.852184e+00,   New residual: 2.631783e-04    1.000000e+00
+ne max
+   1.0634e+08
+
+E max
+   1.4254e+07
+
+Timestep :  562
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 11.463059 seconds.
+Newton iteration :  1
+Old residual: 2.227348e+07,   New residual: 1.196585e+05    1.000000e+00
+Newton iteration :  2
+Old residual: 1.196585e+05,   New residual: 9.139076e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 9.139076e+00,   New residual: 2.612083e-04    1.000000e+00
+ne max
+   1.0720e+08
+
+E max
+   1.4266e+07
+
+Timestep :  563
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 10.789232 seconds.
+Newton iteration :  1
+Old residual: 2.241709e+07,   New residual: 1.209407e+05    1.000000e+00
+Newton iteration :  2
+Old residual: 1.209407e+05,   New residual: 9.429248e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 9.429248e+00,   New residual: 2.692963e-04    1.000000e+00
+ne max
+   1.0816e+08
+
+E max
+   1.4278e+07
+
+Timestep :  564
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 9.914113 seconds.
+Newton iteration :  1
+Old residual: 2.255215e+07,   New residual: 1.220230e+05    1.000000e+00
+Newton iteration :  2
+Old residual: 1.220230e+05,   New residual: 9.702923e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 9.702923e+00,   New residual: 2.671161e-04    1.000000e+00
+ne max
+   1.0898e+08
+
+E max
+   1.4292e+07
+
+Timestep :  565
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 10.928608 seconds.
+Newton iteration :  1
+Old residual: 2.267411e+07,   New residual: 1.229719e+05    1.000000e+00
+Newton iteration :  2
+Old residual: 1.229719e+05,   New residual: 9.948631e+00    1.000000e+00
+Newton iteration :  3
+Old residual: 9.948631e+00,   New residual: 2.648432e-04    1.000000e+00
+ne max
+   1.0967e+08
+
+E max
+   1.4307e+07
+
+Timestep :  566
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 11.615921 seconds.
+Newton iteration :  1
+Old residual: 2.280305e+07,   New residual: 1.241870e+05    1.000000e+00
+Newton iteration :  2
+Old residual: 1.241870e+05,   New residual: 1.017034e+01    1.000000e+00
+Newton iteration :  3
+Old residual: 1.017034e+01,   New residual: 2.674790e-04    1.000000e+00
+ne max
+   1.1034e+08
+
+E max
+   1.4319e+07
+
+Timestep :  567
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 11.723533 seconds.
+Newton iteration :  1
+Old residual: 2.294147e+07,   New residual: 1.261378e+05    1.000000e+00
+Newton iteration :  2
+Old residual: 1.261378e+05,   New residual: 1.039326e+01    1.000000e+00
+Newton iteration :  3
+Old residual: 1.039326e+01,   New residual: 2.717209e-04    1.000000e+00
+ne max
+   1.1103e+08
+
+E max
+   1.4331e+07
+
+Timestep :  568
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 11.223814 seconds.
+Newton iteration :  1
+Old residual: 2.308633e+07,   New residual: 1.287652e+05    1.000000e+00
+Newton iteration :  2
+Old residual: 1.287652e+05,   New residual: 1.068490e+01    1.000000e+00
+Newton iteration :  3
+Old residual: 1.068490e+01,   New residual: 2.719180e-04    1.000000e+00
+ne max
+   1.1158e+08
+
+E max
+   1.4348e+07
+
+Timestep :  569
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 11.587510 seconds.
+Newton iteration :  1
+Old residual: 2.322846e+07,   New residual: 1.309463e+05    1.000000e+00
+Newton iteration :  2
+Old residual: 1.309463e+05,   New residual: 1.098795e+01    1.000000e+00
+Newton iteration :  3
+Old residual: 1.098795e+01,   New residual: 2.715999e-04    1.000000e+00
+ne max
+   1.1232e+08
+
+E max
+   1.4358e+07
+
+Timestep :  570
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 10.068024 seconds.
+Newton iteration :  1
+Old residual: 2.336805e+07,   New residual: 1.323212e+05    1.000000e+00
+Newton iteration :  2
+Old residual: 1.323212e+05,   New residual: 1.126982e+01    1.000000e+00
+Newton iteration :  3
+Old residual: 1.126982e+01,   New residual: 2.735985e-04    1.000000e+00
+ne max
+   1.1292e+08
+
+E max
+   1.4371e+07
+
+Timestep :  571
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 11.137897 seconds.
+Newton iteration :  1
+Old residual: 2.350980e+07,   New residual: 1.335327e+05    1.000000e+00
+Newton iteration :  2
+Old residual: 1.335327e+05,   New residual: 1.155270e+01    1.000000e+00
+Newton iteration :  3
+Old residual: 1.155270e+01,   New residual: 2.758805e-04    1.000000e+00
+ne max
+   1.1338e+08
+
+E max
+   1.4391e+07
+
+Timestep :  572
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 10.672245 seconds.
+Newton iteration :  1
+Old residual: 2.365239e+07,   New residual: 1.345661e+05    1.000000e+00
+Newton iteration :  2
+Old residual: 1.345661e+05,   New residual: 1.180981e+01    1.000000e+00
+Newton iteration :  3
+Old residual: 1.180981e+01,   New residual: 2.783964e-04    1.000000e+00
+ne max
+   1.1396e+08
+
+E max
+   1.4400e+07
+
+Timestep :  573
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 11.825313 seconds.
+Newton iteration :  1
+Old residual: 2.379154e+07,   New residual: 1.356849e+05    1.000000e+00
+Newton iteration :  2
+Old residual: 1.356849e+05,   New residual: 1.211418e+01    1.000000e+00
+Newton iteration :  3
+Old residual: 1.211418e+01,   New residual: 2.885942e-04    1.000000e+00
+ne max
+   1.1447e+08
+
+E max
+   1.4412e+07
+
+Timestep :  574
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 11.712863 seconds.
+Newton iteration :  1
+Old residual: 2.393216e+07,   New residual: 1.371014e+05    1.000000e+00
+Newton iteration :  2
+Old residual: 1.371014e+05,   New residual: 1.247312e+01    1.000000e+00
+Newton iteration :  3
+Old residual: 1.247312e+01,   New residual: 2.861673e-04    1.000000e+00
+ne max
+   1.1511e+08
+
+E max
+   1.4430e+07
+
+Timestep :  575
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 11.511601 seconds.
+Newton iteration :  1
+Old residual: 2.408451e+07,   New residual: 1.392728e+05    1.000000e+00
+Newton iteration :  2
+Old residual: 1.392728e+05,   New residual: 1.285261e+01    1.000000e+00
+Newton iteration :  3
+Old residual: 1.285261e+01,   New residual: 2.958239e-04    1.000000e+00
+ne max
+   1.1562e+08
+
+E max
+   1.4440e+07
+
+Timestep :  576
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 10.825471 seconds.
+Newton iteration :  1
+Old residual: 2.424185e+07,   New residual: 1.416775e+05    1.000000e+00
+Newton iteration :  2
+Old residual: 1.416775e+05,   New residual: 1.315847e+01    1.000000e+00
+Newton iteration :  3
+Old residual: 1.315847e+01,   New residual: 2.886070e-04    1.000000e+00
+ne max
+   1.1622e+08
+
+E max
+   1.4455e+07
+
+Timestep :  577
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 10.333697 seconds.
+Newton iteration :  1
+Old residual: 2.439610e+07,   New residual: 1.441586e+05    1.000000e+00
+Newton iteration :  2
+Old residual: 1.441586e+05,   New residual: 1.346273e+01    1.000000e+00
+Newton iteration :  3
+Old residual: 1.346273e+01,   New residual: 2.875863e-04    1.000000e+00
+ne max
+   1.1673e+08
+
+E max
+   1.4467e+07
+
+Timestep :  578
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 10.759481 seconds.
+Newton iteration :  1
+Old residual: 2.454392e+07,   New residual: 1.462541e+05    1.000000e+00
+Newton iteration :  2
+Old residual: 1.462541e+05,   New residual: 1.379440e+01    1.000000e+00
+Newton iteration :  3
+Old residual: 1.379440e+01,   New residual: 2.862908e-04    1.000000e+00
+ne max
+   1.1737e+08
+
+E max
+   1.4477e+07
+
+Timestep :  579
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 11.168220 seconds.
+Newton iteration :  1
+Old residual: 2.468363e+07,   New residual: 1.475489e+05    1.000000e+00
+Newton iteration :  2
+Old residual: 1.475489e+05,   New residual: 1.413890e+01    1.000000e+00
+Newton iteration :  3
+Old residual: 1.413890e+01,   New residual: 2.994220e-04    1.000000e+00
+ne max
+   1.1794e+08
+
+E max
+   1.4493e+07
+
+Timestep :  580
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 11.418935 seconds.
+Newton iteration :  1
+Old residual: 2.481582e+07,   New residual: 1.486813e+05    1.000000e+00
+Newton iteration :  2
+Old residual: 1.486813e+05,   New residual: 1.452773e+01    1.000000e+00
+Newton iteration :  3
+Old residual: 1.452773e+01,   New residual: 2.951637e-04    1.000000e+00
+ne max
+   1.1837e+08
+
+E max
+   1.4502e+07
+
+Timestep :  581
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 10.885104 seconds.
+Newton iteration :  1
+Old residual: 2.494134e+07,   New residual: 1.496680e+05    1.000000e+00
+Newton iteration :  2
+Old residual: 1.496680e+05,   New residual: 1.491075e+01    1.000000e+00
+Newton iteration :  3
+Old residual: 1.491075e+01,   New residual: 2.919450e-04    1.000000e+00
+ne max
+   1.1880e+08
+
+E max
+   1.4512e+07
+
+Timestep :  582
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 11.618468 seconds.
+Newton iteration :  1
+Old residual: 2.507859e+07,   New residual: 1.513023e+05    1.000000e+00
+Newton iteration :  2
+Old residual: 1.513023e+05,   New residual: 1.522730e+01    1.000000e+00
+Newton iteration :  3
+Old residual: 1.522730e+01,   New residual: 2.977562e-04    1.000000e+00
+ne max
+   1.1928e+08
+
+E max
+   1.4525e+07
+
+Timestep :  583
+DIRK stage :  1
+Running AV...
+Done
+Elapsed time is 9.924150 seconds.
+Newton iteration :  1
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('schur_primal>schur_uq2')" style="font-weight:bold">schur_primal>schur_uq2</a>
+
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('schur_primal', '/Users/saustin/Documents/HDG/kernel/schur_primal.m', 8)" style="font-weight:bold">schur_primal</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/kernel/schur_primal.m',8,0)">line 8</a>)
+    [DUDG, DUDG_DUH, AE, FE] = schur_uq2(M, C, E, BD, F, GK, H, Rq, Ru, Rh);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('hdg_elemental', '/Users/saustin/Documents/HDG/kernel/hdg_elemental.m', 109)" style="font-weight:bold">hdg_elemental</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/kernel/hdg_elemental.m',109,0)">line 109</a>)
+        [dudg, dudg_duh, ae, fe] = schur_primal(M, C, E, L, Q, BD, F, GK, H, Rq, Ru, Rh);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('parallel_function', '/Applications/MATLAB_R2023a.app/toolbox/matlab/lang/parallel_function.m', 494)" style="font-weight:bold">parallel_function</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2023a.app/toolbox/matlab/lang/parallel_function.m',494,0)">line 494</a>)
+            consume(base, limit, F(base, limit, supply(base, limit)));
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('hdg_assemble', '/Users/saustin/Documents/HDG/kernel/hdg_assemble.m', 41)" style="font-weight:bold">hdg_assemble</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/kernel/hdg_assemble.m',41,0)">line 41</a>)
+parfor i = 1:np
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('hdg_solve', '/Users/saustin/Documents/HDG/kernel/hdg_solve.m', 153)" style="font-weight:bold">hdg_solve</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/kernel/hdg_solve.m',153,0)">line 153</a>)
+        [K,F,DUDG,DUDG_DUH] = hdg_assemble(master,mesh,app,UDG,UH,SH);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('hdg_solve_dirk', '/Users/saustin/Documents/HDG/kernel/hdg_solve_dirk.m', 89)" style="font-weight:bold">hdg_solve_dirk</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/kernel/hdg_solve_dirk.m',89,0)">line 89</a>)
+    [UDGn,UHn] = hdg_solve(master,mesh,app,UDG,UH,SDG);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('app_electrondensity', '/Users/saustin/Documents/HDG/problem/2d_streamer/discharge_model/app_electrondensity.m', 105)" style="font-weight:bold">app_electrondensity</a> (<a href="matlab: opentoline('/Users/saustin/Documents/HDG/problem/2d_streamer/discharge_model/app_electrondensity.m',105,0)">line 105</a>)
+    [UDG,UH] = hdg_solve_dirk(master,mesh,app,UDG,UH,[],time,dt(itime+itime_restart),nstage,torder,linearmesh);
+} 
+ismember(5,mesh.t)
+
+ans =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   0
+
+ismember(10,mesh.t)
+
+ans =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   0
+
+mesh.p(10,:)
+
+ans =
+
+     0    88
+
+app_poisson
+Elapsed time is 3.066659 seconds.
+Newton iteration :  1
+Old residual: 1.458632e+05,   New residual: 1.540904e-10    1.000000e+00
+coder
+{'coder' requires <a href="matlab:matlab.internal.addons.launchers.showExplorer('ErrorRecovery', 'identifier', 'ME', 'focused', 'coder');">MATLAB Coder</a>.
+} 
+matlab.internal.addons.launchers.showExplorer('ErrorRecovery', 'identifier', 'ME', 'focused', 'coder');
+coder
+{'coder' requires <a href="matlab:matlab.internal.addons.launchers.showExplorer('ErrorRecovery', 'identifier', 'ME', 'focused', 'coder');">MATLAB Coder</a>.
+} 

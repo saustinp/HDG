@@ -1,4 +1,4 @@
-function [Un,Hn,Pn] = hdg_solve_dirk(master,mesh,app,UDG,UH,PDG,time,dt,nstage,torder)
+function [Un,Hn,Pn] = hdg_solve_dirk(master,mesh,app,UDG,UH,PDG,time,dt,nstage,torder, linearmesh)
 %HDG_SOLVE_DIRK Solve using the HDG method and Newton's iteraion - DIRK timestepping
 %   [UH,QH,UHAT] = HDG_SOLVE_DIRK(MASTER,MESH,UH,QH,UHAT,APP,TIME,DT,NSTAGE,TORDER)
 %
@@ -59,7 +59,33 @@ for istage = 1:nstage
     app.time = time+dt*t(istage);
     app.fc_u = fc_u;
     app.fc_q = fc_q;
-    
+
+    % disp('Running AV...')
+    % % Mod for running with AV field
+    % % 1. Compute AV field on DG nodes
+    % net_charge = UDG(:,2,:) - UDG(:,1,:);
+    % AV= limiting2(net_charge, 2e6, 1e7, 0, .05);
+
+    % % 2. Smooth the AV field
+    % [~, cgelcon, rowent2elem, colent2elem,~] = mkcgent2dgent(mesh.dgnodes,1e-6);
+    % AV = dg2cg2(AV, cgelcon, colent2elem, rowent2elem);
+    % % 2.5. To apply additional smoothing steps, call 'AV = dg2cg2(AV, cgelcon, colent2elem, rowent2elem);' again
+
+    % % 3. Get mesh size at the DG nodes using a linear mesh, then project to high order
+    % [meshsize_linear,~] = meshsize(linearmesh);
+    % meshsize_linear2 = zeros(size(meshsize_linear,1),1,size(meshsize_linear,2));   % he2 must have the same dimensionality as the UDG data structure
+    % meshsize_linear2(:,1,:) = meshsize_linear;
+    % meshsize_ho = dgprojection(master,mesh,meshsize_linear2,1);
+    % meshsize_min = min(min(meshsize_ho));
+    % % scaplot(mesh,meshsize_ho,[],0,0); axis equal; axis tight; colormap jet; title('Mesh size HO');
+
+    % % Scale the smoothed AV field by the element size. Clip at 0.1;
+    % AV = AV .* meshsize_ho/meshsize_min;
+    % AV(AV>.1) = .1;
+    % mesh.dgnodes(:,3,:) = AV;
+    % % clf; figure(); scaplot(mesh,AV,[],0,0); xlim([0,6]); ylim([87,100]); axis equal; axis tight; colormap jet; title('Smoothed AV field');
+    % disp('Done computing AV')
+
     [UDGn,UHn] = hdg_solve(master,mesh,app,UDG,UH,SDG);
     Un = Un + c(istage)*UDGn;
     Hn = Hn + c(istage)*UHn;

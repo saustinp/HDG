@@ -37,7 +37,7 @@ for i = 1:np
 end
 clear UDG SH UH 
 
-% compute elemental matrices in parallel
+% compute elemental matrices in parallel - this only works if np is > 1, which it's not by default
 parfor i = 1:np 
     [ae{i},fe{i},dudg{i},dudg_duh{i}] = hdg_elemental(masterp{i},appp{i},dgnodes{i},bf{i},udg{i},uh{i},sh{i});
 end

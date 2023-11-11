@@ -1,3 +1,5 @@
+# %%
+
 import gmsh
 import numpy as np
 from gmsh import model as gm
@@ -13,7 +15,7 @@ gm.add(case_name)
 
 gm.occ.importShapes('mesh_square.STEP')
 
-# gm.occ.synchronize()
+gm.occ.synchronize()
 # # print(gm.getEntities())
 # gmsh.fltk.run()
 # exit()
@@ -34,22 +36,28 @@ gm.occ.importShapes('mesh_square.STEP')
 # gmsh.model.occ.rotate(dimtags, 0,0,0, 1, 0, 0, np.pi/2)
 xmin, ymin, zmin, xmax, ymax, zmax = gm.occ.getBoundingBox(2, 1)    # Need to over-write the BBox values so that we can generate an accurate length scale later
 
-gmsh.model.occ.addPoint(0, 98, 0, meshSize=0., tag=10)      # 10 set arbitrarily
-gmsh.model.occ.addPoint(0, 96, 0, meshSize=0., tag=11)      # 10 set arbitrarily
-gmsh.model.occ.addPoint(0, 94, 0, meshSize=0., tag=12)      # 10 set arbitrarily
-gmsh.model.occ.addPoint(0, 92, 0, meshSize=0., tag=13)      # 10 set arbitrarily
-gmsh.model.occ.addPoint(0, 90, 0, meshSize=0., tag=14)      # 10 set arbitrarily
-gmsh.model.occ.addPoint(0, 88, 0, meshSize=0., tag=15)      # 10 set arbitrarily
-gmsh.model.occ.addPoint(0, 86, 0, meshSize=0., tag=16)      # 10 set arbitrarily
-gmsh.model.occ.addPoint(0, 84, 0, meshSize=0., tag=17)      # 10 set arbitrarily
-gmsh.model.occ.addPoint(0, 82, 0, meshSize=0., tag=18)      # 10 set arbitrarily
-gmsh.model.occ.addPoint(0, 80, 0, meshSize=0., tag=19)      # 10 set arbitrarily
-gmsh.model.occ.addPoint(0, 78, 0, meshSize=0., tag=20)      # 10 set arbitrarily
-gm.occ.synchronize()
-# print(gm.getEntities())
-# gmsh.fltk.run()
-# exit()
+# %%
+internal_tags = []
+internal_tags.append(gmsh.model.occ.addPoint(0, 98, 0, tag=10))      # 10 set arbitrarily
+internal_tags.append(gmsh.model.occ.addPoint(0, 96, 0, tag=11))      # 10 set arbitrarily
+internal_tags.append(gmsh.model.occ.addPoint(0, 94, 0, tag=12))      # 10 set arbitrarily
+internal_tags.append(gmsh.model.occ.addPoint(0, 92, 0, tag=13))      # 10 set arbitrarily
+internal_tags.append(gmsh.model.occ.addPoint(0, 90, 0, tag=14))      # 10 set arbitrarily
+internal_tags.append(gmsh.model.occ.addPoint(0, 88, 0, tag=15))      # 10 set arbitrarily
+internal_tags.append(gmsh.model.occ.addPoint(0, 86, 0, tag=16))      # 10 set arbitrarily
+internal_tags.append(gmsh.model.occ.addPoint(0, 84, 0, tag=17))      # 10 set arbitrarily
+internal_tags.append(gmsh.model.occ.addPoint(0, 82, 0, tag=18))      # 10 set arbitrarily
+internal_tags.append(gmsh.model.occ.addPoint(0, 80, 0, tag=19))      # 10 set arbitrarily
+internal_tags.append(gmsh.model.occ.addPoint(0, 78, 0, tag=20))      # 10 set arbitrarily
 
+#%%
+# gmsh.model.mesh.embed(0, internal_tags,1, 2)       DON'T USE THIS
+for tag in internal_tags:
+    gmsh.model.occ.fragment([(0,tag)], gmsh.model.occ.getEntities())
+
+gm.occ.synchronize()    # This is important!
+
+#%%
 # Uncomment for refinement
 gm.mesh.field.add("Distance", 4)
 gm.mesh.field.setNumbers(4, "PointsList", [12, 13, 14, 15, 16, 11])
@@ -62,8 +70,6 @@ gmsh.model.mesh.field.setString(12, "F", ".045+.65*(F4/8)^1.5")
 gm.mesh.field.add("Min", 20)
 gm.mesh.field.setNumbers(20, "FieldsList", [12])
 
-
-
 gm.mesh.field.setAsBackgroundMesh(20)
 gmsh.option.setNumber("Mesh.MeshSizeMax", 60)
 # gmsh.option.setNumber("Mesh.MeshSizeMin", 60)
@@ -74,3 +80,5 @@ gmsh.write('streamer_tmp.msh3')
 gmsh.fltk.run()
 gmsh.finalize()
 exit()
+
+# %%

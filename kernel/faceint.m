@@ -67,7 +67,92 @@ uhg = reshape(uhg,[ngf*nfe*ne nch]);
 % pause
 
 % Compute numerical fluxes 
-[FH, FH_udg, FH_uh] = fhat(nlg, pg, udgg, uhg, arg, time);     
+[FH, FH_udg, FH_uh] = fhat(nlg, pg, udgg, uhg, arg, time);
+
+%%% Insert code here to test the C->Matlab fhat function %%
+% Here I write out the flux using UH in order to compute FHAT and compare
+% with the matlab "FH" on line 70.
+r_tilde = pg(:,1);
+
+ne_tilde = udgg(:,1);
+ni_tilde = udgg(:,2);
+phi_tilde = udgg(:,3);
+dne_dr_tilde = udgg(:,4);
+Er_tilde = udgg(:,6);
+dne_dz_tilde = udgg(:,7);
+Ez_tilde = udgg(:,9);
+
+l_ref = arg{1};
+mu_ref = arg{2};
+E_ref = arg{3};
+tau  = arg{10}*r_tilde;
+
+% Fhat
+normE_tilde = sqrt(Er_tilde.^2 + Ez_tilde.^2);
+normE = normE_tilde.*E_ref;
+
+mue_tilde = (2.3987*normE.^(-.26))/mu_ref;
+De_tilde = 4.3628e-3*normE.^.22 / (l_ref*mu_ref*E_ref);
+
+% fv = [De_tilde.*dne_dr_tilde,0,Er_tilde,...
+%       De_tilde.*dne_dz_tilde,0,Ez_tilde];       % The negative sign is included in eqns 1 and 3 bc q=-grad(u)
+
+fv=zeros(45000,6);
+fv(:,1) = De_tilde.*dne_dr_tilde;
+fv(:,3) = Er_tilde;
+fv(:,4) = De_tilde.*dne_dz_tilde;
+fv(:,6) = Ez_tilde;
+
+% fhi = [-Er_tilde.*mue_tilde.*uhg(:,1),0,0,...
+%        -Ez_tilde.*mue_tilde.*uhg(:,1),0,0];
+
+fhi = zeros(45000,6);
+fhi(:,1) = -Er_tilde.*mue_tilde.*uhg(:,1);
+fhi(:,4) = -Ez_tilde.*mue_tilde.*uhg(:,1);
+
+ff = r_tilde.*(fhi + fv);
+
+fhat_test = [(ff(:,1).*nlg(:,1) + ff(:,4).*nlg(:,2) + tau.*(ne_tilde-uhg(:,1))),...
+        (ff(:,2).*nlg(:,1) + ff(:,5).*nlg(:,2) + tau.*(ni_tilde-uhg(:,2))),...
+        (ff(:,3).*nlg(:,1) + ff(:,6).*nlg(:,2) + tau.*(phi_tilde-uhg(:,3)))];
+
+disp('Linf error of FH and fhat from digaso'):
+disp(max(max(fhat_test-FH)))
+
+% nch=ncu;
+% ncd=3;
+% [ng,nc] = size(udgg);
+% arg_dig = cell2mat(arg);
+
+% nl_dig = zeros(size(nlg));
+% pg_dig = zeros(size(pg));
+% udgg_dig = zeros(size(udgg));
+% uhg_dig = zeros(size(uhg));
+% fh_dig = zeros(size(FH));
+% fh_udg_dig = zeros(size(FH_udg));
+% fh_uh_dig = zeros(size(FH_uh));
+
+% % Flatten all arrays
+% nl_dig = reshape(nl_dig,1,[]);
+% pg_dig = reshape(pg_dig,1,[]);
+% udgg_dig = reshape(udgg_dig,1,[]);
+% uhg_dig = reshape(uhg_dig,1,[]);
+% fh_dig = reshape(fh_dig,1,[]);
+% fh_udg_dig = reshape(fh_udg_dig,1,[]);
+% fh_uh_dig = reshape(fh_uh_dig,1,[]);
+
+% [fh_dig,fh_udg_dig, fh_uh_dig] = fhat_digaso_matlab_mex(fh_dig, fh_udg_dig, fh_uh_dig, pg_dig, udgg_dig, uhg_dig, nl_dig, arg_dig, time, ng, nc, nch, nd, ncd);
+
+% % Reshape all arrays
+% nl_dig = reshape(nl_dig, size(nlg));
+% pg_dig = reshape(pg_dig, size(pg));
+% udgg_dig = reshape(udgg_dig, size(udgg));
+% uhg_dig = reshape(uhg_dig, size(uhg));
+% fh_dig = reshape(fh_dig, size(FH));
+% fh_udg_dig = reshape(fh_udg_dig, size(FH_udg));
+% fh_uh_dig = reshape(fh_uh_dig, size(FH_uh));
+
+
 
 % squeeze(pg)
 % squeeze(nlg)
@@ -150,7 +235,41 @@ for i = 1:length(bcm)
     
     ib = bcm(i);
     bv = repmat(bcs(i,:),[ngf*nfb 1]);
-    [fh, dfh_dudg, dfh_duh] = fbou(ib,bv,nlgb,pgb,udgb,uhgb,arg,time);                                                 
+    [fh, dfh_dudg, dfh_duh] = fbou(ib,bv,nlgb,pgb,udgb,uhgb,arg,time);     
+    
+    % Insert code here to test the C->Matlab fbou
+    % nch=ncu;
+    % ncd=3;
+    % [ng,nc] = size(udgg);
+    % arg_dig = cell2mat(arg);
+    % 
+    % nl_dig = zeros(size(nlg));
+    % pg_dig = zeros(size(pg));
+    % udgg_dig = zeros(size(udgg));
+    % uhg_dig = zeros(size(uhg));
+    % fh_dig = zeros(size(FH));
+    % fh_udg_dig = zeros(size(FH_udg));
+    % fh_uh_dig = zeros(size(FH_uh));
+    % bv_dig = zeros(size(bv));
+    % 
+    % % Flatten all arrays
+    % nl_dig = reshape(nl_dig,1,[]);
+    % pg_dig = reshape(pg_dig,1,[]);
+    % udgg_dig = reshape(udgg_dig,1,[]);
+    % uhg_dig = reshape(uhg_dig,1,[]);
+    % fh_dig = reshape(fh_dig,1,[]);
+    % fh_udg_dig = reshape(fh_udg_dig,1,[]);
+    % fh_uh_dig = reshape(fh_uh_dig,1,[]);
+    % bv_dig = reshape(bv_dig,1,[]);
+    % 
+    % [fh_dig, fh_udg_dig, fh_uh_dig] = fbou_digaso_matlab_mex(fh_dig, fh_udg_dig, fh_uh_dig, pg_dig, udgg_dig, uhg_dig, nl_dig, bv_dig, arg_dig, time, ib, ng, nc, nch, nd, ncd);
+    % 
+    % % Reshape all arrays
+    % fh_dig = reshape(fh_dig, size(FH));
+    % fh_udg_dig = reshape(fh_udg_dig, size(FH_udg));
+    % fh_uh_dig = reshape(fh_uh_dig, size(FH_uh));
+
+
     BH(im,:) = fh;
     BH_udg(im,:,:) = dfh_dudg;
     BH_uh(im,:,:) = dfh_duh;              

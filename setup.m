@@ -12,5 +12,7 @@ addpath([d0,'/master']);
 addpath([d0,'/plot']);
 addpath([d0,'/shockcapturing']);
 addpath([d0,'/problem/mongeampere']);
+addpath([d0,'/problem/2d_streamer/digaso_compare']);
+
 fprintf(' \n Done. \n\n');
 clear d0
