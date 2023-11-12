@@ -1,0 +1,62 @@
+[
+  {
+    "directory": "/Users/saustin/Documents/HDG/problem/2d_streamer/codegen_test/codegen/mex/mathOpsIntegrated",
+    "command": "/usr/bin/xcrun -sdk macosx13.3 clang -fno-common -arch x86_64 -mmacosx-version-min=10.15 -fexceptions -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \".\" -I \"/Users/saustin/Documents/HDG/problem/2d_streamer/codegen_test\" -I \"./interface\" -I \"/Applications/MATLAB_R2023a.app/extern/include\" -I \".\" -DMODEL=mathOpsIntegrated_mex -c  /Users/saustin/Documents/HDG/problem/2d_streamer/codegen_test/flux.c -o build/maci64/flux.o",
+    "file": "/Users/saustin/Documents/HDG/problem/2d_streamer/codegen_test/flux.c",
+    "output": "build/maci64/flux.o"
+  },
+  {
+    "directory": "/Users/saustin/Documents/HDG/problem/2d_streamer/codegen_test/codegen/mex/mathOpsIntegrated",
+    "command": "/usr/bin/xcrun -sdk macosx13.3 clang -fno-common -arch x86_64 -mmacosx-version-min=10.15 -fexceptions -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \".\" -I \"/Users/saustin/Documents/HDG/problem/2d_streamer/codegen_test\" -I \"./interface\" -I \"/Applications/MATLAB_R2023a.app/extern/include\" -I \".\" -DMODEL=mathOpsIntegrated_mex -c  mathOpsIntegrated_data.c -o build/maci64/mathOpsIntegrated_data.o",
+    "file": "mathOpsIntegrated_data.c",
+    "output": "build/maci64/mathOpsIntegrated_data.o"
+  },
+  {
+    "directory": "/Users/saustin/Documents/HDG/problem/2d_streamer/codegen_test/codegen/mex/mathOpsIntegrated",
+    "command": "/usr/bin/xcrun -sdk macosx13.3 clang -fno-common -arch x86_64 -mmacosx-version-min=10.15 -fexceptions -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \".\" -I \"/Users/saustin/Documents/HDG/problem/2d_streamer/codegen_test\" -I \"./interface\" -I \"/Applications/MATLAB_R2023a.app/extern/include\" -I \".\" -DMODEL=mathOpsIntegrated_mex -c  rt_nonfinite.c -o build/maci64/rt_nonfinite.o",
+    "file": "rt_nonfinite.c",
+    "output": "build/maci64/rt_nonfinite.o"
+  },
+  {
+    "directory": "/Users/saustin/Documents/HDG/problem/2d_streamer/codegen_test/codegen/mex/mathOpsIntegrated",
+    "command": "/usr/bin/xcrun -sdk macosx13.3 clang -fno-common -arch x86_64 -mmacosx-version-min=10.15 -fexceptions -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \".\" -I \"/Users/saustin/Documents/HDG/problem/2d_streamer/codegen_test\" -I \"./interface\" -I \"/Applications/MATLAB_R2023a.app/extern/include\" -I \".\" -DMODEL=mathOpsIntegrated_mex -c  mathOpsIntegrated_initialize.c -o build/maci64/mathOpsIntegrated_initialize.o",
+    "file": "mathOpsIntegrated_initialize.c",
+    "output": "build/maci64/mathOpsIntegrated_initialize.o"
+  },
+  {
+    "directory": "/Users/saustin/Documents/HDG/problem/2d_streamer/codegen_test/codegen/mex/mathOpsIntegrated",
+    "command": "/usr/bin/xcrun -sdk macosx13.3 clang -fno-common -arch x86_64 -mmacosx-version-min=10.15 -fexceptions -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \".\" -I \"/Users/saustin/Documents/HDG/problem/2d_streamer/codegen_test\" -I \"./interface\" -I \"/Applications/MATLAB_R2023a.app/extern/include\" -I \".\" -DMODEL=mathOpsIntegrated_mex -c  mathOpsIntegrated_terminate.c -o build/maci64/mathOpsIntegrated_terminate.o",
+    "file": "mathOpsIntegrated_terminate.c",
+    "output": "build/maci64/mathOpsIntegrated_terminate.o"
+  },
+  {
+    "directory": "/Users/saustin/Documents/HDG/problem/2d_streamer/codegen_test/codegen/mex/mathOpsIntegrated",
+    "command": "/usr/bin/xcrun -sdk macosx13.3 clang -fno-common -arch x86_64 -mmacosx-version-min=10.15 -fexceptions -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \".\" -I \"/Users/saustin/Documents/HDG/problem/2d_streamer/codegen_test\" -I \"./interface\" -I \"/Applications/MATLAB_R2023a.app/extern/include\" -I \".\" -DMODEL=mathOpsIntegrated_mex -c  mathOpsIntegrated.c -o build/maci64/mathOpsIntegrated.o",
+    "file": "mathOpsIntegrated.c",
+    "output": "build/maci64/mathOpsIntegrated.o"
+  },
+  {
+    "directory": "/Users/saustin/Documents/HDG/problem/2d_streamer/codegen_test/codegen/mex/mathOpsIntegrated",
+    "command": "/usr/bin/xcrun -sdk macosx13.3 clang -fno-common -arch x86_64 -mmacosx-version-min=10.15 -fexceptions -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \".\" -I \"/Users/saustin/Documents/HDG/problem/2d_streamer/codegen_test\" -I \"./interface\" -I \"/Applications/MATLAB_R2023a.app/extern/include\" -I \".\" -DMODEL=mathOpsIntegrated_mex -c  interface/_coder_mathOpsIntegrated_api.c -o build/maci64/_coder_mathOpsIntegrated_api.o",
+    "file": "interface/_coder_mathOpsIntegrated_api.c",
+    "output": "build/maci64/_coder_mathOpsIntegrated_api.o"
+  },
+  {
+    "directory": "/Users/saustin/Documents/HDG/problem/2d_streamer/codegen_test/codegen/mex/mathOpsIntegrated",
+    "command": "/usr/bin/xcrun -sdk macosx13.3 clang -fno-common -arch x86_64 -mmacosx-version-min=10.15 -fexceptions -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \".\" -I \"/Users/saustin/Documents/HDG/problem/2d_streamer/codegen_test\" -I \"./interface\" -I \"/Applications/MATLAB_R2023a.app/extern/include\" -I \".\" -DMODEL=mathOpsIntegrated_mex -c  interface/_coder_mathOpsIntegrated_mex.c -o build/maci64/_coder_mathOpsIntegrated_mex.o",
+    "file": "interface/_coder_mathOpsIntegrated_mex.c",
+    "output": "build/maci64/_coder_mathOpsIntegrated_mex.o"
+  },
+  {
+    "directory": "/Users/saustin/Documents/HDG/problem/2d_streamer/codegen_test/codegen/mex/mathOpsIntegrated",
+    "command": "/usr/bin/xcrun -sdk macosx13.3 clang -fno-common -arch x86_64 -mmacosx-version-min=10.15 -fexceptions -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \".\" -I \"/Users/saustin/Documents/HDG/problem/2d_streamer/codegen_test\" -I \"./interface\" -I \"/Applications/MATLAB_R2023a.app/extern/include\" -I \".\" -DMODEL=mathOpsIntegrated_mex -c  interface/_coder_mathOpsIntegrated_info.c -o build/maci64/_coder_mathOpsIntegrated_info.o",
+    "file": "interface/_coder_mathOpsIntegrated_info.c",
+    "output": "build/maci64/_coder_mathOpsIntegrated_info.o"
+  },
+  {
+    "directory": "/Users/saustin/Documents/HDG/problem/2d_streamer/codegen_test/codegen/mex/mathOpsIntegrated",
+    "command": "/usr/bin/xcrun -sdk macosx13.3 clang -fno-common -arch x86_64 -mmacosx-version-min=10.15 -fexceptions -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \".\" -I \"/Users/saustin/Documents/HDG/problem/2d_streamer/codegen_test\" -I \"./interface\" -I \"/Applications/MATLAB_R2023a.app/extern/include\" -I \".\" -DMODEL=mathOpsIntegrated_mex -c  /Applications/MATLAB_R2023a.app/extern/version/c_mexapi_version.c -o build/maci64/c_mexapi_version.o",
+    "file": "/Applications/MATLAB_R2023a.app/extern/version/c_mexapi_version.c",
+    "output": "build/maci64/c_mexapi_version.o"
+  }
+]

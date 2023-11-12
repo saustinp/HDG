@@ -1,9 +1,9 @@
 [
   {
     "directory": "/Users/saustin/Documents/HDG/problem/2d_streamer/digaso_compare/codegen/mex/fhat_digaso_matlab",
-    "command": "/usr/bin/xcrun -sdk macosx13.3 clang -fno-common -arch x86_64 -mmacosx-version-min=10.15 -fexceptions -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \".\" -I \"/Users/saustin/Documents/HDG/problem/2d_streamer/digaso_compare\" -I \"./interface\" -I \"/Applications/MATLAB_R2023a.app/extern/include\" -I \".\" -DMODEL=fhat_digaso_matlab_mex -c  /Users/saustin/Documents/HDG/problem/2d_streamer/digaso_compare/fbou_streamer2d.c -o build/maci64/fbou_streamer2d.o",
-    "file": "/Users/saustin/Documents/HDG/problem/2d_streamer/digaso_compare/fbou_streamer2d.c",
-    "output": "build/maci64/fbou_streamer2d.o"
+    "command": "/usr/bin/xcrun -sdk macosx13.3 clang -fno-common -arch x86_64 -mmacosx-version-min=10.15 -fexceptions -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \".\" -I \"/Users/saustin/Documents/HDG/problem/2d_streamer/digaso_compare\" -I \"./interface\" -I \"/Applications/MATLAB_R2023a.app/extern/include\" -I \".\" -DMODEL=fhat_digaso_matlab_mex -c  /Users/saustin/Documents/HDG/problem/2d_streamer/digaso_compare/fhat_streamer2d.c -o build/maci64/fhat_streamer2d.o",
+    "file": "/Users/saustin/Documents/HDG/problem/2d_streamer/digaso_compare/fhat_streamer2d.c",
+    "output": "build/maci64/fhat_streamer2d.o"
   },
   {
     "directory": "/Users/saustin/Documents/HDG/problem/2d_streamer/digaso_compare/codegen/mex/fhat_digaso_matlab",

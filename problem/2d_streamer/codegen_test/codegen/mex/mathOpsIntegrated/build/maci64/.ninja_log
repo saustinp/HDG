@@ -1,0 +1,12 @@
+# ninja log v5
+0	405	1699421965857450392	build/maci64/mathOpsIntegrated_data.o	27cce49226b9a873
+1	434	1699421965888655477	build/maci64/mathOpsIntegrated_initialize.o	d76dc25e6d0afb3
+1	434	1699421965889204101	build/maci64/mathOpsIntegrated_terminate.o	3db454a117fced2b
+2	436	1699421965889839809	build/maci64/_coder_mathOpsIntegrated_api.o	76ac3da97e96b45
+3	436	1699421965889082518	build/maci64/_coder_mathOpsIntegrated_info.o	e444384123dc860a
+3	436	1699421965888177477	build/maci64/c_mexapi_version.o	610331b49c8c9188
+1	436	1699421965888637935	build/maci64/rt_nonfinite.o	6860fb8a86fcc3ee
+2	436	1699421965890817516	build/maci64/_coder_mathOpsIntegrated_mex.o	b8e5bb0084126743
+2	436	1699421965888464144	build/maci64/mathOpsIntegrated.o	27f03a970d4e4009
+0	436	1699421965888210394	build/maci64/flux.o	33cf5704342b4b33
+436	523	1699421965982924564	mathOpsIntegrated_mex.mexmaci64	528e65d225e5532c

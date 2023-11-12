@@ -141,15 +141,7 @@ uhg_dig = reshape(uhg_dig,1,[]);
 fh_dig = reshape(fh_dig,1,[]);
 fh_udg_dig = reshape(fh_udg_dig,1,[]);
 fh_uh_dig = reshape(fh_uh_dig,1,[]);
-% 
-% sprintf('a1=zeros(1,%d)',size(fh_dig,2))
-% sprintf('a2=zeros(1,%d)',size(fh_udg_dig,2))
-% sprintf('a3=zeros(1,%d)',size(fh_uh_dig,2))
-% sprintf('a4=zeros(1,%d)',size(pg_dig,2))
-% sprintf('a5=zeros(1,%d)',size(udgg_dig,2))
-% sprintf('a6=zeros(1,%d)',size(uhg_dig,2))
-% sprintf('a7=zeros(1,%d)',size(nl_dig,2))
-% sprintf('a8=zeros(1,%d)',size(arg_dig,2))
+
 
 
 [fh_dig,fh_udg_dig, fh_uh_dig] = fhat_digaso_matlab_mex(fh_dig, fh_udg_dig, fh_uh_dig, pg_dig, udgg_dig, uhg_dig, nl_dig, arg_dig, time, ng, nc, nch, nd, ncd);
@@ -164,9 +156,6 @@ fh_udg_dig = reshape(fh_udg_dig, size(FH_udg));
 fh_uh_dig = reshape(fh_uh_dig, size(FH_uh));
 
 
-max(max(fh_dig-FH))
-max(max(max(fh_udg_dig-FH_udg)))
-max(max(max(fh_uh_dig - FH_uh)))
 
 % squeeze(pg)
 % squeeze(nlg)

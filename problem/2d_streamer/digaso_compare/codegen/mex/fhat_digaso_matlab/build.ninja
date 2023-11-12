@@ -36,7 +36,7 @@ rule linkxx
     command = $linkerxx $in $linkobjs $ldflags
 
 # Build
-build $builddir/fbou_streamer2d.o : cc $startdir/fbou_streamer2d.c
+build $builddir/fhat_streamer2d.o : cc $startdir/fhat_streamer2d.c
 build $builddir/fhat_digaso_matlab_data.o : cc $root/fhat_digaso_matlab_data.c
 build $builddir/rt_nonfinite.o : cc $root/rt_nonfinite.c
 build $builddir/fhat_digaso_matlab_initialize.o : cc $root/fhat_digaso_matlab_initialize.c
@@ -48,4 +48,4 @@ build $builddir/_coder_fhat_digaso_matlab_info.o : cc $root/interface/_coder_fha
 build $builddir/c_mexapi_version.o : cc $matlabdir/extern/version/c_mexapi_version.c
 
 # Link
-build $root/fhat_digaso_matlab_mex.mexmaci64 : link $builddir/fbou_streamer2d.o $builddir/fhat_digaso_matlab_data.o $builddir/rt_nonfinite.o $builddir/fhat_digaso_matlab_initialize.o $builddir/fhat_digaso_matlab_terminate.o $builddir/_coder_fhat_digaso_matlab_api.o $builddir/_coder_fhat_digaso_matlab_mex.o $builddir/fhat_digaso_matlab.o $builddir/_coder_fhat_digaso_matlab_info.o $builddir/c_mexapi_version.o 
+build $root/fhat_digaso_matlab_mex.mexmaci64 : link $builddir/fhat_streamer2d.o $builddir/fhat_digaso_matlab_data.o $builddir/rt_nonfinite.o $builddir/fhat_digaso_matlab_initialize.o $builddir/fhat_digaso_matlab_terminate.o $builddir/_coder_fhat_digaso_matlab_api.o $builddir/_coder_fhat_digaso_matlab_mex.o $builddir/fhat_digaso_matlab.o $builddir/_coder_fhat_digaso_matlab_info.o $builddir/c_mexapi_version.o 
