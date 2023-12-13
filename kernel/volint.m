@@ -81,47 +81,82 @@ end
 [f, f_udg] = flux( pg, udgg, arg, time);
 [s, s_udg] = source( pg, udgg, arg, time); 
 
-% Insert code here to test the C->Matlab flux and source functions
 
-% Source check
-% nch=ncu;
-% ncd=3;
-% [ng,nc] = size(udgg);
-% arg2 = cell2mat(arg);
-% pg_digaso = reshape(pg,1,[]);   % flatten
-% udg_digaso = reshape(udgg,1,[]);    % flatten
-% s_digaso = zeros(ng,nch);
-% s_digaso = reshape(s_digaso,1,[]);
-% s_udg_digaso = zeros(ng,nch,nc);
-% s_udg_digaso = reshape(s_udg_digaso,1,[]);
-% 
-% [s_digaso, s_udg_digaso] = source_digaso_matlab_mex(s_digaso, s_udg_digaso, pg_digaso, udg_digaso, arg2, time, ng, nc, ncu, nd, ncd);
-% s_digaso = reshape(s_digaso, [ng,nch]);
-% s_udg_digaso = reshape(s_udg_digaso, [ng,nch,nc]);
-% 
-% disp('Max discrepancy in s and s_udg')
-% max(max(s-s_digaso))
-% max(max(max(s_udg-s_udg_digaso)))
 
-% Flux check
-% nch=ncu;
-% ncd=3;
-% [ng,nc] = size(udgg);
-% arg2 = cell2mat(arg);
-% pg_digaso = reshape(pg,1,[]);   % flatten
-% udg_digaso = reshape(udgg,1,[]);    % flatten
-% f_digaso = zeros(ng,nch,nd);
-% f_digaso = reshape(f_digaso,1,[]);
-% f_udg_digaso = zeros(ng,nch,nd,nc);
-% f_udg_digaso = reshape(f_udg_digaso,1,[]);
-% [f_digaso, f_udg_digaso] = flux_digaso_matlab_mex(f_digaso, f_udg_digaso, pg_digaso, udg_digaso, arg2, time, ng, nc, ncu, nd, ncd);
-% f_digaso = reshape(f_digaso, [ng,nch,nd]);
-% f_udg_digaso = reshape(f_udg_digaso, [ng,nch,nd,nc]);
+% Code to test the C->Matlab flux and source functions
+% Flag implemented so we don't have to uncomment it every time
+if isfield(app,'check_volint_flg')
+
+    % Prepare data structures
+    nch=ncu;
+    ncd=3;
+    [ng,nc] = size(udgg);
+    arg2 = cell2mat(arg);
+    pg_digaso = reshape(pg,1,[]);   % flatten
+    udg_digaso = reshape(udgg,1,[]);    % flatten
+    s_digaso = zeros(size(s));
+    s_digaso = reshape(s_digaso,1,[]);
+    s_udg_digaso = zeros(size(s_udg));
+    s_udg_digaso = reshape(s_udg_digaso,1,[]);
+    f_digaso = zeros(size(f));
+    f_digaso = reshape(f_digaso,1,[]);
+    f_udg_digaso = zeros(size(f_udg));
+    f_udg_digaso = reshape(f_udg_digaso,1,[]);
+
+    a1=zeros(1,size(s_digaso,2));
+    a2=zeros(1,size(s_udg_digaso,2));
+    a3=zeros(1,size(pg_digaso,2));
+    a4=zeros(1,size(udg_digaso,2));
+    a5=zeros(1,size(arg2,2));
+
+    disp('Generating MEX file for source ...')
+    codegen source_digaso_matlab -args {a1,a2,a3,a4,a5,1,1,1,1,1,1} ../digaso_compare/source.c
+
+    a1=zeros(1,size(f_digaso,2));
+    a2=zeros(1,size(f_udg_digaso,2));
+    disp('Generating MEX file for flux ...')
+    codegen flux_digaso_matlab -args {a1,a2,a3,a4,a5,1,1,1,1,1,1} ../digaso_compare/flux.c
+
+    % Run source function check
+    [s_digaso, s_udg_digaso] = source_digaso_matlab_mex(s_digaso, s_udg_digaso, pg_digaso, udg_digaso, arg2, time, ng, nc, ncu, nd, ncd);
+    s_digaso = reshape(s_digaso, [ng,nch]);
+    s_udg_digaso = reshape(s_udg_digaso, [ng,nch,nc]);
+
+    % Run flux function check
+    [f_digaso, f_udg_digaso] = flux_digaso_matlab_mex(f_digaso, f_udg_digaso, pg_digaso, udg_digaso, arg2, time, ng, nc, ncu, nd, ncd);
+    f_digaso = reshape(f_digaso, [ng,nch,nd]);
+    f_udg_digaso = reshape(f_udg_digaso, [ng,nch,nd,nc]);
+    
+    str=sprintf('Linf norm in s: %d', max(max(s-s_digaso)));
+    disp(str)
+    str=sprintf('Linf norm in s_udg: %d', max(max(max(s_udg-s_udg_digaso))));
+    disp(str)
+    str=sprintf('Linf norm in f: %d', max(max(max(f-f_digaso))));
+    disp(str)
+    str=sprintf('Linf norm in f_udg: %d', max(max(max(max(f_udg-f_udg_digaso)))));
+    disp(str)
+
+    error('Done checking volume integral ...')
+
+end
+
+% Check with the C++ code
+% disp('DIGASO')
+% f_dig = readbin('/Users/saustin/Documents/digaso/problem/streamer/discharge_model/f.bin');
+% f_udg_dig = readbin('/Users/saustin/Documents/digaso/problem/streamer/discharge_model/f_udg.bin');
 % 
-% disp('Max discrepancy in f and f_udg')
-% max(max(max(f-f_digaso)))
-% max(max(max(max(f_udg-f_udg_digaso))))
+% f_mat = f(1:6,:,:,:);
+% f_udg_mat = f_udg(1:6,:,:,:);
 % 
+% % f_udg_dig = reshape(f_udg_dig, [ngv,ncu,nd,nc]);
+% % f_udg_dig = permute(f_udg_dig, [1,3,2,4]);
+% 
+% % [f_udg_mat(:), f_udg_dig]
+% 
+% disp('f')
+% max(abs(f_mat(:) - f_dig))
+% disp('f_udg')
+% max(abs(f_udg_mat(:) - f_udg_dig(:)))
 
 
 f     = reshape(f,[ngv ne ncu nd]);
@@ -185,6 +220,23 @@ if tdep
     end
 end
 
+
+% Check with the C++ code
+% disp('DIGASO')
+% s_dig = readbin('/Users/saustin/Documents/digaso/problem/streamer/discharge_model/s.bin');
+% s_udg_dig = readbin('/Users/saustin/Documents/digaso/problem/streamer/discharge_model/s_udg.bin');
+% 
+% s_mat = s(1:6,:);
+% s_udg_mat = s_udg(1:6,:,:);
+% 
+% disp('s')
+% max(abs(s_mat(:) - s_dig))
+% disp('s_udg')
+% max(abs(s_udg_mat(:) - s_udg_dig))
+% 
+% error('Done')
+
+
 % compute wrk and wrl to time with shape functions
 wrk = zeros(ngv*(nd+1),ne*ncu);
 wrl = zeros(ngv*(nd+1),ne*ncu*nc);
@@ -209,6 +261,64 @@ Ru = reshape(Ru,[npv ne ncu]);
 % volume matrices
 BD = reshape(shapvgdotshapvl,[npv*npv ngv*(nd+1)])*wrl;
 BD = reshape(BD,[npv npv ne ncu nc]);
+
+% Check digaso
+% BD_digaso = readbin('/Users/saustin/Documents/digaso/problem/streamer/discharge_model/BD_mat.bin');
+% BD1 = permute(reshape(BD(:,:,1,:,:), [npv npv ncu nc]), [1 3 2 4]);
+% B = reshape(BD1(:,:,:,ncu+1:end), [npv ncu npv ncu nd]);
+% D = reshape(BD1(:,:,:,1:ncu), [npv ncu npv ncu]);
+% MiC = zeros(npv,npv,nd);
+% Mi = inv(M(:,:,1));
+% for d = 1:nd
+%     MiC(:,:,d) = Mi*C(:,:,d,1);
+% end
+% BMiC = mapContractK(B, MiC,[1 2 4],[3 5],[],[1 3],2,[]);
+% 
+% BMiC = permute(BMiC,[1,2,4,3]);
+% D = D + BMiC;
+% BD_digaso = BD_digaso(1:npv*ncu*npv*ncu);
+% max(abs(D(:) - BD_digaso(:)))
+% 
+% error('Done...')
+
+
+% Read in arrays from digaso
+% disp('DIGASO')
+% M_dig = readbin('/Users/saustin/Documents/digaso/problem/streamer/discharge_model/mass_mat.bin');
+% M_dig = reshape(M_dig,[npv,npv]);
+% C_dig = readbin('/Users/saustin/Documents/digaso/problem/streamer/discharge_model/C_mat.bin');
+% Rq_dig = readbin('/Users/saustin/Documents/digaso/problem/streamer/discharge_model/Rq.bin');
+% Ru_dig = readbin('/Users/saustin/Documents/digaso/problem/streamer/discharge_model/Ru.bin');
+% BD_dig = readbin('/Users/saustin/Documents/digaso/problem/streamer/discharge_model/BD_mat.bin');
+% dgnodes_dig = readbin('/Users/saustin/Documents/digaso/problem/streamer/discharge_model/dgnodes.bin');
+% 
+% BD_dig = permute(BD_dig,[1,3,4,2]);
+% % npv npv ne ncu nc
+% 
+% M_matlab = M(:,:,1);
+% disp('MATLAB')
+% M_matlab = chol(M_matlab);
+% C_matlab = C(:,:,:,1);
+% Rq_mat = Rq(:,:,:,1);
+% Ru_mat = Ru(:,1,:);
+% BD_mat = BD(:,:,1,:,:);
+% 
+% disp('M')
+% max(abs(M_dig(:) - M_matlab(:)))
+% disp('C')
+% max(abs(C_dig(:) - C_matlab(:)))
+% disp('Rq')
+% max(abs(Rq_dig(:) - Rq_mat(:)))
+% disp('Ru')
+% max(abs(Ru_dig(:) - Ru_mat(:)))
+% disp('BD')
+% max(abs(BD_dig(:) - BD_mat(:)))
+% disp('dgnodes')
+% dgnodes = dgnodes(:,1,:);
+% max(abs(dgnodes_dig(:) - dgnodes(:)))
+% error('Done...')
+
+
 
 % % F: nge*ne*ncu*nd
 % % S: nge*ne*ncu

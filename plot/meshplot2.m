@@ -1,0 +1,116 @@
+function hh = meshplot(mesh, elemsToPlot)
+%MESHPLOT  Plot mesh structure 
+%    MESHPLOT(MESH,[OPTS])
+%
+%    MESH:       Mesh structure
+%    OPTS:       (logical)
+%      OPTS(1):  Plot elements/faces using p (default) or dgnodes
+%      OPTS(2):  Plot dgnodes 
+%      OPTS(3):  Plot element numbers (2D only)
+%      OPTS(4):  Plot node numbers (2D only)
+%      OPTS(5):  Plot face numbers (2D only)
+
+p=mesh.p;
+t=mesh.t;
+dim=size(p,2);
+dpl=size(mesh.plocal,2);
+
+% surface mesh
+if dpl==2 && dim==3
+    surface = 1;
+    f=mesh.f;
+else 
+    surface = 0;
+end
+    
+if dim < 1 || dim > 3,
+    error('Only can handle dim=1, dim=2 or dim=3');
+end
+
+%pars={'facecolor',[0.2,0.5,1.0],'edgecolor','r','Linew',0.5};
+pars={'facecolor','r','edgecolor','r','Linew',0.5};
+
+max_x = max(p(:,1));
+min_x = min(p(:,1));
+max_y = max(p(:,2));
+min_y = min(p(:,2));
+
+% f=figure();
+plot([min_x, max_x], [min_y, min_y], "black"); hold on;
+plot([max_x, max_x], [min_y, max_y], "black"); hold on;
+plot([min_x, max_x], [max_y, max_y], "black"); hold on;
+plot([min_x, min_x], [min_y, max_y], "black"); hold on;
+
+t = t(elemsToPlot,:);
+% p = p(t(:),:);
+
+% t=1:size(elemsToPlot,2);
+
+hh=[[];patch('faces',t,'vertices',p,pars{:})];     
+clear hh;
+set(gcf,'color','w');
+
+
+function e=boundedges(p,t,elemtype)
+%BOUNDEDGES Find boundary edges from triangular mesh
+%   E=BOUNDEDGES(P,T)
+
+% Form all edges, non-duplicates are boundary edges
+
+if elemtype==0
+    edges=[t(:,[1,2]);
+           t(:,[1,3]);
+           t(:,[2,3])];
+    node3=[t(:,3);t(:,2);t(:,1)];
+else
+    edges=[t(:,[1,2]);
+           t(:,[2,3]);
+           t(:,[3,4]);
+           t(:,[4,1]);];
+    node3=[t(:,4);t(:,3);t(:,2);t(:,1)];    
+end
+edges=sort(edges,2);
+[foo,ix,jx]=unique(edges,'rows');
+vec=histc(jx,1:max(jx));
+qx=find(vec==1);
+e=edges(ix(qx),:);
+node3=node3(ix(qx));
+
+% Orientation
+v1=p(e(:,2),:)-p(e(:,1),:);
+v2=p(node3,:)-p(e(:,1),:);
+ix=find(v1(:,1).*v2(:,2)-v1(:,2).*v2(:,1)>0);
+e(ix,[1,2])=e(ix,[2,1]);
+
+
+function e1=segcollect(e)
+%SEGCOLLECT Collect polygons from edge segments.
+
+ue=unique(e(:));
+he=histc(e(:),ue);
+current=ue(min(find(he==1))); % Find an endpoint
+if isempty(current) % Closed curve
+  current=e(1,1);
+end
+e1=current;
+while ~isempty(e)
+  ix=min(find(e(:,1)==e1(end)));
+  if isempty(ix)
+    ix=min(find(e(:,2)==e1(end)));
+    if isempty(ix) % >1 disjoint curves, recur
+      rest=segcollect(e);
+      e1={e1,rest{:}};
+      return;
+    end
+    next=e(ix,1);
+  else
+    next=e(ix,2);
+  end
+  e1=[e1,next];
+  e(ix,:)=[];
+end
+e1={e1};
+
+
+
+

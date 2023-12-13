@@ -6,7 +6,7 @@ npf = size(master.perm,1);
 nfe = size(master.perm,2);
 ncu = app.ncu;
 nc  = app.nc;
-ns  = 5000;
+ns  = 20000;
 
 nb = ceil(ne/ns);          
 nk = 1:ns:ne;
@@ -107,6 +107,45 @@ for j=1:nb
     % perform schur compliment to obtain the elemental matrices and vectors
     if app.adjoint == 0
         [dudg, dudg_duh, ae, fe] = schur_primal(M, C, E, L, Q, BD, F, GK, H, Rq, Ru, Rh);
+    %   DinvRu  DinvF     H  Rh in digaso
+        if isfield(app,'debug_digaso')
+            DinvRu = readbin('/Users/saustin/Documents/digaso/problem/streamer/discharge_model/debug/debug27.bin');   % Compare with dudg: first 3 columns: tmp=dudg(:,1:ncu,:); max(tmp(:)-DinvRu)=1.2385. First element matches though
+            DinvF = readbin('/Users/saustin/Documents/digaso/problem/streamer/discharge_model/debug/debug28.bin');     % tmp=dudg_duh(:,1:ncu,:,:,1); max(tmp(:)-DinvF(1:486))=68.1129. Upon closer inspection, the signs are reversed, so doing max(tmp(:)+DinvF(1:486))=1.8771e-08. Max across the entire array is 83.6884
+            H = readbin('/Users/saustin/Documents/digaso/problem/streamer/discharge_model/debug/debug25.bin');        % First two elements match, but the max error across the entire array (11765331 entries) is 9.3384
+            Rh = readbin('/Users/saustin/Documents/digaso/problem/streamer/discharge_model/debug/debug26.bin');      % First two elements match, but the max error across the entire array is 186.4416
+            
+            % elem_err = [];
+            % for ie = 1:ne
+            %     tmp=dudg(:,1:ncu,ie);
+            %     err = max(tmp(:)-DinvRu(1+(ie-1)*18:ie*18));
+            %     if err > 1e-3
+            %         elem_err(end+1) = ie;
+            %     end
+            % end
+            % assignin('base','elem_err',elem_err);
+            % stop
+
+        
+            % elem_err = [];
+            % for ie = 1:ne
+            %     tmp=dudg_duh(:,1:ncu,:,:,ie);
+            %     err = max(tmp(:)+DinvF(1+(ie-1)*486:ie*486));   % + because the sign is flipped
+            %     if ie==1
+            %         disp(err)
+            %     end
+            %     if err > 1e-4
+            %         elem_err(end+1) = ie;
+            %     end
+            % end
+            % assignin('base','elem_err',elem_err);
+            % stop
+            % 
+            % 
+        
+        
+        
+        end
+
     else
         [dudg, dudg_duh, ae, fe] = schur_adjoint(M, C, E, L, Q, BD, F, GK, H, Jq, Ju, Jh);
     end

@@ -66,96 +66,62 @@ uhg = reshape(uhg,[ngf*nfe*ne nch]);
 % squeeze(tmp(:,1,:))
 % pause
 
+% arg{end} = 0;
+% uhg = 0*uhg;
+% udgg = 0*udgg;
+
 % Compute numerical fluxes 
 [FH, FH_udg, FH_uh] = fhat(nlg, pg, udgg, uhg, arg, time);
 
-%%% Insert code here to test the C->Matlab fhat function %%
-% Here I write out the flux using UH in order to compute FHAT and compare
-% with the matlab "FH" on line 70.
+% Code to compare C code (DIGASO) and Matlab implementation of fhat
+% Flag implemented so we don't have to uncomment it every time
+if isfield(app,'check_fhat_flg')
+    nch=ncu;
+    ncd=3;
+    [ng,nc] = size(udgg);
+    arg_dig = cell2mat(arg);
 
-% r_tilde = pg(:,1);
-% 
-% ne_tilde = udgg(:,1);
-% ni_tilde = udgg(:,2);
-% phi_tilde = udgg(:,3);
-% dne_dr_tilde = udgg(:,4);
-% Er_tilde = udgg(:,6);
-% dne_dz_tilde = udgg(:,7);
-% Ez_tilde = udgg(:,9);
-% 
-% l_ref = arg{1};
-% mu_ref = arg{2};
-% E_ref = arg{3};
-% tau  = arg{10}*r_tilde;
-% 
-% % Fhat
-% normE_tilde = sqrt(Er_tilde.^2 + Ez_tilde.^2);
-% normE = normE_tilde.*E_ref;
-% 
-% mue_tilde = (2.3987*normE.^(-.26))/mu_ref;
-% De_tilde = 4.3628e-3*normE.^.22 / (l_ref*mu_ref*E_ref);
-% 
-% % fv = [De_tilde.*dne_dr_tilde,0,Er_tilde,...
-% %       De_tilde.*dne_dz_tilde,0,Ez_tilde];       % The negative sign is included in eqns 1 and 3 bc q=-grad(u)
-% 
-% fv=zeros(45000,6);
-% fv(:,1) = De_tilde.*dne_dr_tilde;
-% fv(:,3) = Er_tilde;
-% fv(:,4) = De_tilde.*dne_dz_tilde;
-% fv(:,6) = Ez_tilde;
-% 
-% % fhi = [-Er_tilde.*mue_tilde.*uhg(:,1),0,0,...
-% %        -Ez_tilde.*mue_tilde.*uhg(:,1),0,0];
-% 
-% fhi = zeros(45000,6);
-% fhi(:,1) = -Er_tilde.*mue_tilde.*uhg(:,1);
-% fhi(:,4) = -Ez_tilde.*mue_tilde.*uhg(:,1);
-% 
-% ff = r_tilde.*(fhi + fv);
-% 
-% fhat_test = [(ff(:,1).*nlg(:,1) + ff(:,4).*nlg(:,2) + tau.*(ne_tilde-uhg(:,1))),...
-%         (ff(:,2).*nlg(:,1) + ff(:,5).*nlg(:,2) + tau.*(ni_tilde-uhg(:,2))),...
-%         (ff(:,3).*nlg(:,1) + ff(:,6).*nlg(:,2) + tau.*(phi_tilde-uhg(:,3)))];
-% 
-% disp('Linf error of FH and fhat from digaso')
-% disp(max(max(fhat_test-FH)))
+    fh_dig = zeros(size(FH));
+    fh_udg_dig = zeros(size(FH_udg));
+    fh_uh_dig = zeros(size(FH_uh));
 
-nch=ncu;
-ncd=3;
-[ng,nc] = size(udgg);
-arg_dig = cell2mat(arg);
+    % Flatten all arrays
+    nl_dig = reshape(nlg,1,[]);
+    pg_dig = reshape(pg,1,[]);
+    udgg_dig = reshape(udgg,1,[]);
+    uhg_dig = reshape(uhg,1,[]);
+    fh_dig = reshape(fh_dig,1,[]);
+    fh_udg_dig = reshape(fh_udg_dig,1,[]);
+    fh_uh_dig = reshape(fh_uh_dig,1,[]);
 
-nl_dig = zeros(size(nlg));
-pg_dig = zeros(size(pg));
-udgg_dig = zeros(size(udgg));
-uhg_dig = zeros(size(uhg));
-fh_dig = zeros(size(FH));
-fh_udg_dig = zeros(size(FH_udg));
-fh_uh_dig = zeros(size(FH_uh));
+    a1=zeros(1,size(fh_dig,2));
+    a2=zeros(1,size(fh_udg_dig,2));
+    a3=zeros(1,size(fh_uh_dig,2));
+    a4=zeros(1,size(pg_dig,2));
+    a5=zeros(1,size(udgg_dig,2));
+    a6=zeros(1,size(uhg_dig,2));
+    a7=zeros(1,size(nl_dig,2));
+    a8=zeros(1,size(arg_dig,2));
 
-% Flatten all arrays
-nl_dig = reshape(nl_dig,1,[]);
-pg_dig = reshape(pg_dig,1,[]);
-udgg_dig = reshape(udgg_dig,1,[]);
-uhg_dig = reshape(uhg_dig,1,[]);
-fh_dig = reshape(fh_dig,1,[]);
-fh_udg_dig = reshape(fh_udg_dig,1,[]);
-fh_uh_dig = reshape(fh_uh_dig,1,[]);
+    disp('Generating MEX file for fhat ...')
+    codegen fhat_digaso_matlab -args {a1,a2,a3,a4,a5,a6,a7,a8,1,1,1,1,1,1} ../digaso_compare/fhat.c
 
+    [fh_dig,fh_udg_dig, fh_uh_dig] = fhat_digaso_matlab_mex(fh_dig, fh_udg_dig, fh_uh_dig, pg_dig, udgg_dig, uhg_dig, nl_dig, arg_dig, time, ng, nc, nch, nd, ncd);
 
+    % Reshape all arrays
+    fh_dig = reshape(fh_dig, size(FH));
+    fh_udg_dig = reshape(fh_udg_dig, size(FH_udg));
+    fh_uh_dig = reshape(fh_uh_dig, size(FH_uh));
 
-[fh_dig,fh_udg_dig, fh_uh_dig] = fhat_digaso_matlab_mex(fh_dig, fh_udg_dig, fh_uh_dig, pg_dig, udgg_dig, uhg_dig, nl_dig, arg_dig, time, ng, nc, nch, nd, ncd);
+    str=sprintf('Linf norm in fhat: %d', max(max(fh_dig-FH)));
+    disp(str)
+    str=sprintf('Linf norm in fhat_udg: %d', max(max(max(fh_udg_dig-FH_udg))));
+    disp(str)
+    str=sprintf('Linf norm in fhat_uh: %d', max(max(max(fh_uh_dig - FH_uh))));
+    disp(str)
 
-% Reshape all arrays
-nl_dig = reshape(nl_dig, size(nlg));
-pg_dig = reshape(pg_dig, size(pg));
-udgg_dig = reshape(udgg_dig, size(udgg));
-uhg_dig = reshape(uhg_dig, size(uhg));
-fh_dig = reshape(fh_dig, size(FH));
-fh_udg_dig = reshape(fh_udg_dig, size(FH_udg));
-fh_uh_dig = reshape(fh_uh_dig, size(FH_uh));
-
-
+    error('Done checking fhat...')
+end
 
 % squeeze(pg)
 % squeeze(nlg)
@@ -212,7 +178,7 @@ JUDG   = zeros(ngf*nbf,nc);
 an     = zeros(nbf*npf,1);
 bn     = zeros(nbf*ngf,1);
 j = 1;
-for i = 1:length(bcm)    
+for i = 1:length(bcm) 
     [I,J] = find(bf==-i);
     nfb = length(I);
     pgb  = zeros(ngf*nfb, size(pg,2));
@@ -238,40 +204,64 @@ for i = 1:length(bcm)
     
     ib = bcm(i);
     bv = repmat(bcs(i,:),[ngf*nfb 1]);
-    [fh, dfh_dudg, dfh_duh] = fbou(ib,bv,nlgb,pgb,udgb,uhgb,arg,time);     
+    [fh, dfh_dudg, dfh_duh] = fbou(ib,bv,nlgb,pgb,udgb,uhgb,arg,time);
     
-    % Insert code here to test the C->Matlab fbou
-    % nch=ncu;
-    % ncd=3;
-    % [ng,nc] = size(udgg);
-    % arg_dig = cell2mat(arg);
-    % 
-    % nl_dig = zeros(size(nlg));
-    % pg_dig = zeros(size(pg));
-    % udgg_dig = zeros(size(udgg));
-    % uhg_dig = zeros(size(uhg));
-    % fh_dig = zeros(size(FH));
-    % fh_udg_dig = zeros(size(FH_udg));
-    % fh_uh_dig = zeros(size(FH_uh));
-    % bv_dig = zeros(size(bv));
-    % 
-    % % Flatten all arrays
-    % nl_dig = reshape(nl_dig,1,[]);
-    % pg_dig = reshape(pg_dig,1,[]);
-    % udgg_dig = reshape(udgg_dig,1,[]);
-    % uhg_dig = reshape(uhg_dig,1,[]);
-    % fh_dig = reshape(fh_dig,1,[]);
-    % fh_udg_dig = reshape(fh_udg_dig,1,[]);
-    % fh_uh_dig = reshape(fh_uh_dig,1,[]);
-    % bv_dig = reshape(bv_dig,1,[]);
-    % 
-    % [fh_dig, fh_udg_dig, fh_uh_dig] = fbou_digaso_matlab_mex(fh_dig, fh_udg_dig, fh_uh_dig, pg_dig, udgg_dig, uhg_dig, nl_dig, bv_dig, arg_dig, time, ib, ng, nc, nch, nd, ncd);
-    % 
-    % % Reshape all arrays
-    % fh_dig = reshape(fh_dig, size(FH));
-    % fh_udg_dig = reshape(fh_udg_dig, size(FH_udg));
-    % fh_uh_dig = reshape(fh_uh_dig, size(FH_uh));
+    % Code to compare C code (DIGASO) and Matlab implementation of fbou
+    % Flag implemented so we don't have to uncomment it every time
+    if isfield(app,'check_fbou_flg')
+        if (i == app.check_fbou_flg) && (size(fh,1)>0)      % Set app.check_fbou_flg to the index of the boundary you want to check
 
+            nch=ncu;
+            ncd=3;
+            [ng,nc] = size(udgg);
+            arg_dig = cell2mat(arg);
+            ngb = ngf*nfb;
+
+            fh_dig = zeros(size(fh));
+            fh_udg_dig = zeros(size(dfh_dudg));
+            fh_uh_dig = zeros(size(dfh_duh));
+
+            % Flatten all arrays
+            nl_dig = reshape(nlgb,1,[]);
+            pg_dig = reshape(pgb,1,[]);
+            udgg_dig = reshape(udgb,1,[]);
+            uhg_dig = reshape(uhgb,1,[]);
+            fh_dig = reshape(fh_dig,1,[]);
+            fh_udg_dig = reshape(fh_udg_dig,1,[]);
+            fh_uh_dig = reshape(fh_uh_dig,1,[]);
+            bv_dig = reshape(bv,1,[]);
+
+            a1=zeros(1,size(fh_dig,2));
+            a2=zeros(1,size(fh_udg_dig,2));
+            a3=zeros(1,size(fh_uh_dig,2));
+            a4=zeros(1,size(pg_dig,2));
+            a5=zeros(1,size(udgg_dig,2));
+            a6=zeros(1,size(uhg_dig,2));
+            a7=zeros(1,size(nl_dig,2));
+            a8=zeros(1,size(bv_dig,2));
+            a9=zeros(1,size(arg_dig,2));
+
+            str = sprintf('Generating MEX file for fbou, boundary %d ...', i);
+            disp(str)
+            codegen fbou_digaso_matlab -args {a1,a2,a3,a4,a5,a6,a7,a8,a9,1,1,1,1,1,1,1} ../digaso_compare/fbou.c
+
+            [fh_dig, fh_udg_dig, fh_uh_dig] = fbou_digaso_matlab_mex(fh_dig, fh_udg_dig, fh_uh_dig, pg_dig, udgg_dig, uhg_dig, nl_dig, bv_dig, arg_dig, time, ib, ngb, nc, nch, nd, ncd);
+
+            % Reshape all arrays
+            fh_dig = reshape(fh_dig, size(fh));
+            fh_udg_dig = reshape(fh_udg_dig, size(dfh_dudg));
+            fh_uh_dig = reshape(fh_uh_dig, size(dfh_duh));
+
+            str=sprintf('Linf norm in fh: %d', max(max(fh_dig-fh)));
+            disp(str)
+            str=sprintf('Linf norm in fh_udg: %d', max(max(max(fh_udg_dig-dfh_dudg))));
+            disp(str)
+            str=sprintf('Linf norm in fh_uh: %d', max(max(max(fh_uh_dig-dfh_duh))));
+            disp(str)
+
+            error('Done checking fbou...')
+        end
+    end
 
     BH(im,:) = fh;
     BH_udg(im,:,:) = dfh_dudg;
@@ -373,3 +363,44 @@ H  = permute(reshape(H,[npf*nfe npf*nfe ne nch nch]),[4 1 5 2 3]);
 
 
 
+% Read in arrays from digaso
+disp('DIGASO')
+% Ru, Rq, Rh, BD, F, E, G, H, Ju, Jq, Jh, wrb
+Rq_dig = readbin('/Users/saustin/Documents/digaso/problem/streamer/discharge_model/Rq.bin');
+Ru_dig = readbin('/Users/saustin/Documents/digaso/problem/streamer/discharge_model/Ru.bin');
+Rh_dig = readbin('/Users/saustin/Documents/digaso/problem/streamer/discharge_model/Rh.bin');
+BD_dig = readbin('/Users/saustin/Documents/digaso/problem/streamer/discharge_model/BD_mat.bin');
+F_dig = 
+E_dig = 
+G_dig = 
+H_dig = 
+Ju_dig = 
+Jq_dig = 
+Jh_dig = 
+wrb_dig = 
+
+BD_dig = permute(BD_dig,[1,3,4,2]);
+% npv npv ne ncu nc
+
+M_matlab = M(:,:,1);
+disp('MATLAB')
+M_matlab = chol(M_matlab);
+C_matlab = C(:,:,:,1);
+Rq_mat = Rq(:,:,:,1);
+Ru_mat = Ru(:,1,:);
+BD_mat = BD(:,:,1,:,:);
+
+disp('M')
+max(abs(M_dig(:) - M_matlab(:)))
+disp('C')
+max(abs(C_dig(:) - C_matlab(:)))
+disp('Rq')
+max(abs(Rq_dig(:) - Rq_mat(:)))
+disp('Ru')
+max(abs(Ru_dig(:) - Ru_mat(:)))
+disp('BD')
+max(abs(BD_dig(:) - BD_mat(:)))
+disp('dgnodes')
+dgnodes = dgnodes(:,1,:);
+max(abs(dgnodes_dig(:) - dgnodes(:)))
+error('Done...')

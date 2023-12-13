@@ -1,0 +1,51 @@
+# CompilerName=clang
+# Mode=optim
+ninja_required_version = 1.3
+
+# Basic folders
+root = .
+builddir = $root/build/maci64
+matlabdir = /Applications/MATLAB_R2023a.app
+startdir = /Users/saustin/Documents/HDG/problem/2d_streamer/discharge_model
+
+# Toolchain information
+cc = /usr/bin/xcrun -sdk macosx13.3 clang
+cxx = /usr/bin/xcrun -sdk macosx13.3 clang++
+linker = /usr/bin/xcrun -sdk macosx13.3 clang
+linkerxx = /usr/bin/xcrun -sdk macosx13.3 clang++
+
+cflags =  -fno-common -arch x86_64 -mmacosx-version-min=10.15 -fexceptions -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I "$root" -I "$startdir" -I "/Users/saustin/Documents/HDG/problem/2d_streamer/digaso_compare" -I "$root/interface" -I "$matlabdir/extern/include" -I "." -DMODEL=fhat_digaso_matlab_mex -c 
+
+cxxflags =  -fno-common -arch x86_64 -mmacosx-version-min=10.15 -fexceptions -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -fobjc-arc -std=c++14 -stdlib=libc++ -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c++11 -I "$root" -I "$startdir" -I "/Users/saustin/Documents/HDG/problem/2d_streamer/digaso_compare" -I "$root/interface" -I "$matlabdir/extern/include" -I "." -DMODEL=fhat_digaso_matlab_mex -c 
+
+ldflags =  -Wl,-twolevel_namespace -undefined error -arch x86_64 -mmacosx-version-min=10.15 -Wl,-syslibroot,/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -bundle   -L"$matlabdir/bin/maci64" -lmx -lmex -lmat -lc++  -Wl,-rpath,@loader_path -o fhat_digaso_matlab_mex.mexmaci64 -lemlrt -lcovrt -lut -lmwmathutil  -Wl,-exported_symbols_list,fhat_digaso_matlab_mex.map
+
+linkobjs = 
+
+# Build Rules
+rule cc
+    command = $cc $cflags $in -o $out
+
+rule cxx
+    command = $cxx $cxxflags $in -o $out
+
+rule link
+    command = $linker $in $linkobjs $ldflags
+
+rule linkxx
+    command = $linkerxx $in $linkobjs $ldflags
+
+# Build
+build $builddir/fhat.o : cc /Users/saustin/Documents/HDG/problem/2d_streamer/digaso_compare/fhat.c
+build $builddir/fhat_digaso_matlab_data.o : cc $root/fhat_digaso_matlab_data.c
+build $builddir/rt_nonfinite.o : cc $root/rt_nonfinite.c
+build $builddir/fhat_digaso_matlab_initialize.o : cc $root/fhat_digaso_matlab_initialize.c
+build $builddir/fhat_digaso_matlab_terminate.o : cc $root/fhat_digaso_matlab_terminate.c
+build $builddir/_coder_fhat_digaso_matlab_api.o : cc $root/interface/_coder_fhat_digaso_matlab_api.c
+build $builddir/_coder_fhat_digaso_matlab_mex.o : cc $root/interface/_coder_fhat_digaso_matlab_mex.c
+build $builddir/fhat_digaso_matlab.o : cc $root/fhat_digaso_matlab.c
+build $builddir/_coder_fhat_digaso_matlab_info.o : cc $root/interface/_coder_fhat_digaso_matlab_info.c
+build $builddir/c_mexapi_version.o : cc $matlabdir/extern/version/c_mexapi_version.c
+
+# Link
+build $root/fhat_digaso_matlab_mex.mexmaci64 : link $builddir/fhat.o $builddir/fhat_digaso_matlab_data.o $builddir/rt_nonfinite.o $builddir/fhat_digaso_matlab_initialize.o $builddir/fhat_digaso_matlab_terminate.o $builddir/_coder_fhat_digaso_matlab_api.o $builddir/_coder_fhat_digaso_matlab_mex.o $builddir/fhat_digaso_matlab.o $builddir/_coder_fhat_digaso_matlab_info.o $builddir/c_mexapi_version.o 

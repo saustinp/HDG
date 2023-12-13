@@ -1,4 +1,4 @@
-function hh = meshplot(mesh,opts,udg)
+function hh = meshplot(mesh,opts,udg,elemsToPlot)
 %MESHPLOT  Plot mesh structure 
 %    MESHPLOT(MESH,[OPTS])
 %
@@ -9,6 +9,7 @@ function hh = meshplot(mesh,opts,udg)
 %      OPTS(3):  Plot element numbers (2D only)
 %      OPTS(4):  Plot node numbers (2D only)
 %      OPTS(5):  Plot face numbers (2D only)
+% elemsToPlot: vector of element indices to highlight in red
 
 if nargin<2 || isempty(opts), opts=0; end
 if length(opts)<2, opts=[opts,0]; end
@@ -43,7 +44,11 @@ if dim==1
     plot(p,0*p);
 elseif dim == 2 || surface==1    
     if opts(1) == 0 % plot elements using p        
-        hh=[hh;patch('faces',t,'vertices',p,pars{:})];                        
+        hh=[hh;patch('faces',t,'vertices',p,pars{:})];
+        pars={'facecolor','r','edgecolor','r','Linew',0.5};
+        t = t(elemsToPlot,:);
+        hh=[[];patch('faces',t,'vertices',p,pars{:})];    
+        
     else            % plot elements using dgnodes
         e=boundedges(mesh.plocal,mesh.tlocal,mesh.elemtype);
         e1=segcollect(e);        

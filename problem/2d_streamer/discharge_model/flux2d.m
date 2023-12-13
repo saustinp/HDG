@@ -38,9 +38,13 @@ if nargout > 1
     t18 = param3.*t6.*t10.*t15.*u1.*u6.*u9.*6.23662e-1;
     t19 = t5.*t6.*t7.*t12.*x1.*4.3628e-3;
     t17 = -t16;
-    mt1 = [t6.*t13.*u6.*x1.*(-2.3987);zero;zero;t6.*t13.*u9.*x1.*(-2.3987);zero;zero;zero;zero;zero;zero;zero;zero;zero;zero;zero;zero;zero;zero;t19;zero;zero;zero;zero;zero;zero;zero;zero;zero;zero;zero;x1.*(t17+param3.*t3.*t6.*t10.*t15.*u1.*6.23662e-1+t5.*t6.*t10.*t14.*u4.*u6.*9.59816e-4);zero;t2;x1.*(t18+t5.*t6.*t10.*t14.*u6.*u7.*9.59816e-4);zero;zero;zero;zero;zero;t19;zero;zero;zero;zero;zero;zero;zero;zero];
-    mt2 = [x1.*(t18+t5.*t6.*t10.*t14.*u4.*u9.*9.59816e-4);zero;zero;x1.*(t17+param3.*t4.*t6.*t10.*t15.*u1.*6.23662e-1+t5.*t6.*t10.*t14.*u7.*u9.*9.59816e-4);zero;t2];
+    mt1 = [t6.*t13.*u6.*x1.*(-2.3987);  zero;  zero;  t6.*t13.*u9.*x1.*(-2.3987);  zero;zero;zero;zero;zero;zero;zero;zero;zero;zero;zero;zero;zero;zero;t19;zero;zero;zero;zero;zero;zero;zero;zero;zero;zero;zero;x1.*(t17+param3.*t3.*t6.*t10.*t15.*u1.*6.23662e-1+t5.*t6.*t10.*t14.*u4.*u6.*9.59816e-4);zero;t2;x1.*(t18+t5.*t6.*t10.*t14.*u6.*u7.*9.59816e-4);zero;zero;zero;zero;zero;t19;zero;zero;zero;zero;zero;zero;zero;zero];
+    mt2 = [x1.*(t18+t5.*t6.*t10.*t14.*u4.*u9.*9.59816e-4); zero;  zero;  x1.*(t17+param3.*t4.*t6.*t10.*t15.*u1.*6.23662e-1+t5.*t6.*t10.*t14.*u7.*u9.*9.59816e-4);zero;t2];
     f_udg = [mt1;mt2];
 end
+
+% disp(t6.*t13.*u9.*x1.*(-2.3987))
+% f_udg = reshape(f_udg,ng,nch,nd,nc)
+
 f = reshape(f,ng,nch,nd);
 f_udg = reshape(f_udg,ng,nch,nd,nc);
